@@ -16,8 +16,8 @@ export default TaskList
 const styles = StyleSheet.create({
     view2: {
 		flex: 8,
-		padding: 10,
+		padding: 16,
 		width: "100%",
-		backgroundColor: "lightblue",
+		backgroundColor: "#1b262e",
 	},
 })

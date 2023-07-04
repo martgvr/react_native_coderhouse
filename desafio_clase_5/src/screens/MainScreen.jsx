@@ -11,18 +11,24 @@ const MainScreen = ({ taskList }) => {
 	const [taskActive, setTaskActive] = useState({})
 	const [modalVisible, setModalVisible] = useState(false)
 
-	const onAddTastk = () => setList([...list, { id: list.length + 1, task: input, completed: false }])
+	const onAddTask = () => setList([...list, { id: list.length + 1, task: input, completed: false }])
 
 	const onPressTask = (task) => {
 		setModalVisible(true)
 		setTaskActive(task)
 	}
 
+	const onPressStatus = (status) => {
+		setModalVisible(false)
+		const taskToUpdate = list.find(item => item == taskActive)
+		taskToUpdate.completed = status
+	}
+
 	return (
 		<View style={styles.container}>
-			<TopBar input={input} onAddTastk={onAddTastk} setInput={setInput} />
+			<TopBar input={input} onAddTask={onAddTask} setInput={setInput} />
 			<TaskList onPressTask={onPressTask} list={list} />
-			<ModalTask modalVisible={modalVisible} setModalVisible={setModalVisible} taskActive={taskActive} />
+			<ModalTask onPressStatus={onPressStatus} modalVisible={modalVisible} setModalVisible={setModalVisible} taskActive={taskActive} />
 		</View>
 	)
 }

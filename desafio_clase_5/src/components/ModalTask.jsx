@@ -1,23 +1,23 @@
 import React from "react"
 import { StyleSheet, Text, View, Modal, Pressable } from "react-native"
 
-const ModalTask = ({ modalVisible, setModalVisible, taskActive }) => {
+const ModalTask = ({ modalVisible, setModalVisible, taskActive, onPressStatus }) => {
 	return (
-		<Modal animationType="none" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(!modalVisible)}>
+		<Modal animationType="none" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(!modalVisible)} >
 			<View style={styles.centeredView}>
 				<View style={styles.modalView}>
 					<Text style={styles.modalText}>{taskActive.task}</Text>
 					<View style={styles.modalButtons}>
 						<Pressable style={[styles.button, styles.buttonClose]} onPress={() => setModalVisible(!modalVisible)}>
-							<Text style={styles.textStyle}>Cancel</Text>
+							<Text style={styles.textStyle}>Cerrar</Text>
 						</Pressable>
 
-						<Pressable style={[styles.button, styles.buttonNotyet]} onPress={() => setModalVisible(!modalVisible)}>
-							<Text style={styles.textStyle}>Not yet</Text>
+						<Pressable style={[styles.button, styles.buttonNotyet]} onPress={() => onPressStatus(false)}>
+							<Text style={styles.textStyle}>Sin completar</Text>
 						</Pressable>
 
-						<Pressable style={[styles.button, styles.buttonDone]} onPress={() => setModalVisible(!modalVisible)}>
-							<Text style={styles.textStyle}>Done</Text>
+						<Pressable style={[styles.button, styles.buttonDone]} onPress={() => onPressStatus(true)}>
+							<Text style={styles.textStyle}>Completada</Text>
 						</Pressable>
 					</View>
 				</View>
@@ -31,24 +31,16 @@ export default ModalTask
 const styles = StyleSheet.create({
     centeredView: {
 		flex: 1,
-		justifyContent: "center",
 		alignItems: "center",
-		marginTop: 22,
+		justifyContent: "flex-end",
 	},
 	modalView: {
-		margin: 20,
-		backgroundColor: "white",
-		borderRadius: 20,
-		padding: 20,
+		backgroundColor: "azure",
 		alignItems: "center",
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.5,
-		shadowRadius: 4,
-		elevation: 10,
+		padding: 15,
+		width: '90%',
+		borderTopLeftRadius: 20,
+		borderTopRightRadius: 20,
 	},
 	button: {
 		borderRadius: 12,
@@ -59,10 +51,10 @@ const styles = StyleSheet.create({
 		backgroundColor: "#F194FF",
 	},
 	buttonClose: {
-		backgroundColor: "#2196F3",
+		backgroundColor: "black",
 	},
 	buttonDone: {
-		backgroundColor: "grey",
+		backgroundColor: "green",
 	},
 	buttonNotyet: {
 		backgroundColor: "red",
