@@ -45,10 +45,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	bottom: {
-		height: 30,
+		height: 20,
 		alignItems: "center",
 		justifyContent: "center",
-		// backgroundColor: 'red'
 	},
 	error: {
 		color: 'red',

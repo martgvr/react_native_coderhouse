@@ -31,7 +31,12 @@ const ItemListCategory = ({ category, setCategory }) => {
   return (
     <View style={styles.container}>
       <Search onSearch={onSearch} error={keywordError} goBack={() => setCategory("")} />
-      <FlatList data={products} keyExtractor={product => product.id} renderItem={({item}) => ProductItem({item})} showsVerticalScrollIndicator={false} />
+      <FlatList 
+        data={products} 
+        keyExtractor={product => product.id} 
+        renderItem={({item}) => ProductItem({item})} 
+        showsVerticalScrollIndicator={false} 
+      />
     </View>
   )
 }

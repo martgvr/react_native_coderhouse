@@ -8,6 +8,7 @@ const Home = ({ setCategory }) => {
   return (
     <View style={styles.container}>
         <FlatList 
+            style={styles.flatlist}
             showsVerticalScrollIndicator={false}
             data={categories}
             keyExtractor={category => category}
@@ -24,6 +25,9 @@ const styles = StyleSheet.create({
         height: '90%',
         backgroundColor: colors.primary,
         alignItems: 'center',
-        padding: 10
+        padding: 10,
+    },
+    flatlist: {
+      width: '100%'
     },
 })
