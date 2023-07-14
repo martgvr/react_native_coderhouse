@@ -6,7 +6,10 @@ import Search from '../components/Search'
 import productsRaw from '../data/products.json'
 import ProductItem from '../components/ProductItem'
 
-const ItemListCategory = ({ category, setCategory }) => {
+const ItemListCategory = ({ navigation, route }) => {
+  const params = route.params
+  const { category } = params
+
   const [keyword, setKeyword] = useState("")
   const [products, setProducts] = useState([])
   const [keywordError, setKeywordError] = useState("")
@@ -30,12 +33,13 @@ const ItemListCategory = ({ category, setCategory }) => {
 
   return (
     <View style={styles.container}>
-      <Search onSearch={onSearch} error={keywordError} goBack={() => setCategory("")} />
+      <Search onSearch={onSearch} error={keywordError} goBack={() => navigation.goBack()} />
       <FlatList 
         data={products} 
+        navigation={navigation} 
         keyExtractor={product => product.id} 
-        renderItem={({item}) => ProductItem({item})} 
         showsVerticalScrollIndicator={false} 
+        renderItem={({item}) => <ProductItem navigation={navigation} item={item} />} 
       />
     </View>
   )

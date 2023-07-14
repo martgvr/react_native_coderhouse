@@ -2,9 +2,9 @@ import { StyleSheet, Text, Pressable } from "react-native"
 
 import Card from "./Card"
 
-const CategoryItem = ({ item, setCategory }) => {
+const CategoryItem = ({ item, navigation }) => {
 	return (
-		<Pressable onPress={() => setCategory(item)}>
+		<Pressable onPress={() => navigation.navigate('ItemListCategory', { category: item })}>
 			<Card additionalStyle={{ justifyContent: 'center' }}>
 				<Text style={styles.textCategory}>{item}</Text>
 			</Card>

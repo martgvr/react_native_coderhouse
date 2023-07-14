@@ -4,15 +4,15 @@ import { StyleSheet, View, FlatList } from 'react-native'
 
 import CategoryItem from '../components/CategoryItem'
 
-const Home = ({ setCategory }) => {
+const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
         <FlatList 
-            style={styles.flatlist}
-            showsVerticalScrollIndicator={false}
             data={categories}
+            style={styles.flatlist}
             keyExtractor={category => category}
-            renderItem={({ item }) => CategoryItem({ item, setCategory })}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item}) => <CategoryItem item={item} navigation={navigation} />}
         />
     </View>
   )
@@ -22,7 +22,6 @@ export default Home
 
 const styles = StyleSheet.create({
     container: {
-        height: '90%',
         backgroundColor: colors.primary,
         alignItems: 'center',
         padding: 10,
