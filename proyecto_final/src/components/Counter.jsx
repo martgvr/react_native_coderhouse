@@ -47,24 +47,24 @@ export default Counter;
 
 const styles = StyleSheet.create({
     container: {
+        width: "100%",
+        alignItems: "center",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
         backgroundColor: colors.primary,
     },
     buttonsContainer: {
+        gap: 10,
+        marginBottom: 10,
+        alignItems: "center",
         flexDirection: "row",
         justifyContent: "center",
-        alignItems: "center",
-        marginBottom: 10,
-        gap: 10,
     },
     button: {
         padding: 10,
-        backgroundColor: '#222',
-        paddingHorizontal: 20,
         borderRadius: 10,
+        paddingHorizontal: 20,
+        backgroundColor: '#222',
     },
     buttonText: {
         fontSize: 18,
@@ -73,16 +73,16 @@ const styles = StyleSheet.create({
     span: {
         width: "60%",
         padding: 10,
-        textAlign: "center",
         fontSize: 20,
+        textAlign: "center",
     },
     spanInput: {
         width: "40%",
         padding: 10,
-        textAlign: "center",
         fontSize: 16,
         borderWidth: 1,
-        borderColor: '#777',
         borderRadius: 10,
+        textAlign: "center",
+        borderColor: '#777',
     },
 });

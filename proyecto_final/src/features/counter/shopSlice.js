@@ -1,5 +1,7 @@
-import Products from '../../data/products.json'
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit'
+
+import products from '../../data/products.json'
+import categories from '../../data/categories.json'
 
 export const shopSlice = createSlice({
     name: 'shop',
@@ -7,7 +9,8 @@ export const shopSlice = createSlice({
         idSelected: '',
         categorySelected: '',
         productsSelected: [],
-        allProducts: Products,
+        allProducts: products,
+        allCategories: categories,
     },
     reducers: {
         setCategorySelected: (state, action) => {
@@ -20,5 +23,5 @@ export const shopSlice = createSlice({
     }
 })
 
-export const { setCategorySelected, setIdSelected } = shopSlice.actions
 export default shopSlice.reducer
+export const { setCategorySelected, setIdSelected } = shopSlice.actions

@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     cardContainer: {
         gap: 20,
         zIndex: 2,
-        width: '100%',
         height: 50,
+        width: '100%',
         paddingLeft: 10,
         borderRadius: 6,
         marginVertical: 6,

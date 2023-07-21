@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		backgroundColor: colors.primary,
 
-		shadowColor: "#000",
 		elevation: 10,
+		shadowColor: "#000",
 	},
 	headerText: {
 		fontSize: 24,

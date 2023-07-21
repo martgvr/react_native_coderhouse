@@ -6,15 +6,15 @@ import store from './src/store/store'
 import { Provider } from 'react-redux'
 
 export default function App() {
-  const [fontsLoaded] = useFonts(fonts);
+    const [fontsLoaded] = useFonts(fonts);
 
-  if (!fontsLoaded) {
-    return null
-  }
+    if (!fontsLoaded) {
+        return null
+    }
 
-  return (
-    <Provider store={store}>
-      <Navigator />
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <Navigator />
+        </Provider>
+    );
 }

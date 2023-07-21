@@ -10,7 +10,7 @@ const CartItem = ({ cartItem }) => {
 					{cartItem.title} ({cartItem.quantity})
 				</Text>
 				<Text style={styles.text2}>{cartItem.brand}</Text>
-				<Text style={styles.text2}>${cartItem.price}</Text>
+				<Text style={styles.text3}>$ {cartItem.price}</Text>
 			</View>
 			
 			<MaterialCommunityIcons name="trash-can-outline" color='black' size={30} />
@@ -23,13 +23,13 @@ export default CartItem
 const styles = StyleSheet.create({
 	card: {
 		height: 100,
-		backgroundColor: colors.tertiary,
 		padding: 10,
 		marginBottom: 10,
 		borderRadius: 10,
 		alignItems: "center",
 		flexDirection: "row",
 		justifyContent: "space-between",
+		backgroundColor: colors.tertiary,
 	},
 	textContainer: {
 		gap: 4,
@@ -43,7 +43,12 @@ const styles = StyleSheet.create({
 		color: "black",
 	},
 	text2: {
-		fontSize: 14,
+		fontSize: 17,
 		color: "#333",
 	},
+	text3: {
+		fontSize: 16,
+		color: '#333',
+		fontWeight: 'bold',
+	}
 })

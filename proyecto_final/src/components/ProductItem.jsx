@@ -1,28 +1,28 @@
-import Card from './Card'
-import { Image, Pressable, StyleSheet, Text } from 'react-native'
+import Card from "./Card"
+import { Image, Pressable, StyleSheet, Text } from "react-native"
 
 const ProductItem = ({ item, navigation }) => {
-  const onSelect = () => navigation.navigate('Detail', { productSelected: item.id })
-	
-  return (
+	const onSelect = () => navigation.navigate("Detail", { productSelected: item.id })
+
+	return (
 		<Pressable onPress={onSelect}>
-      <Card>
-          <Image resizeMode='cover' style={styles.image} source={{ uri: item.thumbnail }} />
-          <Text style={styles.textCategory}>{item.title}</Text>
-      </Card>
-    </Pressable>
-  )
+			<Card>
+				<Image resizeMode="cover" style={styles.image} source={{ uri: item.thumbnail }} />
+				<Text style={styles.textCategory}>{item.title}</Text>
+			</Card>
+		</Pressable>
+	)
 }
 
 export default ProductItem
 
 const styles = StyleSheet.create({
-  image: {
-    height: 35,
-    width: 35,
-    borderRadius: 30,
-  },
-  textCategory: {
-    fontSize: 18
-  }
+	image: {
+		width: 35,
+		height: 35,
+		borderRadius: 30,
+	},
+	textCategory: {
+		fontSize: 18,
+	},
 })

@@ -1,16 +1,16 @@
 import { colors } from "../global/colors"
+import { useSelector } from 'react-redux'
 import { StyleSheet, Text, View, FlatList, Pressable } from "react-native"
 
-import cartData from "../data/cart.json"
 import CartItem from "../components/CartItem"
 
 const Cart = () => {
+	const cartData = useSelector(state => state.cartReducer.cartData)
     const total = cartData.reduce((acumulador, currentItem) => acumulador += currentItem.price * currentItem.quantity, 0)
-	
+
     return (
 		<View style={styles.container}>
 			<FlatList data={cartData} keyExtractor={(cartItem) => cartItem.id} renderItem={({ item }) => <CartItem cartItem={item} />} />
-
 			<View style={styles.totalContainer}>
 				<Pressable>
 					<Text>Confirm</Text>
@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.primary,
 	},
 	totalContainer: {
-		flexDirection: "row",
-		alignSelf: "center",
 		gap: 10,
+		alignSelf: "center",
+		flexDirection: "row",
 	},
 })
