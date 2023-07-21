@@ -1,56 +1,55 @@
-import { colors } from '../global/colors'
-import { useEffect, useState } from 'react'
-import { StyleSheet, View, FlatList } from 'react-native'
+import { colors } from "../global/colors"
+import { useSelector } from 'react-redux'
+import { useEffect, useState } from "react"
+import { StyleSheet, View, FlatList } from "react-native"
 
-import Search from '../components/Search'
-import productsRaw from '../data/products.json'
-import ProductItem from '../components/ProductItem'
+import Search from "../components/Search"
+import ProductItem from "../components/ProductItem"
 
 const ItemListCategory = ({ navigation, route }) => {
-  const params = route.params
-  const { category } = params
+	const [keyword, setKeyword] = useState("")
+	const [products, setProducts] = useState([])
+	const [keywordError, setKeywordError] = useState("")
 
-  const [keyword, setKeyword] = useState("")
-  const [products, setProducts] = useState([])
-  const [keywordError, setKeywordError] = useState("")
+	const productsSelected = useSelector(state => state.shopReducer.productsSelected)
 
-  useEffect(()=> {
-    const productsFiltered = productsRaw.filter(product => product.category.toLowerCase() === category && product.title.toLowerCase().includes(keyword))
-    setProducts(productsFiltered)
-  }, [category, keyword])
+	useEffect(()=> {
+		const productsFiltered = productsSelected.filter(product => product.title.toLocaleLowerCase().includes(keyword.toLowerCase()))
+		setProducts(productsFiltered)
+	  }, [productsSelected, keyword])
 
-  const onSearch = (input) => {
-    const expression = /^[a-zA-Z0-9\ ]*$/
-    const evaluation = expression.test(input)
+	const onSearch = (input) => {
+		const expression = /^[a-zA-Z0-9\ ]*$/
+		const evaluation = expression.test(input)
 
-    if (evaluation) {
-      setKeyword(input)
-      setKeywordError("")
-    } else {
-      setKeywordError('Solo se permiten letras y numeros')
-    }
-  }
+		if (evaluation) {
+			setKeyword(input)
+			setKeywordError("")
+		} else {
+			setKeywordError("Solo se permiten letras y numeros")
+		}
+	}
 
-  return (
-    <View style={styles.container}>
-      <Search onSearch={onSearch} error={keywordError} goBack={() => navigation.goBack()} />
-      <FlatList 
-        data={products} 
-        navigation={navigation} 
-        keyExtractor={product => product.id} 
-        showsVerticalScrollIndicator={false} 
-        renderItem={({item}) => <ProductItem navigation={navigation} item={item} />} 
-      />
-    </View>
-  )
+	return (
+		<View style={styles.container}>
+			<Search onSearch={onSearch} error={keywordError} goBack={() => navigation.goBack()} />
+			<FlatList
+				data={products}
+				navigation={navigation}
+				keyExtractor={(product) => product.id}
+				showsVerticalScrollIndicator={false}
+				renderItem={({ item }) => <ProductItem navigation={navigation} item={item} />}
+			/>
+		</View>
+	)
 }
 
 export default ItemListCategory
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: colors.primary,
-  },
+	container: {
+		flex: 1,
+		padding: 10,
+		backgroundColor: colors.primary,
+	},
 })

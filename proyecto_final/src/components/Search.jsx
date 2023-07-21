@@ -1,26 +1,20 @@
 import { useState } from "react"
 import { colors } from "../global/colors"
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native"
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
-import { AntDesign } from "@expo/vector-icons"
-import { FontAwesome } from "@expo/vector-icons"
-import { FontAwesome5 } from "@expo/vector-icons"
-
-const Search = ({ error, onSearch, goBack }) => {
+const Search = ({ error, onSearch }) => {
 	const [keyword, setKeyword] = useState("")
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.top} >
-				<Pressable onPress={goBack}>
-					<AntDesign name="back" size={24} color="#444" />
-				</Pressable>
+			<View style={styles.top}>
 				<TextInput style={styles.input} placeholder="Search..." value={keyword} onChangeText={setKeyword} />
 				<Pressable onPress={() => onSearch(keyword)}>
-					<FontAwesome name="search" size={24} color="#444" />
+					<MaterialCommunityIcons name="magnify" color="#444" size={24} />
 				</Pressable>
 				<Pressable onPress={() => setKeyword("")}>
-					<FontAwesome5 name="eraser" size={24} color="#444" />
+					<MaterialCommunityIcons name="eraser" color="#444" size={24} />
 				</Pressable>
 			</View>
 
@@ -39,7 +33,7 @@ const styles = StyleSheet.create({
 	},
 	top: {
 		gap: 18,
-		width: '100%',
+		width: "100%",
 		alignItems: "center",
 		flexDirection: "row",
 		justifyContent: "center",
@@ -50,7 +44,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	error: {
-		color: 'red',
+		color: "red",
 		fontSize: 12,
 	},
 	input: {

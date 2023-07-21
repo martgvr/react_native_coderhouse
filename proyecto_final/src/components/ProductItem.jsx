@@ -2,7 +2,7 @@ import Card from './Card'
 import { Image, Pressable, StyleSheet, Text } from 'react-native'
 
 const ProductItem = ({ item, navigation }) => {
-  const onSelect = () => navigation.navigate('ItemDetail', { productSelected: item.id })
+  const onSelect = () => navigation.navigate('Detail', { productSelected: item.id })
 	
   return (
 		<Pressable onPress={onSelect}>
@@ -21,5 +21,8 @@ const styles = StyleSheet.create({
     height: 35,
     width: 35,
     borderRadius: 30,
+  },
+  textCategory: {
+    fontSize: 18
   }
 })
