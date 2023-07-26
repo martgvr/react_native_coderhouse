@@ -1,23 +1,34 @@
 import { colors } from "../global/colors"
-import { useSelector } from 'react-redux'
 import { StyleSheet, View, FlatList } from "react-native"
+import { useGetCategoriesQuery } from "../services/shopServices"
 
+import Error from "../components/Error"
+import Loader from "../components/Loader"
 import Counter from "../components/Counter"
 import CategoryItem from "../components/CategoryItem"
 
 const Home = ({ navigation }) => {
-	const categories = useSelector(state => state.shopReducer.allCategories)
+	const { data: categories, isLoading, isError } = useGetCategoriesQuery()
 
 	return (
 		<View style={styles.container}>
-			<Counter />
-			<FlatList
-				data={categories}
-				style={styles.flatlist}
-				keyExtractor={(category) => category}
-				showsVerticalScrollIndicator={false}
-				renderItem={({ item }) => <CategoryItem item={item} navigation={navigation} />}
-			/>
+			{
+				isLoading ?
+					<Loader />
+					:
+					isError ?
+						<Error />
+						:
+						<View style={styles.flatListContainer}>
+							<Counter />
+							<FlatList
+								data={categories}
+								keyExtractor={(category) => category}
+								showsVerticalScrollIndicator={false}
+								renderItem={({ item }) => <CategoryItem item={item} navigation={navigation} />}
+							/>
+						</View>
+			}
 		</View>
 	)
 }
@@ -31,7 +42,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: colors.primary,
 	},
-	flatlist: {
-		width: "100%",
+	flatListContainer: {
+		width: '100%'
 	},
 })
