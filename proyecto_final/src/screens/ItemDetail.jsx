@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux'
 import { useEffect, useState } from "react"
-import { Button, StyleSheet, Text, View, Image, useWindowDimensions } from "react-native"
+import { useSelector, useDispatch } from 'react-redux'
+import { addCartItem } from "../features/cart/cartSlice"
+import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
 
 const ItemDetail = ({ navigation, route }) => {
+	const dispatch = useDispatch()
 	const allProducts = useSelector(state => state.shopReducer.allProducts)
 
 	const [product, setProduct] = useState(null)
@@ -20,9 +22,12 @@ const ItemDetail = ({ navigation, route }) => {
 		setProduct(productFound)
 	}, [productSelected])
 
+	const onAddToCart = () => {
+		dispatch(addCartItem({ ...product, quantity: 1 }))
+	}
+
 	return (
 		<View style={orientation === "landscape" ? styles.containerLandscape : null}>
-			<Button onPress={() => navigation.goBack()} title="Go Back" />
 			<View style={styles.container}>
 				{product && (
 					<View>
@@ -30,6 +35,16 @@ const ItemDetail = ({ navigation, route }) => {
 						<Text style={styles.title}>{product.title}</Text>
 						<Text style={styles.description}>{product.description}</Text>
 						<Text style={styles.price}>$ {product.price}</Text>
+
+						<View style={styles.buttonsContainer}>
+							<TouchableOpacity style={[styles.button, styles.goBackButton]} onPress={() => navigation.goBack()}>
+								<Text>Go back</Text>
+							</TouchableOpacity>
+
+							<TouchableOpacity style={[styles.button, styles.addToCartButton]} onPress={onAddToCart} >
+								<Text>Add to cart</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				)}
 			</View>
@@ -67,4 +82,26 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 		alignSelf: "center",
 	},
+	buttonsContainer: {
+		width: '100%',
+		padding: 10,
+		marginTop: 20,
+		alignSelf: 'center',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	button: {
+		width: 120,
+		padding: 10,
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#aaa',
+		alignItems: 'center',
+	},
+	goBackButton: {
+		backgroundColor: '#cceeff'
+	},
+	addToCartButton: {
+		backgroundColor: '#d1edd6'
+	},	
 })

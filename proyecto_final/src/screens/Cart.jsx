@@ -5,8 +5,7 @@ import { StyleSheet, Text, View, FlatList, Pressable } from "react-native"
 import CartItem from "../components/CartItem"
 
 const Cart = () => {
-	const cartData = useSelector(state => state.cartReducer.cartData)
-    const total = cartData.reduce((acumulador, currentItem) => acumulador += currentItem.price * currentItem.quantity, 0)
+	const { items: cartData, total } = useSelector(state => state.cartReducer)
 
     return (
 		<View style={styles.container}>
