@@ -19,7 +19,7 @@ export default Order
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 10,
+		padding: 20,
 		backgroundColor: colors.primary,
 	},
 })

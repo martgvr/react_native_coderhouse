@@ -20,14 +20,27 @@ export default OrderItem
 
 const styles = StyleSheet.create({
 	card: {
+		height: 90,
 		padding: 10,
-		borderRadius: 10,
 		marginBottom: 10,
+		borderRadius: 10,
 		alignItems: "center",
 		flexDirection: "row",
-		backgroundColor: "white",
 		justifyContent: "space-between",
-		backgroundColor: colors.tertiary,
+
+		borderWidth: 1,
+		borderColor: "#bbb",
+		backgroundColor: "#fff",
+
+		shadowColor: "#222",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+
+		elevation: 15,
 	},
 	textContainer: {
 		gap: 6,

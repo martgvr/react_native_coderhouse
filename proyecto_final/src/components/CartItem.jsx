@@ -1,6 +1,6 @@
-import { colors } from '../global/colors'
-import { StyleSheet, Text, View } from 'react-native'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { colors } from "../global/colors"
+import { StyleSheet, Text, View } from "react-native"
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 const CartItem = ({ cartItem }) => {
 	return (
@@ -12,8 +12,8 @@ const CartItem = ({ cartItem }) => {
 				<Text style={styles.text2}>{cartItem.brand}</Text>
 				<Text style={styles.text3}>$ {cartItem.price}</Text>
 			</View>
-			
-			<MaterialCommunityIcons name="trash-can-outline" color='black' size={30} />
+
+			<MaterialCommunityIcons name="trash-can-outline" color="black" size={30} />
 		</View>
 	)
 }
@@ -29,7 +29,20 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		flexDirection: "row",
 		justifyContent: "space-between",
-		backgroundColor: colors.tertiary,
+
+		borderWidth: 1,
+		borderColor: "#bbb",
+		backgroundColor: "#fff",
+
+		shadowColor: "#222",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+
+		elevation: 15,
 	},
 	textContainer: {
 		gap: 4,
@@ -48,7 +61,7 @@ const styles = StyleSheet.create({
 	},
 	text3: {
 		fontSize: 16,
-		color: '#333',
-		fontWeight: 'bold',
-	}
+		color: "#333",
+		fontWeight: "bold",
+	},
 })
