@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { addCartItem } from "../features/cart/cartSlice"
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
+import Counter from "../components/Counter"
+
 
 const ItemDetail = ({ navigation, route }) => {
 	const dispatch = useDispatch()
@@ -30,20 +32,26 @@ const ItemDetail = ({ navigation, route }) => {
 		<View style={orientation === "landscape" ? styles.containerLandscape : null}>
 			<View style={styles.container}>
 				{product && (
-					<View>
-						<Image source={{ uri: product.images[0] }} style={styles.image} />
-						<Text style={styles.title}>{product.title}</Text>
-						<Text style={styles.description}>{product.description}</Text>
-						<Text style={styles.price}>$ {product.price}</Text>
+					<View style={styles.container1}>
+						<View>
+							<Image source={{ uri: product.images[0] }} style={styles.image} />
+							<Text style={styles.title}>{product.title}</Text>
+							<Text style={styles.description}>{product.description}</Text>
+							<Text style={styles.price}>$ {product.price}</Text>
+						</View>
 
-						<View style={styles.buttonsContainer}>
-							<TouchableOpacity style={[styles.button, styles.goBackButton]} onPress={() => navigation.goBack()}>
-								<Text>Go back</Text>
-							</TouchableOpacity>
+						<View>
+							<Counter />
+							
+							<View style={styles.buttonsContainer}>
+								<TouchableOpacity style={[styles.button, styles.goBackButton]} onPress={() => navigation.goBack()}>
+									<Text>Go back</Text>
+								</TouchableOpacity>
 
-							<TouchableOpacity style={[styles.button, styles.addToCartButton]} onPress={onAddToCart} >
-								<Text>Add to cart</Text>
-							</TouchableOpacity>
+								<TouchableOpacity style={[styles.button, styles.addToCartButton]} onPress={onAddToCart} >
+									<Text>Add to cart</Text>
+								</TouchableOpacity>
+							</View>
 						</View>
 					</View>
 				)}
@@ -59,6 +67,11 @@ const styles = StyleSheet.create({
 		height: "100%",
 		backgroundColor: "white",
 	},
+	container1: {
+		height: '100%',
+		paddingBottom: 60,
+		justifyContent: 'space-between',
+	},	
 	containerLandscape: {
 		flexDirection: "row",
 	},
@@ -85,23 +98,26 @@ const styles = StyleSheet.create({
 	buttonsContainer: {
 		width: '100%',
 		padding: 10,
-		marginTop: 20,
+		marginTop: 10,
 		alignSelf: 'center',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
 	button: {
-		width: 120,
-		padding: 10,
-		borderWidth: 1,
+		width: 150,
+		height: 50,
+		borderWidth: 2,
 		borderRadius: 10,
 		borderColor: '#aaa',
 		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	goBackButton: {
-		backgroundColor: '#cceeff'
+		borderColor: '#cceeff',
+		backgroundColor: '#f5fbfc'
 	},
 	addToCartButton: {
-		backgroundColor: '#d1edd6'
+		borderColor: '#d1edd6',
+		backgroundColor: '#f2fcf4',
 	},	
 })

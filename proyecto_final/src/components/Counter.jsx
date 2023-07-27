@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { colors } from "../global/colors"
 import { useDispatch, useSelector } from "react-redux"
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native"
+import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native"
 import { increment, decrement, incrementByAmount } from "../features/counter/counterSlice"
 
 const Counter = () => {
@@ -13,16 +13,17 @@ const Counter = () => {
     return (
         <View style={styles.container}>
             <View style={styles.buttonsContainer}>
-                <Pressable style={styles.button}>
+                <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText} onPress={() => dispatch(decrement())}>-</Text>
-                </Pressable>
+                </TouchableOpacity>
+
                 <Text style={styles.span}>{count}</Text>
 
-                <Pressable style={styles.button} onPress={() => dispatch(increment())} >
+                <TouchableOpacity style={styles.button} onPress={() => dispatch(increment())} >
                     <Text style={styles.buttonText}>+</Text>
-                </Pressable>
-
+                </TouchableOpacity>
             </View>
+
             <View style={styles.buttonsContainer}>
                 <TextInput
                     style={styles.spanInput}
@@ -31,13 +32,13 @@ const Counter = () => {
                     value={inputToAdd.toString()}
                     placeholder="Cantidad a aumentar"
                 />
-                <Pressable style={styles.button} onPress={() => dispatch(incrementByAmount(inputToAdd))}>
+                <TouchableOpacity style={styles.button} onPress={() => dispatch(incrementByAmount(inputToAdd))}>
                     <Text style={styles.buttonText}>Add</Text>
-                </Pressable>
+                </TouchableOpacity>
 
-                <Pressable style={styles.button} onPress={() => setInputToAdd(0)}>
+                <TouchableOpacity style={styles.button} onPress={() => setInputToAdd(0)}>
                     <Text style={styles.buttonText}>Reset</Text>
-                </Pressable>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -47,7 +48,9 @@ export default Counter;
 
 const styles = StyleSheet.create({
     container: {
+        gap: 10,
         width: "100%",
+        alignSelf: 'flex-end',
         alignItems: "center",
         flexDirection: "column",
         justifyContent: "center",
@@ -55,34 +58,41 @@ const styles = StyleSheet.create({
     },
     buttonsContainer: {
         gap: 10,
-        marginBottom: 10,
+        width: '100%',
+        paddingHorizontal: 10,
         alignItems: "center",
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: 'space-between',
     },
     button: {
-        padding: 10,
+        flex: 1,
+        height: 50,
+        borderWidth: 1,
         borderRadius: 10,
-        paddingHorizontal: 20,
-        backgroundColor: '#222',
+        borderColor: '#ddd',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     buttonText: {
         fontSize: 18,
-        color: 'white',
+        color: 'black',
     },
     span: {
         width: "60%",
         padding: 10,
         fontSize: 20,
         textAlign: "center",
+        backgroundColor: '#fff',
     },
     spanInput: {
         width: "40%",
         padding: 10,
         fontSize: 16,
+        textAlign: "center",
         borderWidth: 1,
         borderRadius: 10,
-        textAlign: "center",
-        borderColor: '#777',
+        borderColor: '#ddd',
+        backgroundColor: '#fff',
     },
 });

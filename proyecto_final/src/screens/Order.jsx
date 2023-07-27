@@ -5,11 +5,11 @@ import { View, FlatList, StyleSheet } from "react-native"
 import OrderItem from "../components/OrderItem"
 
 const Order = () => {
-	const orderData = useSelector((state) => state.orderReducer.orderData)
+	// const orderData = useSelector((state) => state.orderReducer.orderData)
 
 	return (
 		<View style={styles.container}>
-			<FlatList data={orderData} keyExtractor={(orderItem) => orderItem.id} renderItem={({ item }) => <OrderItem order={item} />} />
+			{/* <FlatList data={orderData} keyExtractor={(orderItem) => orderItem.id} renderItem={({ item }) => <OrderItem order={item} />} /> */}
 		</View>
 	)
 }

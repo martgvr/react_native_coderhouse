@@ -1,11 +1,17 @@
 import { colors } from "../global/colors"
 import { useSelector } from 'react-redux'
-import { StyleSheet, Text, View, FlatList, Pressable } from "react-native"
+import { usePostCartMutation } from "../services/shopServices"
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native"
 
 import CartItem from "../components/CartItem"
 
 const Cart = () => {
 	const { items: cartData, total } = useSelector(state => state.cartReducer)
+
+	const confirmHandler = () => {
+		
+	}
+
     return (
 		<View style={styles.container}>
 			{
@@ -17,11 +23,13 @@ const Cart = () => {
 					:
 					<View style={styles.screenFill}>
 						<FlatList data={cartData} keyExtractor={(cartItem) => cartItem.id} renderItem={({ item }) => <CartItem cartItem={item} />} />
+						
 						<View style={styles.totalContainer}>
-							<Pressable>
-								<Text>Confirm</Text>
-							</Pressable>
 							<Text>Total: $ {total}</Text>
+
+							<TouchableOpacity style={styles.button} onPress={confirmHandler}>
+								<Text>Confirm</Text>
+							</TouchableOpacity>
 						</View>
 					</View>
 			}
@@ -41,7 +49,8 @@ const styles = StyleSheet.create({
 	totalContainer: {
 		gap: 10,
 		alignSelf: "center",
-		flexDirection: "row",
+		alignItems: 'center',
+		flexDirection: "column",
 	},
 	screenFill: {
 		height: '100%'
@@ -60,5 +69,13 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		alignSelf: 'center',
 		textAlign: 'center',
+	},
+	button: {
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#777',
+		padding: 10,
+		width: 100,
+		alignItems: 'center'
 	}
 })

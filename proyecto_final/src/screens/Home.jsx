@@ -4,7 +4,6 @@ import { useGetCategoriesQuery } from "../services/shopServices"
 
 import Error from "../components/Error"
 import Loader from "../components/Loader"
-import Counter from "../components/Counter"
 import CategoryItem from "../components/CategoryItem"
 
 const Home = ({ navigation }) => {
@@ -20,7 +19,6 @@ const Home = ({ navigation }) => {
 						<Error />
 						:
 						<View style={styles.flatListContainer}>
-							<Counter />
 							<FlatList
 								data={categories}
 								keyExtractor={(category) => category}
