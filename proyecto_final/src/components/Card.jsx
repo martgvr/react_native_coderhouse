@@ -20,7 +20,10 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         borderRadius: 6,
         marginVertical: 6,
-        backgroundColor: colors.tertiary,
+        
+        borderWidth: 1,
+		borderColor: "#ccc",
+		backgroundColor: "#fff",
         
         alignItems: 'center',
         flexDirection: 'row', 

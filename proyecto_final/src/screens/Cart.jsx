@@ -6,11 +6,12 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native
 import CartItem from "../components/CartItem"
 
 const Cart = () => {
-	const { items: cartData, total } = useSelector(state => state.cartReducer)
+    const [triggerPostCart, result] = usePostCartMutation()
+    const { items: cartData, total, updatedAt, user } = useSelector(state => state.cartReducer)
 
-	const confirmHandler = () => {
-		
-	}
+    const confirmHandler = () => {
+        triggerPostCart({ items: cartData, total, user, updatedAt })
+    }
 
     return (
 		<View style={styles.container}>
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 20,
 		paddingBottom: 65,
-		backgroundColor: colors.primary,
+		backgroundColor: '#eee',
 	},
 	totalContainer: {
 		gap: 10,
@@ -75,7 +76,8 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		borderColor: '#777',
 		padding: 10,
-		width: 100,
-		alignItems: 'center'
+		width: 150,
+		alignItems: 'center',
+		backgroundColor: '#fff',
 	}
 })

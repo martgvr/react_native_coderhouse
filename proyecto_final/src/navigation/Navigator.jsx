@@ -1,4 +1,6 @@
+import { colors } from "../global/colors"
 import { StatusBar } from "react-native"
+import { useSelector } from "react-redux"
 import { SafeAreaView, StyleSheet } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -6,27 +8,35 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import ShopStack from "./ShopStack"
 import CartStack from "./CartStack"
-import Header from "../components/Header"
 import OrderStack from "./OrderStack"
-import { colors } from "../global/colors"
+
+import Header from "../components/Header"
+import AuthStack from "./AuthStack"
 
 const Tab = createBottomTabNavigator()
 
 const Navigator = () => {
+	const { email } = useSelector(state => state.userReducer.value)
+	
 	return (
 		<SafeAreaView style={styles.container}>
 			<NavigationContainer>
-				<Tab.Navigator
-					screenOptions={({ route, navigation }) => ({
-                        tabBarShowLabel: false,
-                        tabBarStyle: styles.tabBar,
-						header: () => <Header route={route} navigation={navigation} />,
-					})}
-				>
-					<Tab.Screen name="Shop" component={ShopStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="store" color={focused ? colors.accents : color} size={30} />) }} />
-					<Tab.Screen name="Orders" component={OrderStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="format-list-bulleted" color={focused ? colors.accents : color} size={30} />) }} />
-					<Tab.Screen name="Cart" component={CartStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="cart" color={focused ? colors.accents : color} size={30} />) }} />
-				</Tab.Navigator>
+				{
+					email ? 
+					<Tab.Navigator
+						screenOptions={({ route, navigation }) => ({
+							tabBarShowLabel: false,
+							tabBarStyle: styles.tabBar,
+							header: () => <Header route={route} navigation={navigation} />,
+						})}
+					>
+						<Tab.Screen name="Shop" component={ShopStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="store" color={focused ? colors.accents : color} size={30} />) }} />
+						<Tab.Screen name="Orders" component={OrderStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="format-list-bulleted" color={focused ? colors.accents : color} size={30} />) }} />
+						<Tab.Screen name="Cart" component={CartStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="cart" color={focused ? colors.accents : color} size={30} />) }} />
+					</Tab.Navigator>
+					:
+					<AuthStack />
+				}
 			</NavigationContainer>
 		</SafeAreaView>
 	)

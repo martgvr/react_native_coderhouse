@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		marginBottom: 50,
 		alignItems: "center",
-		backgroundColor: colors.primary,
+		backgroundColor: '#eee',
 	},
 	flatListContainer: {
 		width: '100%'
