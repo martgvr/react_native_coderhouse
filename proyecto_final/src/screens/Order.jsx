@@ -1,4 +1,4 @@
-import { colors } from "../global/colors"
+import { COLORS } from "../global/colors"
 import { useSelector } from "react-redux"
 import { View, FlatList, StyleSheet } from "react-native"
 
@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 20,
-		backgroundColor: '#eee',
+		backgroundColor: COLORS.secondary,
 	},
 })

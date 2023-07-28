@@ -1,6 +1,6 @@
+import { COLORS } from "../global/colors"
 import { Feather } from "@expo/vector-icons"
 import { StyleSheet, Text, View } from "react-native"
-import { colors } from "../global/colors"
 
 const OrderItem = ({ order }) => {
 	const total = order.items.reduce((acc, currentItem) => (acc += currentItem.price * currentItem.quantity), 0)

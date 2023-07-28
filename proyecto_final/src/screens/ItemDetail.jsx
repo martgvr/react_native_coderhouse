@@ -1,9 +1,10 @@
+import { COLORS } from "../global/colors"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { addCartItem } from "../features/cart/cartSlice"
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
-import Counter from "../components/Counter"
 
+import Counter from "../components/Counter"
 
 const ItemDetail = ({ navigation, route }) => {
 	const dispatch = useDispatch()
@@ -45,11 +46,11 @@ const ItemDetail = ({ navigation, route }) => {
 							
 							<View style={styles.buttonsContainer}>
 								<TouchableOpacity style={[styles.button, styles.goBackButton]} onPress={() => navigation.goBack()}>
-									<Text>Go back</Text>
+									<Text style={styles.buttonText}>Go back</Text>
 								</TouchableOpacity>
 
 								<TouchableOpacity style={[styles.button, styles.addToCartButton]} onPress={onAddToCart} >
-									<Text>Add to cart</Text>
+									<Text style={styles.buttonText}>Add to cart</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -65,7 +66,7 @@ export default ItemDetail
 const styles = StyleSheet.create({
 	container: {
 		height: "100%",
-		backgroundColor: "white",
+		backgroundColor: COLORS.secondary,
 	},
 	container1: {
 		height: '100%',
@@ -84,16 +85,19 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 		fontWeight: 800,
 		alignSelf: "center",
+		color: COLORS.text,
 	},
 	description: {
 		fontSize: 16,
 		alignSelf: "center",
 		textAlign: "center",
+		color: COLORS.subtitle,
 	},
 	price: {
 		fontSize: 20,
 		marginTop: 20,
 		alignSelf: "center",
+		color: COLORS.text,
 	},
 	buttonsContainer: {
 		width: '100%',
@@ -108,16 +112,18 @@ const styles = StyleSheet.create({
 		height: 50,
 		borderWidth: 2,
 		borderRadius: 10,
-		borderColor: '#aaa',
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
 	goBackButton: {
 		borderColor: '#cceeff',
-		backgroundColor: '#f5fbfc'
+		backgroundColor: COLORS.primary,
 	},
 	addToCartButton: {
 		borderColor: '#d1edd6',
-		backgroundColor: '#f2fcf4',
-	},	
+		backgroundColor: COLORS.primary,
+	},
+	buttonText: {
+		color: COLORS.text
+	},
 })

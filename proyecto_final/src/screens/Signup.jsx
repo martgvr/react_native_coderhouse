@@ -1,3 +1,4 @@
+import { COLORS } from "../global/colors"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { setUser } from "../features/user/userSlice"
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
 		height: "100%",
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: '#eee',
+		backgroundColor: COLORS.secondary,
 	},
 	container: {
 		gap: 15,
@@ -98,17 +99,20 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		flexDirection: "column",
 		justifyContent: "center",
-		backgroundColor: '#fff',
+		borderWidth: 1,
+		borderColor: COLORS.border,
+		backgroundColor: COLORS.primary,
 	},
 	title: {
 		fontSize: 22,
+		color: COLORS.text,
 	},
 	sub: {
 		fontSize: 14,
-		color: "black",
+		color: COLORS.text,
 	},
 	subLink: {
 		fontSize: 14,
-		color: "blue",
+		color: COLORS.accents,
 	},
 })

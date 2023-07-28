@@ -1,4 +1,4 @@
-import { colors } from '../global/colors'
+import { COLORS } from '../global/colors'
 import { StyleSheet, View } from 'react-native'
 
 const Card = ({ children, additionalStyle }) => {
@@ -15,15 +15,15 @@ const styles = StyleSheet.create({
     cardContainer: {
         gap: 20,
         zIndex: 2,
-        height: 50,
+        height: 60,
         width: '100%',
         paddingLeft: 10,
         borderRadius: 6,
         marginVertical: 6,
         
         borderWidth: 1,
-		borderColor: "#ccc",
-		backgroundColor: "#fff",
+		borderColor: COLORS.border,
+		backgroundColor: COLORS.primary,
         
         alignItems: 'center',
         flexDirection: 'row', 

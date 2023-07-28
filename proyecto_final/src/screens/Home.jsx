@@ -1,4 +1,4 @@
-import { colors } from "../global/colors"
+import { COLORS } from "../global/colors"
 import { StyleSheet, View, FlatList } from "react-native"
 import { useGetCategoriesQuery } from "../services/shopServices"
 
@@ -35,12 +35,12 @@ export default Home
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 10,
+		padding: 20,
 		marginBottom: 50,
 		alignItems: "center",
-		backgroundColor: '#eee',
+		backgroundColor: COLORS.secondary,
 	},
 	flatListContainer: {
-		width: '100%'
+		width: '100%',
 	},
 })

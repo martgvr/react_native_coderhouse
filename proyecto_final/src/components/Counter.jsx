@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { colors } from "../global/colors"
+import { COLORS } from "../global/colors"
 import { useDispatch, useSelector } from "react-redux"
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native"
 import { increment, decrement, incrementByAmount } from "../features/counter/counterSlice"
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "column",
         justifyContent: "center",
-        backgroundColor: colors.primary,
+        backgroundColor: COLORS.secondary,
     },
     buttonsContainer: {
         gap: 10,
@@ -69,21 +69,22 @@ const styles = StyleSheet.create({
         height: 50,
         borderWidth: 1,
         borderRadius: 10,
-        borderColor: '#ddd',
-        backgroundColor: '#fff',
+        borderColor: COLORS.border,
+        backgroundColor: COLORS.primary,
         alignItems: 'center',
         justifyContent: 'center',
     },
     buttonText: {
         fontSize: 18,
-        color: 'black',
+        color: COLORS.text,
     },
     span: {
         width: "60%",
         padding: 10,
         fontSize: 20,
         textAlign: "center",
-        backgroundColor: '#fff',
+        color: COLORS.text,
+        backgroundColor: COLORS.secondary,
     },
     spanInput: {
         width: "40%",
@@ -92,7 +93,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         borderWidth: 1,
         borderRadius: 10,
-        borderColor: '#ddd',
-        backgroundColor: '#fff',
+        color: COLORS.text,
+        borderColor: COLORS.border,
+        backgroundColor: COLORS.primary,
     },
 });

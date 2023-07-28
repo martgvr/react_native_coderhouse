@@ -1,4 +1,4 @@
-import { colors } from "../global/colors"
+import { COLORS } from "../global/colors"
 import { StatusBar } from "react-native"
 import { useSelector } from "react-redux"
 import { SafeAreaView, StyleSheet } from "react-native"
@@ -6,12 +6,12 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import AuthStack from "./AuthStack"
 import ShopStack from "./ShopStack"
 import CartStack from "./CartStack"
 import OrderStack from "./OrderStack"
 
 import Header from "../components/Header"
-import AuthStack from "./AuthStack"
 
 const Tab = createBottomTabNavigator()
 
@@ -30,9 +30,9 @@ const Navigator = () => {
 							header: () => <Header route={route} navigation={navigation} />,
 						})}
 					>
-						<Tab.Screen name="Shop" component={ShopStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="store" color={focused ? colors.accents : color} size={30} />) }} />
-						<Tab.Screen name="Orders" component={OrderStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="format-list-bulleted" color={focused ? colors.accents : color} size={30} />) }} />
-						<Tab.Screen name="Cart" component={CartStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="cart" color={focused ? colors.accents : color} size={30} />) }} />
+						<Tab.Screen name="Shop" component={ShopStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="store" color={focused ? COLORS.accents : color} size={30} />) }} />
+						<Tab.Screen name="Orders" component={OrderStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="format-list-bulleted" color={focused ? COLORS.accents : color} size={30} />) }} />
+						<Tab.Screen name="Cart" component={CartStack} options={{ tabBarIcon: ({ color, size, focused }) => (<MaterialCommunityIcons name="cart" color={focused ? COLORS.accents : color} size={30} />) }} />
 					</Tab.Navigator>
 					:
 					<AuthStack />
@@ -50,15 +50,15 @@ const styles = StyleSheet.create({
 		paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
 	},
     tabBar: {
-        backgroundColor: '#222',
-        shadowColor: 'black',
-        elevation: 4,
         position: 'absolute',
-        bottom: 10,
         left: 10,
         right: 10,
-        borderRadius: 15,
         height: 40,
+        bottom: 10,
+        elevation: 4,
         opacity: 0.98,
+        borderRadius: 15,
+        shadowColor: 'black',
+        backgroundColor: '#222',
     },
 })

@@ -1,3 +1,4 @@
+import { COLORS } from "../global/colors"
 import { StyleSheet, Text, View } from "react-native"
 
 const Loader = () => {
@@ -19,5 +20,6 @@ const styles = StyleSheet.create({
 	},
     text: {
         fontSize: 20,
+        color: COLORS.text,
     },
 })

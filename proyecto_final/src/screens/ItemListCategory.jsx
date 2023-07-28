@@ -1,4 +1,4 @@
-import { colors } from "../global/colors"
+import { COLORS } from "../global/colors"
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from "react"
 import { StyleSheet, View, FlatList } from "react-native"
@@ -64,8 +64,8 @@ export default ItemListCategory
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 10,
-		backgroundColor: '#eee',
+		padding: 20,
+		backgroundColor: COLORS.secondary,
 	},
 	flatListContainer: {
 		width: '100%'

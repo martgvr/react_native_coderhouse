@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { colors } from "../global/colors"
+import { COLORS } from "../global/colors"
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
@@ -9,12 +9,12 @@ const Search = ({ error, onSearch }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.top}>
-				<TextInput style={styles.input} placeholder="Search..." value={keyword} onChangeText={setKeyword} />
+				<TextInput style={styles.input} placeholder="Search..." value={keyword} onChangeText={setKeyword} placeholderTextColor={COLORS.subtitle} />
 				<Pressable onPress={() => onSearch(keyword)}>
-					<MaterialCommunityIcons name="magnify" color="#444" size={24} />
+					<MaterialCommunityIcons name="magnify" color={COLORS.accents} size={24} />
 				</Pressable>
 				<Pressable onPress={() => setKeyword("")}>
-					<MaterialCommunityIcons name="eraser" color="#444" size={24} />
+					<MaterialCommunityIcons name="eraser" color={COLORS.accents} size={24} />
 				</Pressable>
 			</View>
 
@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		borderWidth: 2,
 		borderRadius: 10,
-		borderColor: colors.accents,
-		backgroundColor: colors.primary,
+		color: COLORS.text,
+		borderColor: COLORS.accents,
+		backgroundColor: COLORS.primary,
 	},
 })

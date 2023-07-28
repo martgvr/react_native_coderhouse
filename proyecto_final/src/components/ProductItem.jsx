@@ -1,4 +1,5 @@
 import Card from "./Card"
+import { COLORS } from '../global/colors'
 import { Image, Pressable, StyleSheet, Text } from "react-native"
 
 const ProductItem = ({ item, navigation }) => {
@@ -24,5 +25,6 @@ const styles = StyleSheet.create({
 	},
 	textCategory: {
 		fontSize: 18,
+		color: COLORS.text,
 	},
 })

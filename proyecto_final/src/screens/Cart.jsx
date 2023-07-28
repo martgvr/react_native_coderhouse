@@ -1,4 +1,4 @@
-import { colors } from "../global/colors"
+import { COLORS } from "../global/colors"
 import { useSelector } from 'react-redux'
 import { usePostCartMutation } from "../services/shopServices"
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native"
@@ -9,9 +9,7 @@ const Cart = () => {
     const [triggerPostCart, result] = usePostCartMutation()
     const { items: cartData, total, updatedAt, user } = useSelector(state => state.cartReducer)
 
-    const confirmHandler = () => {
-        triggerPostCart({ items: cartData, total, user, updatedAt })
-    }
+    const confirmHandler = () => triggerPostCart({ items: cartData, total, user, updatedAt })
 
     return (
 		<View style={styles.container}>
@@ -26,10 +24,10 @@ const Cart = () => {
 						<FlatList data={cartData} keyExtractor={(cartItem) => cartItem.id} renderItem={({ item }) => <CartItem cartItem={item} />} />
 						
 						<View style={styles.totalContainer}>
-							<Text>Total: $ {total}</Text>
+							<Text style={styles.buttonText}>Total: $ {total}</Text>
 
 							<TouchableOpacity style={styles.button} onPress={confirmHandler}>
-								<Text>Confirm</Text>
+								<Text style={styles.buttonText}>Confirm</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -45,7 +43,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 20,
 		paddingBottom: 65,
-		backgroundColor: '#eee',
+		backgroundColor: COLORS.secondary,
 	},
 	totalContainer: {
 		gap: 10,
@@ -62,22 +60,26 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 		alignSelf: 'center',
 		textAlign: 'center',
+		color: COLORS.text,
 	},
 	noCartDataText: {
 		top: '40%',
 		width: 250,
-		color: '#555',
 		marginTop: 10,
 		alignSelf: 'center',
 		textAlign: 'center',
+		color: COLORS.subtitle,
 	},
 	button: {
-		borderWidth: 1,
-		borderRadius: 10,
-		borderColor: '#777',
 		padding: 10,
 		width: 150,
 		alignItems: 'center',
-		backgroundColor: '#fff',
-	}
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: COLORS.border,
+		backgroundColor: COLORS.primary,
+	},
+	buttonText: {
+		color: COLORS.text,
+	},
 })

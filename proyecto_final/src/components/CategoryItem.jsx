@@ -1,4 +1,5 @@
 import Card from "./Card"
+import { COLORS } from '../global/colors'
 import { useDispatch } from "react-redux"
 import { StyleSheet, Text, Pressable } from "react-native"
 import { setCategorySelected } from '../features/shop/shopSlice'
@@ -25,5 +26,6 @@ export default CategoryItem
 const styles = StyleSheet.create({
 	textCategory: {
 		fontSize: 18,
+		color: COLORS.text,
 	}
 })
