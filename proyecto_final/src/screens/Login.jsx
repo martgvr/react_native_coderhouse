@@ -14,13 +14,19 @@ const Login = ({ navigation }) => {
 
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
+	
 	const [errorMail, setErrorMail] = useState("")
 	const [errorPassword, setErrorPassword] = useState("")
 
 	const [triggerSignIn, result] = useSignInMutation()
 
 	useEffect(() => {
+		if (result.error?.data.error.message) {
+			setErrorMail('Email o password incorrectos')
+		}
+
 		if (result.isSuccess) {
+			console.log('TODO BIEN');
 			dispatch(setUser({ 
 				email: result.data.email,
 				idToken: result.data.idToken,
@@ -37,13 +43,11 @@ const Login = ({ navigation }) => {
 			const isCorrectPassword = isAtLeastSixCharacters(password)
 
 			if (isCorrectEmail && isCorrectPassword) {
-				const request = {
+				triggerSignIn({
 					email: email,
 					password: password,
 					returnSecureToken: true,
-				}
-	
-				triggerSignIn(request)
+				})
 			}
 			
 			if (!isCorrectEmail) setErrorMail('Email incorrecto')

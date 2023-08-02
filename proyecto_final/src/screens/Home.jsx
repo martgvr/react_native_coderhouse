@@ -36,7 +36,7 @@ export default Home
 const styles = StyleSheet.create({
 	container: {
 		padding: 20,
-		marginBottom: 50,
+		paddingBottom: 65,
 		alignItems: "center",
 		backgroundColor: COLORS.secondary,
 	},

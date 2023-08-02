@@ -1,5 +1,5 @@
 import { COLORS } from "../global/colors"
-import { StatusBar } from "react-native"
+import { Platform, StatusBar } from "react-native"
 import { useSelector } from "react-redux"
 import { SafeAreaView, StyleSheet } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
