@@ -12,12 +12,12 @@ export const userSlice = createSlice({
         setUser: (state, action) => {
             state.value = action.payload
         },
-        logOut: (state) => {
+        signOut: (state) => {
             state.value = { email: '', idToken: '', }
         }
     }
 })
 
-export const { setUser, logOut } = userSlice.actions
+export const { setUser, signOut } = userSlice.actions
 
 export default userSlice.reducer
