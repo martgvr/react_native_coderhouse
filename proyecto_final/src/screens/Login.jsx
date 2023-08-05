@@ -26,7 +26,6 @@ const Login = ({ navigation }) => {
 		}
 
 		if (result.isSuccess) {
-			console.log('TODO BIEN');
 			dispatch(setUser({ 
 				email: result.data.email,
 				idToken: result.data.idToken,
