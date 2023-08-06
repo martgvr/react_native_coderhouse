@@ -1,9 +1,9 @@
 import { COLORS } from "../global/colors"
 import { Pressable, StyleSheet, Text } from "react-native"
 
-const SubmitButton = ({ onPress, title }) => {
+const SubmitButton = ({ onPress, title, width = '40%' }) => {
 	return (
-		<Pressable onPress={onPress} style={styles.button}>
+		<Pressable onPress={onPress} style={[styles.button, { width: width }]}>
 			<Text style={styles.text}>{title}</Text>
 		</Pressable>
 	)
@@ -13,7 +13,6 @@ export default SubmitButton
 
 const styles = StyleSheet.create({
 	button: {
-		width: "40%",
 		padding: 6,
 		marginTop: 10,
 		alignItems: "center",
