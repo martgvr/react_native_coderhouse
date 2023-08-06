@@ -12,8 +12,8 @@ import SubmitButton from "../components/SubmitButton"
 const Login = ({ navigation }) => {
 	const dispatch = useDispatch()
 
-	const [email, setEmail] = useState("")
-	const [password, setPassword] = useState("")
+	const [email, setEmail] = useState("jorge@rial.com")
+	const [password, setPassword] = useState("123456")
 	
 	const [errorMail, setErrorMail] = useState("")
 	const [errorPassword, setErrorPassword] = useState("")
@@ -29,6 +29,8 @@ const Login = ({ navigation }) => {
 			dispatch(setUser({ 
 				email: result.data.email,
 				idToken: result.data.idToken,
+				localID: result.data.localId,
+                profileImage: "",
 			}))
 		}
 	}, [result])

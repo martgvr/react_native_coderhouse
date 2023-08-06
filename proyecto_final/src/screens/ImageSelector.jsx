@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { colors } from "../global/colors"
+import { useState } from "react"
+import { COLORS } from "../global/colors"
 import AddButton from "../components/AddButton"
 import * as ImagePicker from "expo-image-picker"
 import * as MediaLibrary from "expo-media-library"
@@ -12,7 +12,7 @@ const ImageSelector = ({ navigation }) => {
 	const [image, setImage] = useState(null)
     
     const dispatch = useDispatch()
-    const { localId } = useSelector((state) => state.userReducer.value)
+    const { localID } = useSelector((state) => state.userReducer)
     const [triggerSaveImage, resultSaveImage] = usePostProfileImageMutation()
 
 	const verifyCameraPermissions = async () => {
@@ -55,7 +55,7 @@ const ImageSelector = ({ navigation }) => {
                 //Save image link on profileImages remote location
                 triggerSaveImage({
                     image: response.uri,
-                    localId: localId,
+                    localID: localID,
                 });
 
                 // Set image on redux state

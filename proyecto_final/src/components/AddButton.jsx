@@ -1,8 +1,8 @@
 import React from "react"
-import { colors } from "../global/colors"
+import { COLORS } from "../global/colors"
 import { Pressable, StyleSheet, Text } from "react-native"
 
-const AddButton = ({ title = "", onPress = () => {}, color = colors.pink }) => {
+const AddButton = ({ title = "", onPress = () => {}, color = COLORS.tertiary }) => {
 	return (
 		<Pressable style={{ ...styles.button, backgroundColor: color }} onPress={onPress}>
 			<Text style={styles.text}>{title}</Text>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 		padding: 8,
 	},
 	text: {
-		fontFamily: "Ubuntu",
+		// fontFamily: "Ubuntu",
 		fontSize: 18,
 		// color: colors.lightPink,
 	},
