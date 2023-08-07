@@ -1,8 +1,8 @@
 import { COLORS } from "../global/colors"
+import { signOut } from "../features/user/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { Image, StyleSheet, View, Text } from "react-native"
 import { useGetProfileImageQuery } from "../services/shopServices"
-import { signOut } from "../features/user/userSlice"
 
 import SubmitButton from "../components/SubmitButton"
 
@@ -12,8 +12,9 @@ const Profile = ({ navigation }) => {
 	const { data: image } = useGetProfileImageQuery(localID)
 
 	const cameraImage = image?.image
-	const launchCamera = async () => navigation.navigate("Image Selector")
 	const logoutHandler = () => dispatch(signOut())
+	const launchCamera = async () => navigation.navigate("Image Selector")
+	const launchLocation = async () => navigation.navigate('List Address')
 	
 	return (
 		<View style={styles.container}>
@@ -26,6 +27,7 @@ const Profile = ({ navigation }) => {
 
 			<SubmitButton title={'Add profile picture'} onPress={launchCamera} width="80%"/>
 			<SubmitButton title={'Logout'} onPress={logoutHandler} width="80%"/>
+			<SubmitButton title={'My address'} onPress={launchLocation} width="80%" />
 		</View>
 	)
 }
