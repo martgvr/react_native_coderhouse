@@ -1,10 +1,11 @@
+import { COLORS } from "../global/colors"
 import { useSelector } from "react-redux"
 import { StyleSheet, Text, View } from "react-native"
 import { useGetUserLocationQuery } from "../services/shopServices"
 
 import AddButton from "../components/AddButton"
 import AddressItem from '../components/AddressItem'
-import { COLORS } from "../global/colors"
+import SubmitButton from "../components/SubmitButton"
 
 const ListAddress = ({ navigation }) => {
     const { location, localID } = useSelector((state) => state.userReducer);
@@ -20,7 +21,7 @@ const ListAddress = ({ navigation }) => {
     ) : (
         <View style={styles.container}>
             <Text style={styles.text}>No location set</Text>
-            <AddButton title="Set location" onPress={() => navigation.navigate("Location Selector")} />
+            <SubmitButton title={'Set location'} onPress={() => navigation.navigate("Location Selector")} width="80%" />
         </View>
     );
 };
@@ -37,8 +38,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.secondary,
     },
     text: {
+        fontSize: 18,
+        color: COLORS.text,
         paddingVertical: 20,
-        // fontFamily: 'Josefin',
-        fontSize: 18
     }
 });

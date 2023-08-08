@@ -1,13 +1,14 @@
 import { useState } from "react"
 import { COLORS } from "../global/colors"
-import AddButton from "../components/AddButton"
-import * as ImagePicker from "expo-image-picker"
-import * as MediaLibrary from "expo-media-library"
-import { saveImage } from "../features/user/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { Image, View, StyleSheet, Text } from "react-native"
-import { usePostProfileImageMutation } from "../services/shopServices"
+
+import * as ImagePicker from "expo-image-picker"
+import * as MediaLibrary from "expo-media-library"
+
 import SubmitButton from "../components/SubmitButton"
+import { saveImage } from "../features/user/userSlice"
+import { usePostProfileImageMutation } from "../services/shopServices"
 
 const ImageSelector = ({ navigation }) => {
 	const [image, setImage] = useState(null)
@@ -23,48 +24,32 @@ const ImageSelector = ({ navigation }) => {
 
 	const pickImage = async () => {
 		const isCameraOk = await verifyCameraPermissions()
+
 		if (isCameraOk) {
-			// No permissions request is necessary for launching the image library
 			let result = await ImagePicker.launchCameraAsync({
 				mediaTypes: ImagePicker.MediaTypeOptions.All,
 				allowsEditing: true,
 				aspect: [1, 1],
-				//base64: true,
 				quality: 1,
 			})
 
-			console.log(result.assets)
-
-			if (!result.canceled) {
-				setImage(result.assets[0].uri)
-			}
+			(!result.canceled) && setImage(result.assets[0].uri)
 		}
 	}
 
 	const confirmImage = async () => {
 		try {
-            // Request device storage access permission
             const { status } = await MediaLibrary.requestPermissionsAsync();
 
             if (status === "granted") {
-                console.log("Only valid on emulators and physical devices");
-
-                // Save image to media library and create an asset
                 const response = await MediaLibrary.createAssetAsync(image);
-                console.log(response.uri);
-
-                //Save image link on profileImages remote location
-                triggerSaveImage({
-                    image: response.uri,
-                    localID: localID,
-                });
-
-                // Set image on redux state
+				triggerSaveImage({ image: response.uri, localID: localID });
                 dispatch(saveImage(response.uri));
             }
         } catch (error) {
             console.log(error);
         }
+
         navigation.goBack();
 	}
 
@@ -81,6 +66,7 @@ const ImageSelector = ({ navigation }) => {
 					<View style={styles.noPhotoContainer}>
 						<Text style={styles.text}>No photo to show...</Text>
 					</View>
+
 					<SubmitButton title={'Take a photo'} width="80%" onPress={pickImage} />
 				</>
 			)}

@@ -1,10 +1,10 @@
 import { COLORS } from "../global/colors"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { addCartItem } from "../features/cart/cartSlice"
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
 
 import Counter from "../components/Counter"
+import { addCartItem } from "../features/cart/cartSlice"
 
 const ItemDetail = ({ navigation, route }) => {
 	const dispatch = useDispatch()
@@ -25,9 +25,7 @@ const ItemDetail = ({ navigation, route }) => {
 		setProduct(productFound)
 	}, [productSelected])
 
-	const onAddToCart = () => {
-		dispatch(addCartItem({ ...product, quantity: 1 }))
-	}
+	const onAddToCart = () => dispatch(addCartItem({ ...product, quantity: 1 }))
 
 	return (
 		<View style={orientation === "landscape" ? styles.containerLandscape : null}>

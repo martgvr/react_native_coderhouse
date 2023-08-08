@@ -1,18 +1,16 @@
 import { COLORS } from "../global/colors"
-import { Entypo } from "@expo/vector-icons"
 import { Pressable, StyleSheet, Text, View } from "react-native"
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 const AddressItem = ({ location, navigation }) => {
-    const onChangeLocation = () => navigation.navigate('Location Selector')
-
     return (
         <View style={styles.card} onPress={() => {}}>
             <View style={styles.textContainer}>
                 <Text style={styles.text}>{location.address}</Text>
             </View>
 
-            <Pressable onPress={onChangeLocation} style={styles.pressable}>
-                <Entypo name="location" size={28} color={COLORS.accents}/>
+            <Pressable onPress={() => navigation.navigate('Location Selector')} style={styles.pressable}>
+                <MaterialCommunityIcons name="map-marker" color={COLORS.accents} size={28} />
                 <Text style={styles.text2}>Change</Text>
             </Pressable>
         </View>
