@@ -7,3 +7,8 @@ export const isAtLeastSixCharacters = (input) => {
     const regex = /.{6,}/
     return regex.test(input)
 }
+
+export const isValidName = (input) => {
+    const regex = /^[a-zA-Z_][a-zA-Z0-9_]*$/
+    return regex.test(input)
+}

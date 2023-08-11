@@ -37,10 +37,16 @@ $ npm install @react-navigation/native-stack
 $ npm install @react-navigation/bottom-tabs
 ```
 
-# Redux Toolkit
+## Redux Toolkit
 
 ```
 $ npm install @reduxjs/toolkit
 $ npm install react-redux
 $ npm i -D @redux-devtools/core
+```
+
+## SQLite
+
+```
+$ npx expo install expo-sqlite
 ```
