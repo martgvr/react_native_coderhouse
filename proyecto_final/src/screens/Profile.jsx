@@ -1,8 +1,8 @@
 import { COLORS } from "../global/colors"
-import { signOut } from "../features/user/userSlice"
+import { signOut } from "../features/user/user.slice"
 import { useDispatch, useSelector } from "react-redux"
 import { Image, StyleSheet, View, Text } from "react-native"
-import { useGetProfileImageQuery } from "../services/shopServices"
+import { useGetProfileImageQuery } from "../services/shop.service"
 
 import SubmitButton from "../components/SubmitButton"
 

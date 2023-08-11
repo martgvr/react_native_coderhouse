@@ -1,8 +1,8 @@
 import { COLORS } from "../global/colors"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { setUser } from "../features/user/userSlice"
-import { useSignInMutation } from "../services/authServices"
+import { setUser } from "../features/user/user.slice"
+import { useSignInMutation } from "../services/auth.service"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 
@@ -12,8 +12,8 @@ import SubmitButton from "../components/SubmitButton"
 const Login = ({ navigation }) => {
 	const dispatch = useDispatch()
 
-	const [email, setEmail] = useState("")
-	const [password, setPassword] = useState("")
+	const [email, setEmail] = useState("jorge@rial.com")
+	const [password, setPassword] = useState("123456")
 	
 	const [errorMail, setErrorMail] = useState("")
 	const [errorPassword, setErrorPassword] = useState("")

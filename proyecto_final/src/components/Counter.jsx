@@ -2,7 +2,7 @@ import { useState } from "react"
 import { COLORS } from "../global/colors"
 import { useDispatch, useSelector } from "react-redux"
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native"
-import { increment, decrement, incrementByAmount } from "../features/counter/counterSlice"
+import { increment, decrement, incrementByAmount } from "../features/counter/counter.slice"
 
 const Counter = () => {
     const [inputToAdd, setInputToAdd] = useState(0);

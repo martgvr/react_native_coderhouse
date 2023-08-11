@@ -1,5 +1,5 @@
 import { Image, StyleSheet, View } from "react-native"
-import { MAPS_API_KEY } from "../database/firebaseConfig"
+import { MAPS_API_KEY } from "../database/firebase.config"
 
 const MapPreview = ({ location }) => {
     const mapPreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${location.latitude},${location.longitude}&zoom=13&size=300x300&maptype=roadmap&markers=color:red%7Clabel:Me%7C${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`;

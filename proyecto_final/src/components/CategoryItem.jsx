@@ -2,7 +2,7 @@ import Card from "./Card"
 import { COLORS } from '../global/colors'
 import { useDispatch } from "react-redux"
 import { StyleSheet, Text, Pressable } from "react-native"
-import { setCategorySelected } from '../features/shop/shopSlice'
+import { setCategorySelected } from '../features/shop/shop.slice'
 
 const CategoryItem = ({ item, navigation }) => {
 	const dispatch = useDispatch()

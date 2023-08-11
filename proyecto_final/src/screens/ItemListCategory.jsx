@@ -2,7 +2,7 @@ import { COLORS } from "../global/colors"
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from "react"
 import { StyleSheet, View, FlatList } from "react-native"
-import { useGetProductsByCategoryQuery } from "../services/shopServices"
+import { useGetProductsByCategoryQuery } from "../services/shop.service"
 
 import Loader from "../components/Loader"
 import Search from "../components/Search"

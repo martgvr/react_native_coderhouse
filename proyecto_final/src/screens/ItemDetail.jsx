@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
 
 import Counter from "../components/Counter"
-import { addCartItem } from "../features/cart/cartSlice"
+import { addCartItem } from "../features/cart/cart.slice"
 
 const ItemDetail = ({ navigation, route }) => {
 	const dispatch = useDispatch()

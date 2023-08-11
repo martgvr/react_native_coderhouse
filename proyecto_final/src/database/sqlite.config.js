@@ -21,11 +21,15 @@ export const sqliteInit = (tableName) => {
     return promise
 }
 
-export const dropTableSessions = () => {
+export const dropTable = (tableName) => {
+    if (!isValidName(tableName)) {
+        throw new Error('Nombre de tabla no válido');
+    }
+
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'DROP TABLE IF EXISTS sessions ',
+                `DROP TABLE IF EXISTS ${tableName}`,
                 [],
                 (_, result) => resolve(result),
                 (_, error) => reject(error)
@@ -35,12 +39,12 @@ export const dropTableSessions = () => {
     return promise
 }
 
-export const insertSession = ({ email, localId, idToken }) => {
+export const insertSession = ({ email, localID, idToken }) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'INSERT INTO sessions (email, localId, idToken) VALUES (?, ?, ?);',
-                [email, localId, idToken],
+                'INSERT INTO sessions (email, localID, idToken) VALUES (?, ?, ?);',
+                [email, localID, idToken],
                 (_, result) => resolve(result),
                 (_, error) => reject(error)
             )
@@ -63,12 +67,12 @@ export const getSession = () => {
     return promise
 }
 
-export const deleteSession = (localId) => {
+export const deleteSession = (localID) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'DELETE FROM sessions WHERE localId = ?',
-                [localId],
+                'DELETE FROM sessions WHERE localID = ?',
+                [localID],
                 (_, result) => resolve(result),
                 (_, error) => reject(error)
             )

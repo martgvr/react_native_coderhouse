@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 
-import { MAPS_API_KEY } from "../database/firebaseConfig"
-import { setUserLocation } from "../features/user/userSlice"
-import { usePostUserLocationMutation } from "../services/shopServices"
+import { MAPS_API_KEY } from "../database/firebase.config"
+import { setUserLocation } from "../features/user/user.slice"
+import { usePostUserLocationMutation } from "../services/shop.service"
 
 import MapPreview from "../components/MapPreview"
 import SubmitButton from "../components/SubmitButton"

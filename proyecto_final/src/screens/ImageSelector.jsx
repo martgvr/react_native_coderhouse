@@ -7,8 +7,8 @@ import * as ImagePicker from "expo-image-picker"
 import * as MediaLibrary from "expo-media-library"
 
 import SubmitButton from "../components/SubmitButton"
-import { saveImage } from "../features/user/userSlice"
-import { usePostProfileImageMutation } from "../services/shopServices"
+import { saveImage } from "../features/user/user.slice"
+import { usePostProfileImageMutation } from "../services/shop.service"
 
 const ImageSelector = ({ navigation }) => {
 	const [image, setImage] = useState(null)

@@ -1,6 +1,6 @@
 import { COLORS } from "../global/colors"
 import { useSelector } from 'react-redux'
-import { usePostCartMutation } from "../services/shopServices"
+import { usePostCartMutation } from "../services/shop.service"
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native"
 
 import CartItem from "../components/CartItem"

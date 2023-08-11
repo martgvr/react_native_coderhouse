@@ -1,6 +1,6 @@
 import { COLORS } from "../global/colors"
 import { StyleSheet, View, FlatList } from "react-native"
-import { useGetCategoriesQuery } from "../services/shopServices"
+import { useGetCategoriesQuery } from "../services/shop.service"
 
 import Error from "../components/Error"
 import Loader from "../components/Loader"

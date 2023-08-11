@@ -1,8 +1,8 @@
 import { COLORS } from "../global/colors"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { setUser } from "../features/user/userSlice"
-import { useSignUpMutation } from "../services/authServices"
+import { setUser } from "../features/user/user.slice"
+import { useSignUpMutation } from "../services/auth.service"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 

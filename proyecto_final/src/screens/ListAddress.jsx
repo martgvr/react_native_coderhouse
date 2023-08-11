@@ -1,7 +1,7 @@
 import { COLORS } from "../global/colors"
 import { useSelector } from "react-redux"
 import { StyleSheet, Text, View } from "react-native"
-import { useGetUserLocationQuery } from "../services/shopServices"
+import { useGetUserLocationQuery } from "../services/shop.service"
 
 import AddButton from "../components/AddButton"
 import AddressItem from '../components/AddressItem'
