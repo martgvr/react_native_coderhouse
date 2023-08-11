@@ -3,26 +3,25 @@ import { useFonts } from 'expo-font'
 import { fonts } from './src/global/fonts'
 import Navigator from './src/navigation/Navigator'
 
-import store from './src/store/store'
+import { useState } from 'react'
 import { Provider } from 'react-redux'
 import { sqliteInit } from './src/database/sqlite.config'
 
+import store from './src/store/store'
+import Error from './src/components/Error'
+
 export default function App() {
     const [fontsLoaded] = useFonts(fonts)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
-        const fetchData = async () => {
+        (async () => {
             try {
-                const result = await sqliteInit('sessions')
-                console.log('Db initialized/dropped')
-                console.log(result)
+                await sqliteInit('sessions')
             } catch (err) {
-                console.log("Initialization DB failed:")
-                console.log(err.message)
+                setError(true)
             }
-        }
-    
-        fetchData()
+        })()
     }, [])
 
     if (!fontsLoaded) {
@@ -31,7 +30,12 @@ export default function App() {
 
     return (
         <Provider store={store}>
-            <Navigator />
+            {
+                error ?
+                <Error title={'ERROR!'} description={'Ocurrió un error al crear la base de datos SQLite. Contacte al desarrollador para obtener soporte.'} />
+                :
+                <Navigator />
+            }
         </Provider>
     );
 }

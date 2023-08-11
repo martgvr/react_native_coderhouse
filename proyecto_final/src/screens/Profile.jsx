@@ -15,6 +15,10 @@ const Profile = ({ navigation }) => {
 	const logoutHandler = () => dispatch(signOut())
 	const launchCamera = async () => navigation.navigate("Image Selector")
 	const launchLocation = async () => navigation.navigate('List Address')
+
+	const themeSwapHandler = () => {
+		console.log('Theme changing');
+	}
 	
 	return (
 		<View style={styles.container}>
@@ -28,6 +32,7 @@ const Profile = ({ navigation }) => {
 			<SubmitButton title={'Add profile picture'} onPress={launchCamera} width="80%"/>
 			<SubmitButton title={'Logout'} onPress={logoutHandler} width="80%"/>
 			<SubmitButton title={'My address'} onPress={launchLocation} width="80%" />
+			<SubmitButton title={'Light mode'} onPress={themeSwapHandler} width="80%" />
 		</View>
 	)
 }

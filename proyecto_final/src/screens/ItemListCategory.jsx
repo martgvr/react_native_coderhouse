@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { StyleSheet, View, FlatList } from "react-native"
 import { useGetProductsByCategoryQuery } from "../services/shop.service"
 
+import Error from "../components/Error"
 import Loader from "../components/Loader"
 import Search from "../components/Search"
 import ProductItem from "../components/ProductItem"
@@ -42,7 +43,7 @@ const ItemListCategory = ({ navigation }) => {
 					<Loader />
 					:
 					isError ?
-						<Error />
+					<Error title={'Se produjo un error de conexión'} description={'Reinicie la aplicación para intentar nuevamente.'} />
 						:
 						<View style={styles.flatListContainer}>
 							<Search onSearch={onSearch} error={keywordError} goBack={() => navigation.goBack()} />

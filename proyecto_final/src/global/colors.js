@@ -8,16 +8,6 @@
 //     accents: '#45afed'
 // }
 
-// export const COLORS = {
-//     primary: '#4c5359',
-//     secondary: '#23282b',
-//     text: '#fff',
-//     subtitle: '#aaa',
-//     error: 'red',
-//     border: '#777',
-//     accents: '#45afed'
-// }
-
 export const COLORS = {
     primary: '#232326',
     secondary: '#0f0f0f',

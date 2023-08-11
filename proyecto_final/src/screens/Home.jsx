@@ -16,7 +16,7 @@ const Home = ({ navigation }) => {
 					<Loader />
 					:
 					isError ?
-						<Error />
+						<Error title={'Se produjo un error de conexión'} description={'Reinicie la aplicación para intentar nuevamente.'} />
 						:
 						<View style={styles.flatListContainer}>
 							<FlatList
