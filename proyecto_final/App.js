@@ -12,14 +12,14 @@ import Error from './src/components/Error'
 
 export default function App() {
     const [fontsLoaded] = useFonts(fonts)
-    const [error, setError] = useState(false)
-
+    const [error, setError] = useState({ status: false, code: "" })
+    
     useEffect(() => {
         (async () => {
             try {
                 await sqliteInit('sessions')
             } catch (err) {
-                setError(true)
+                setError({ status: true, code: err })
             }
         })()
     }, [])
@@ -31,10 +31,10 @@ export default function App() {
     return (
         <Provider store={store}>
             {
-                error ?
-                <Error title={'ERROR!'} description={'Ocurrió un error al crear la base de datos SQLite. Contacte al desarrollador para obtener soporte.'} />
-                :
-                <Navigator />
+                error.status ?
+                    <Error title={'ERROR!'} description={'Ocurrió un error al crear la base de datos SQLite. Contacte al desarrollador para obtener soporte.'} code={error.code} />
+                    :
+                    <Navigator />
             }
         </Provider>
     );
