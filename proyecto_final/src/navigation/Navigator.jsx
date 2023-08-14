@@ -1,9 +1,14 @@
-import { COLORS } from "../global/colors"
+import { useEffect } from "react"
 import { Platform, StatusBar } from "react-native"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { SafeAreaView, StyleSheet } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+
+import { setUser } from "../features/user/user.slice"
+import { getSession } from "../database/sqlite.config"
+
+import { COLORS } from "../global/colors"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import AuthStack from "./AuthStack"
@@ -17,8 +22,24 @@ import Header from "../components/Header"
 const Tab = createBottomTabNavigator()
 
 const Navigator = () => {
+	const dispatch = useDispatch()
 	const { email } = useSelector(state => state.userReducer)
-	
+
+	useEffect(() => {
+		(async ()=> {
+            try {
+                const session = await getSession()
+
+                if (session?.rows.length) {
+                    const user = session.rows._array[0]
+                    dispatch(setUser(user))
+                }
+            } catch (error) {
+                console.log('Error getting session:', error.message);
+            }
+        })()
+	}, [])
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<NavigationContainer>

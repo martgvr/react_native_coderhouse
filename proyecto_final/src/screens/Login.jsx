@@ -1,9 +1,11 @@
-import { COLORS } from "../global/colors"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { setUser } from "../features/user/user.slice"
-import { useSignInMutation } from "../services/auth.service"
 import { Pressable, StyleSheet, Text, View } from "react-native"
+
+import { COLORS } from "../global/colors"
+import { setUser } from "../features/user/user.slice"
+import { insertSession, getSession } from "../database/sqlite.config"
+import { useSignInMutation } from "../services/auth.service"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 
 import InputForm from "../components/InputForm"
@@ -12,27 +14,45 @@ import SubmitButton from "../components/SubmitButton"
 const Login = ({ navigation }) => {
 	const dispatch = useDispatch()
 
-	const [email, setEmail] = useState("jorge@rial.com")
 	const [password, setPassword] = useState("123456")
-	
-	const [errorMail, setErrorMail] = useState("")
 	const [errorPassword, setErrorPassword] = useState("")
+
+	const [email, setEmail] = useState("jorge@rial.com")
+	const [errorMail, setErrorMail] = useState("")
 
 	const [triggerSignIn, result] = useSignInMutation()
 
 	useEffect(() => {
-		if (result.error?.data.error.message) {
-			setErrorMail('Email o password incorrectos')
-		}
+		(async () => {
+			if (result.error?.data.error.message) {
+				setErrorMail('Email o password incorrectos')
+			}
+	
+			if (result.isSuccess) {
+				dispatch(setUser({ 
+					email: result.data.email,
+					idToken: result.data.idToken,
+					localID: result.data.localId,
+					profileImage: "",
+					location: {
+						latitude: "",
+						longitude: "",
+					}
+				}))
 
-		if (result.isSuccess) {
-			dispatch(setUser({ 
-				email: result.data.email,
-				idToken: result.data.idToken,
-				localID: result.data.localId,
-                profileImage: "",
-			}))
-		}
+				try {
+					const response = await insertSession({
+						idToken: result.data.idToken,
+						localID: result.data.localId,
+						email: result.data.email,
+					})
+
+					console.log(response)
+				} catch (error) {
+					console.log(error)
+				}
+			}
+		})()
 	}, [result])
 
 	const onSubmit = () => {
@@ -44,11 +64,7 @@ const Login = ({ navigation }) => {
 			const isCorrectPassword = isAtLeastSixCharacters(password)
 
 			if (isCorrectEmail && isCorrectPassword) {
-				triggerSignIn({
-					email: email,
-					password: password,
-					returnSecureToken: true,
-				})
+				triggerSignIn({ email: email, password: password, returnSecureToken: true })
 			}
 			
 			if (!isCorrectEmail) setErrorMail('Email incorrecto')
