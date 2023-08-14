@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native"
 
 import { COLORS } from "../global/colors"
 import { setUser } from "../features/user/user.slice"
-import { insertSession, getSession } from "../database/sqlite.config"
+import { insertSession } from "../database/sqlite.config"
 import { useSignInMutation } from "../services/auth.service"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 
@@ -46,8 +46,6 @@ const Login = ({ navigation }) => {
 						localID: result.data.localId,
 						email: result.data.email,
 					})
-
-					console.log(response)
 				} catch (error) {
 					console.log(error)
 				}

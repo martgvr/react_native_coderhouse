@@ -5,10 +5,9 @@ import { SafeAreaView, StyleSheet } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
+import { COLORS } from "../global/colors"
 import { setUser } from "../features/user/user.slice"
 import { getSession } from "../database/sqlite.config"
-
-import { COLORS } from "../global/colors"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import AuthStack from "./AuthStack"

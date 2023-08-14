@@ -1,7 +1,9 @@
-import { COLORS } from "../global/colors"
-import { signOut } from "../features/user/user.slice"
 import { useDispatch, useSelector } from "react-redux"
 import { Image, StyleSheet, View, Text } from "react-native"
+
+import { COLORS } from "../global/colors"
+import { signOut } from "../features/user/user.slice"
+import { dropTable } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
 
 import SubmitButton from "../components/SubmitButton"
@@ -12,12 +14,13 @@ const Profile = ({ navigation }) => {
 	const { data: image } = useGetProfileImageQuery(localID)
 
 	const cameraImage = image?.image
-	const logoutHandler = () => dispatch(signOut())
+	const themeHandler = () => console.log('Theme changing')
 	const launchCamera = async () => navigation.navigate("Image Selector")
 	const launchLocation = async () => navigation.navigate('List Address')
-
-	const themeSwapHandler = () => {
-		console.log('Theme changing');
+	
+	const logoutHandler = () => {
+		dispatch(signOut())
+		dropTable('sessions')
 	}
 	
 	return (
@@ -32,7 +35,7 @@ const Profile = ({ navigation }) => {
 			<SubmitButton title={'Add profile picture'} onPress={launchCamera} width="80%"/>
 			<SubmitButton title={'Logout'} onPress={logoutHandler} width="80%"/>
 			<SubmitButton title={'My address'} onPress={launchLocation} width="80%" />
-			<SubmitButton title={'Light mode'} onPress={themeSwapHandler} width="80%" />
+			<SubmitButton title={'Light mode'} onPress={themeHandler} width="80%" />
 		</View>
 	)
 }
