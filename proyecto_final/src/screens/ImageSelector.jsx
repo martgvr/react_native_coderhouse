@@ -12,45 +12,51 @@ import { usePostProfileImageMutation } from "../services/shop.service"
 
 const ImageSelector = ({ navigation }) => {
 	const [image, setImage] = useState(null)
-    
-    const dispatch = useDispatch()
-    const { localID } = useSelector((state) => state.userReducer)
-    const [triggerSaveImage, resultSaveImage] = usePostProfileImageMutation()
+
+	const dispatch = useDispatch()
+	const { localID } = useSelector((state) => state.userReducer)
+	const [triggerSaveImage, resultSaveImage] = usePostProfileImageMutation()
 
 	const verifyCameraPermissions = async () => {
 		const { granted } = await ImagePicker.requestCameraPermissionsAsync()
-        return granted
+		return granted
 	}
 
 	const pickImage = async () => {
 		const isCameraOk = await verifyCameraPermissions()
 
 		if (isCameraOk) {
-			let result = await ImagePicker.launchCameraAsync({
-				mediaTypes: ImagePicker.MediaTypeOptions.All,
-				allowsEditing: true,
-				aspect: [1, 1],
-				quality: 1,
-			})
-
-			(!result.canceled) && setImage(result.assets[0].uri)
+			try {
+				let result = await ImagePicker.launchCameraAsync({
+					mediaTypes: ImagePicker.MediaTypeOptions.All,
+					allowsEditing: true,
+					aspect: [1, 1],
+					quality: 1,
+				})
+				
+				if (!result.canceled) {
+					setImage(result.assets[0].uri)
+				}
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 
 	const confirmImage = async () => {
 		try {
-            const { status } = await MediaLibrary.requestPermissionsAsync();
+			const { status } = await MediaLibrary.requestPermissionsAsync()
 
-            if (status === "granted") {
-                const response = await MediaLibrary.createAssetAsync(image);
-				triggerSaveImage({ image: response.uri, localID: localID });
-                dispatch(saveImage(response.uri));
-            }
-        } catch (error) {
-            console.log(error);
-        }
+			if (status === "granted") {
+				const response = await MediaLibrary.createAssetAsync(image)
+				triggerSaveImage({ image: response.uri, localID: localID })
+				dispatch(saveImage(response.uri))
+			}
+		} catch (error) {
+			console.log(error)
+		}
 
-        navigation.goBack();
+		navigation.goBack()
 	}
 
 	return (
@@ -58,8 +64,8 @@ const ImageSelector = ({ navigation }) => {
 			{image ? (
 				<>
 					<Image source={{ uri: image }} style={styles.image} />
-					<SubmitButton title={'Take another photo'} width="80%" onPress={pickImage} />
-					<SubmitButton title={'Confirm photo'} width="80%" onPress={confirmImage} />
+					<SubmitButton title={"Take another photo"} width="80%" onPress={pickImage} />
+					<SubmitButton title={"Confirm photo"} width="80%" onPress={confirmImage} />
 				</>
 			) : (
 				<>
@@ -67,7 +73,7 @@ const ImageSelector = ({ navigation }) => {
 						<Text style={styles.text}>No photo to show...</Text>
 					</View>
 
-					<SubmitButton title={'Take a photo'} width="80%" onPress={pickImage} />
+					<SubmitButton title={"Take a photo"} width="80%" onPress={pickImage} />
 				</>
 			)}
 		</View>
@@ -104,5 +110,5 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		color: COLORS.text,
-	},	
+	},
 })

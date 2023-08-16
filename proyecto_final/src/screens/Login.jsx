@@ -29,6 +29,16 @@ const Login = ({ navigation }) => {
 			}
 	
 			if (result.isSuccess) {
+				try {
+					await insertSession({
+						idToken: result.data.idToken,
+						localID: result.data.localId,
+						email: result.data.email,
+					})
+				} catch (error) {
+					console.log(error)
+				}
+
 				dispatch(setUser({ 
 					email: result.data.email,
 					idToken: result.data.idToken,
@@ -39,16 +49,6 @@ const Login = ({ navigation }) => {
 						longitude: "",
 					}
 				}))
-
-				try {
-					const response = await insertSession({
-						idToken: result.data.idToken,
-						localID: result.data.localId,
-						email: result.data.email,
-					})
-				} catch (error) {
-					console.log(error)
-				}
 			}
 		})()
 	}, [result])

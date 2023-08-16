@@ -31,7 +31,7 @@ const Navigator = () => {
 
                 if (session?.rows.length) {
                     const user = session.rows._array[0]
-                    dispatch(setUser(user))
+                    dispatch(setUser({...user, localID: user.localId}))
                 }
             } catch (error) {
                 console.log('Error getting session:', error.message);

@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text } from "react-native"
 
 import { COLORS } from "../global/colors"
 import { signOut } from "../features/user/user.slice"
-import { dropTable } from "../database/sqlite.config"
+import { dropTable, deleteSession } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
 
 import SubmitButton from "../components/SubmitButton"
@@ -18,9 +18,9 @@ const Profile = ({ navigation }) => {
 	const launchCamera = async () => navigation.navigate("Image Selector")
 	const launchLocation = async () => navigation.navigate('List Address')
 	
-	const logoutHandler = () => {
+	const logoutHandler = async () => {
+		const result = await deleteSession(localID)
 		dispatch(signOut())
-		dropTable('sessions')
 	}
 	
 	return (
