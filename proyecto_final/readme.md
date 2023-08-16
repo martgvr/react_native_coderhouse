@@ -1,6 +1,5 @@
 # Proyecto final React Native
 
-
 ## Instalación de definiciones (tipos)
 
 ```
@@ -49,4 +48,14 @@ $ npm i -D @redux-devtools/core
 
 ```
 $ npx expo install expo-sqlite
+```
+
+# What's next?
+
+```
+- Universalizar funciones de sqlite.
+- Crear db para carrito (persistente).
+- Eliminar archivos json locales.
+- Implementar un estado de error en redux. ({ status: true/false, code: "" })
+- Mostrar componente ErrorModal al detectar un error. Al no ser un error crítico se podría cerrar el modal y seguir usando la app.
 ```

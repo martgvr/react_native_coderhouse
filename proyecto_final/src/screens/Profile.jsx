@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text } from "react-native"
 
 import { COLORS } from "../global/colors"
 import { signOut } from "../features/user/user.slice"
-import { dropTable, deleteSession } from "../database/sqlite.config"
+import { deleteSession } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
 
 import SubmitButton from "../components/SubmitButton"
@@ -19,8 +19,12 @@ const Profile = ({ navigation }) => {
 	const launchLocation = async () => navigation.navigate('List Address')
 	
 	const logoutHandler = async () => {
-		const result = await deleteSession(localID)
-		dispatch(signOut())
+		try {
+			await deleteSession(localID)
+			dispatch(signOut())
+		} catch (error) {
+			console.log(error)
+		}
 	}
 	
 	return (
