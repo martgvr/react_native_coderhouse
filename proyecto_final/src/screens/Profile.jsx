@@ -1,7 +1,7 @@
+import { useTheme } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { Image, StyleSheet, View, Text } from "react-native"
 
-import { COLORS } from "../global/colors"
 import { signOut } from "../features/user/user.slice"
 import { deleteSession } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
@@ -10,6 +10,7 @@ import SubmitButton from "../components/SubmitButton"
 
 const Profile = ({ navigation }) => {
 	const dispatch = useDispatch()
+	const styles = dynamicStyle(useTheme().colors)
 	const { localID, profileImage, email } = useSelector((state) => state.userReducer)
 	const { data: image } = useGetProfileImageQuery(localID)
 
@@ -46,33 +47,36 @@ const Profile = ({ navigation }) => {
 
 export default Profile
 
-const styles = StyleSheet.create({
-	container: {
-		height: '100%',
-		padding: 10,
-		paddingTop: 40,
-		alignItems: "center",
-		backgroundColor: COLORS.secondary,
-	},
-	image: {
-		width: 100,
-		height: 100,
-		borderRadius: 50,
-		marginBottom: 20,
-	},
-	text: {
-		fontSize: 20,
-		color: COLORS.text,
-		marginBottom: 20,
-	},
-	title: {
-		marginLeft: -3,
-		letterSpacing: 2,
-		opacity: 0.6,
-		fontSize: 10,
-		fontWeight: 'bold',
-		color: COLORS.subtitle,
-		alignSelf: 'flex-start',
-		textTransform: 'uppercase',
-	},
-})
+
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		container: {
+			height: '100%',
+			padding: 10,
+			paddingTop: 40,
+			alignItems: "center",
+			backgroundColor: colors.secondary,
+		},
+		image: {
+			width: 100,
+			height: 100,
+			borderRadius: 50,
+			marginBottom: 20,
+		},
+		text: {
+			fontSize: 20,
+			color: colors.text,
+			marginBottom: 20,
+		},
+		title: {
+			marginLeft: -3,
+			letterSpacing: 2,
+			opacity: 0.6,
+			fontSize: 10,
+			fontWeight: 'bold',
+			color: colors.subtitle,
+			alignSelf: 'flex-start',
+			textTransform: 'uppercase',
+		},
+	})
+}

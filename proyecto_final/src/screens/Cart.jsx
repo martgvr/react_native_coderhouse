@@ -1,11 +1,13 @@
-import { COLORS } from "../global/colors"
 import { useSelector } from 'react-redux'
+import { useTheme } from "@react-navigation/native"
 import { usePostCartMutation } from "../services/shop.service"
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native"
 
 import CartItem from "../components/CartItem"
 
 const Cart = () => {
+	const styles = dynamicStyle(useTheme().colors)
+
     const [triggerPostCart, result] = usePostCartMutation()
     const { items: cartData, total, updatedAt, user } = useSelector(state => state.cartReducer)
 
@@ -38,48 +40,50 @@ const Cart = () => {
 
 export default Cart
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 20,
-		paddingBottom: 65,
-		backgroundColor: COLORS.secondary,
-	},
-	totalContainer: {
-		gap: 10,
-		alignSelf: "center",
-		alignItems: 'center',
-		flexDirection: "column",
-	},
-	screenFill: {
-		height: '100%'
-	},	
-	noCartDataTitle: {
-		top: '40%',
-		width: 250,
-		fontSize: 22,
-		alignSelf: 'center',
-		textAlign: 'center',
-		color: COLORS.text,
-	},
-	noCartDataText: {
-		top: '40%',
-		width: 250,
-		marginTop: 10,
-		alignSelf: 'center',
-		textAlign: 'center',
-		color: COLORS.subtitle,
-	},
-	button: {
-		padding: 10,
-		width: 150,
-		alignItems: 'center',
-		borderWidth: 1,
-		borderRadius: 10,
-		borderColor: COLORS.border,
-		backgroundColor: COLORS.primary,
-	},
-	buttonText: {
-		color: COLORS.text,
-	},
-})
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		container: {
+			flex: 1,
+			padding: 20,
+			paddingBottom: 65,
+			backgroundColor: colors.secondary,
+		},
+		totalContainer: {
+			gap: 10,
+			alignSelf: "center",
+			alignItems: 'center',
+			flexDirection: "column",
+		},
+		screenFill: {
+			height: '100%'
+		},	
+		noCartDataTitle: {
+			top: '40%',
+			width: 250,
+			fontSize: 22,
+			alignSelf: 'center',
+			textAlign: 'center',
+			color: colors.text,
+		},
+		noCartDataText: {
+			top: '40%',
+			width: 250,
+			marginTop: 10,
+			alignSelf: 'center',
+			textAlign: 'center',
+			color: colors.subtitle,
+		},
+		button: {
+			padding: 10,
+			width: 150,
+			alignItems: 'center',
+			borderWidth: 1,
+			borderRadius: 10,
+			borderColor: colors.border,
+			backgroundColor: colors.primary,
+		},
+		buttonText: {
+			color: colors.text,
+		},
+	})
+}

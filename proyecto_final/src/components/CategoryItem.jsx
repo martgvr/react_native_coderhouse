@@ -1,11 +1,15 @@
-import Card from "./Card"
-import { COLORS } from '../global/colors'
 import { useDispatch } from "react-redux"
 import { StyleSheet, Text, Pressable } from "react-native"
 import { setCategorySelected } from '../features/shop/shop.slice'
 
+import Card from "./Card"
+
+import { useTheme } from "@react-navigation/native"
+
 const CategoryItem = ({ item, navigation }) => {
+	const { colors } = useTheme()
 	const dispatch = useDispatch()
+	const styles = dynamicStyle(colors)
 
 	const selectCategoryHandler = () => {
 		navigation.navigate("ItemListCategory", { category: item })
@@ -23,9 +27,11 @@ const CategoryItem = ({ item, navigation }) => {
 
 export default CategoryItem
 
-const styles = StyleSheet.create({
-	textCategory: {
-		fontSize: 18,
-		color: COLORS.text,
-	}
-})
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		textCategory: {
+			fontSize: 18,
+			color: colors.text,
+		}
+	})
+}

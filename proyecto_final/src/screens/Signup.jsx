@@ -1,4 +1,3 @@
-import { COLORS } from "../global/colors"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { setUser } from "../features/user/user.slice"
@@ -9,7 +8,13 @@ import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 import InputForm from "../components/InputForm"
 import SubmitButton from "../components/SubmitButton"
 
+import { useTheme } from "@react-navigation/native"
+
 const Signup = ({ navigation }) => {
+	const { colors } = useTheme()
+	const dispatch = useDispatch()
+	const styles = dynamicStyle(colors)
+
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [confirmPassword, setconfirmPassword] = useState("")
@@ -19,8 +24,6 @@ const Signup = ({ navigation }) => {
 	const [errorConfirmPassword, setErrorConfirmPassword] = useState("")
 
 	const [triggerSignUp, result] = useSignUpMutation()
-
-	const dispatch = useDispatch()
 
 	useEffect(() => {
 		if (result.isSuccess) {
@@ -83,36 +86,38 @@ const Signup = ({ navigation }) => {
 
 export default Signup
 
-const styles = StyleSheet.create({
-	main: {
-		width: "100%",
-		height: "100%",
-		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: COLORS.secondary,
-	},
-	container: {
-		gap: 15,
-		width: "90%",
-		borderRadius: 10,
-		paddingVertical: 20,
-		alignItems: "center",
-		flexDirection: "column",
-		justifyContent: "center",
-		borderWidth: 1,
-		borderColor: COLORS.border,
-		backgroundColor: COLORS.primary,
-	},
-	title: {
-		fontSize: 22,
-		color: COLORS.text,
-	},
-	sub: {
-		fontSize: 14,
-		color: COLORS.text,
-	},
-	subLink: {
-		fontSize: 14,
-		color: COLORS.accents,
-	},
-})
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		main: {
+			width: "100%",
+			height: "100%",
+			alignItems: "center",
+			justifyContent: "center",
+			backgroundColor: colors.secondary,
+		},
+		container: {
+			gap: 15,
+			width: "90%",
+			borderRadius: 10,
+			paddingVertical: 20,
+			alignItems: "center",
+			flexDirection: "column",
+			justifyContent: "center",
+			borderWidth: 1,
+			borderColor: colors.border,
+			backgroundColor: colors.primary,
+		},
+		title: {
+			fontSize: 22,
+			color: colors.text,
+		},
+		sub: {
+			fontSize: 14,
+			color: colors.text,
+		},
+		subLink: {
+			fontSize: 14,
+			color: colors.accents,
+		},
+	})
+}

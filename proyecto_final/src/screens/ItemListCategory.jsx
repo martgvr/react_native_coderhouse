@@ -1,4 +1,3 @@
-import { COLORS } from "../global/colors"
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from "react"
 import { StyleSheet, View, FlatList } from "react-native"
@@ -9,11 +8,15 @@ import Loader from "../components/Loader"
 import Search from "../components/Search"
 import ProductItem from "../components/ProductItem"
 
+import { useTheme } from "@react-navigation/native"
+
 const ItemListCategory = ({ navigation }) => {
 	const [keyword, setKeyword] = useState("")
 	const [products, setProducts] = useState([])
 	const [keywordError, setKeywordError] = useState("")
 
+	const { colors } = useTheme()
+	const styles = dynamicStyle(colors)
 	const categorySelected = useSelector(state => state.shopReducer.categorySelected)
 	const { data: productsSelected, isError, isLoading } = useGetProductsByCategoryQuery(categorySelected)
 
@@ -62,13 +65,15 @@ const ItemListCategory = ({ navigation }) => {
 
 export default ItemListCategory
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 20,
-		backgroundColor: COLORS.secondary,
-	},
-	flatListContainer: {
-		width: '100%'
-	},
-})
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		container: {
+			flex: 1,
+			padding: 20,
+			backgroundColor: colors.secondary,
+		},
+		flatListContainer: {
+			width: '100%'
+		},
+	})
+}

@@ -1,5 +1,5 @@
-import { COLORS } from "../global/colors"
 import { useEffect, useState } from "react"
+import { useTheme } from "@react-navigation/native"
 import { useSelector, useDispatch } from 'react-redux'
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
 
@@ -7,7 +7,9 @@ import Counter from "../components/Counter"
 import { addCartItem } from "../features/cart/cart.slice"
 
 const ItemDetail = ({ navigation, route }) => {
+	const { colors } = useTheme()
 	const dispatch = useDispatch()
+	const styles = dynamicStyle(colors)
 	const allProducts = useSelector(state => state.shopReducer.allProducts)
 
 	const [product, setProduct] = useState(null)
@@ -61,67 +63,71 @@ const ItemDetail = ({ navigation, route }) => {
 
 export default ItemDetail
 
-const styles = StyleSheet.create({
-	container: {
-		height: "100%",
-		backgroundColor: COLORS.secondary,
-	},
-	container1: {
-		height: '100%',
-		paddingBottom: 60,
-		justifyContent: 'space-between',
-	},	
-	containerLandscape: {
-		flexDirection: "row",
-	},
-	image: {
-		height: 200,
-		width: "100%",
-		marginBottom: 10,
-	},
-	title: {
-		fontSize: 22,
-		fontWeight: 800,
-		alignSelf: "center",
-		color: COLORS.text,
-	},
-	description: {
-		fontSize: 16,
-		alignSelf: "center",
-		textAlign: "center",
-		color: COLORS.subtitle,
-	},
-	price: {
-		fontSize: 20,
-		marginTop: 20,
-		alignSelf: "center",
-		color: COLORS.text,
-	},
-	buttonsContainer: {
-		width: '100%',
-		padding: 10,
-		marginTop: 10,
-		alignSelf: 'center',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-	},
-	button: {
-		width: 150,
-		height: 50,
-		borderWidth: 2,
-		borderRadius: 10,
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	goBackButton: {
-		borderColor: '#cceeff',
-		backgroundColor: COLORS.primary,
-	},
-	addToCartButton: {
-		borderColor: '#d1edd6',
-		backgroundColor: COLORS.primary,
-	},
-	buttonText: {
-		color: COLORS.text
-	},
-})
+
+
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		container: {
+			height: "100%",
+			backgroundColor: colors.secondary,
+		},
+		container1: {
+			height: '100%',
+			paddingBottom: 60,
+			justifyContent: 'space-between',
+		},	
+		containerLandscape: {
+			flexDirection: "row",
+		},
+		image: {
+			height: 200,
+			width: "100%",
+			marginBottom: 10,
+		},
+		title: {
+			fontSize: 22,
+			fontWeight: 800,
+			alignSelf: "center",
+			color: colors.text,
+		},
+		description: {
+			fontSize: 16,
+			alignSelf: "center",
+			textAlign: "center",
+			color: colors.subtitle,
+		},
+		price: {
+			fontSize: 20,
+			marginTop: 20,
+			alignSelf: "center",
+			color: colors.text,
+		},
+		buttonsContainer: {
+			width: '100%',
+			padding: 10,
+			marginTop: 10,
+			alignSelf: 'center',
+			flexDirection: 'row',
+			justifyContent: 'space-between',
+		},
+		button: {
+			width: 150,
+			height: 50,
+			borderWidth: 2,
+			borderRadius: 10,
+			alignItems: 'center',
+			justifyContent: 'center'
+		},
+		goBackButton: {
+			borderColor: '#cceeff',
+			backgroundColor: colors.primary,
+		},
+		addToCartButton: {
+			borderColor: '#d1edd6',
+			backgroundColor: colors.primary,
+		},
+		buttonText: {
+			color: colors.text
+		},
+	})
+}

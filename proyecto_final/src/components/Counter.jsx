@@ -1,14 +1,16 @@
 import { useState } from "react"
-import { COLORS } from "../global/colors"
 import { useDispatch, useSelector } from "react-redux"
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native"
 import { increment, decrement, incrementByAmount } from "../features/counter/counter.slice"
 
-const Counter = () => {
-    const [inputToAdd, setInputToAdd] = useState(0);
+import { useTheme } from "@react-navigation/native"
 
+const Counter = () => {
     const dispatch = useDispatch()
+    const styles = dynamicStyle(useTheme().colors)
     const count = useSelector(state => state.counterReducer.value)
+
+    const [inputToAdd, setInputToAdd] = useState(0);
 
     return (
         <View style={styles.container}>
@@ -46,55 +48,57 @@ const Counter = () => {
 
 export default Counter;
 
-const styles = StyleSheet.create({
-    container: {
-        gap: 10,
-        width: "100%",
-        alignSelf: 'flex-end',
-        alignItems: "center",
-        flexDirection: "column",
-        justifyContent: "center",
-        backgroundColor: COLORS.secondary,
-    },
-    buttonsContainer: {
-        gap: 10,
-        width: '100%',
-        paddingHorizontal: 10,
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: 'space-between',
-    },
-    button: {
-        flex: 1,
-        height: 50,
-        borderWidth: 1,
-        borderRadius: 10,
-        borderColor: COLORS.border,
-        backgroundColor: COLORS.primary,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    buttonText: {
-        fontSize: 18,
-        color: COLORS.text,
-    },
-    span: {
-        width: "60%",
-        padding: 10,
-        fontSize: 20,
-        textAlign: "center",
-        color: COLORS.text,
-        backgroundColor: COLORS.secondary,
-    },
-    spanInput: {
-        width: "40%",
-        padding: 10,
-        fontSize: 16,
-        textAlign: "center",
-        borderWidth: 1,
-        borderRadius: 10,
-        color: COLORS.text,
-        borderColor: COLORS.border,
-        backgroundColor: COLORS.primary,
-    },
-});
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+        container: {
+            gap: 10,
+            width: "100%",
+            alignSelf: 'flex-end',
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+            backgroundColor: colors.secondary,
+        },
+        buttonsContainer: {
+            gap: 10,
+            width: '100%',
+            paddingHorizontal: 10,
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: 'space-between',
+        },
+        button: {
+            flex: 1,
+            height: 50,
+            borderWidth: 1,
+            borderRadius: 10,
+            borderColor: colors.border,
+            backgroundColor: colors.primary,
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        buttonText: {
+            fontSize: 18,
+            color: colors.text,
+        },
+        span: {
+            width: "60%",
+            padding: 10,
+            fontSize: 20,
+            textAlign: "center",
+            color: colors.text,
+            backgroundColor: colors.secondary,
+        },
+        spanInput: {
+            width: "40%",
+            padding: 10,
+            fontSize: 16,
+            textAlign: "center",
+            borderWidth: 1,
+            borderRadius: 10,
+            color: colors.text,
+            borderColor: colors.border,
+            backgroundColor: colors.primary,
+        },
+	})
+}

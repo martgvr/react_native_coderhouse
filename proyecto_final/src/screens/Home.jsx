@@ -1,4 +1,3 @@
-import { COLORS } from "../global/colors"
 import { StyleSheet, View, FlatList } from "react-native"
 import { useGetCategoriesQuery } from "../services/shop.service"
 
@@ -6,7 +5,10 @@ import Error from "../components/Error"
 import Loader from "../components/Loader"
 import CategoryItem from "../components/CategoryItem"
 
+import { useTheme } from "@react-navigation/native"
+
 const Home = ({ navigation }) => {
+	const styles = dynamicStyle(useTheme().colors)
 	const { data: categories, isLoading, isError } = useGetCategoriesQuery()
 
 	return (
@@ -33,14 +35,16 @@ const Home = ({ navigation }) => {
 
 export default Home
 
-const styles = StyleSheet.create({
-	container: {
-		padding: 20,
-		paddingBottom: 65,
-		alignItems: "center",
-		backgroundColor: COLORS.secondary,
-	},
-	flatListContainer: {
-		width: '100%',
-	},
-})
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		container: {
+			padding: 20,
+			paddingBottom: 65,
+			alignItems: "center",
+			backgroundColor: colors.secondary,
+		},
+		flatListContainer: {
+			width: '100%',
+		},
+	})
+}
