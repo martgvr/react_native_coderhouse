@@ -1,16 +1,15 @@
 import { COLORS } from "../global/colors"
 import { StyleSheet, Text, View, Pressable } from "react-native"
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 const Header = ({ route, navigation }) => {
 	return (
 		<View style={styles.containerHeader}>
-			{
-				((route.name !== 'Shop') && (route.name !== 'Login') && (route.name !== 'Signup'))&&
-					<Pressable style={styles.pressable} onPress={() => navigation.goBack()}>
-						<MaterialCommunityIcons name="arrow-left" color={COLORS.accents} size={24} />
-					</Pressable>
-			}
+			{route.name !== "Shop" && route.name !== "Login" && route.name !== "Signup" && (
+				<Pressable style={styles.pressable} onPress={() => navigation.goBack()}>
+					<MaterialCommunityIcons name="arrow-left" color={COLORS.accents} size={24} />
+				</Pressable>
+			)}
 			<Text style={styles.headerText}>{route.name}</Text>
 		</View>
 	)
@@ -37,8 +36,8 @@ const styles = StyleSheet.create({
 		color: COLORS.text,
 	},
 	pressable: {
-        left: 20,
-        top: "80%",
-        position: "absolute",
-    },
+		left: 20,
+		top: "80%",
+		position: "absolute",
+	},
 })

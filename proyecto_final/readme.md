@@ -54,8 +54,13 @@ $ npx expo install expo-sqlite
 
 ```
 - Universalizar funciones de sqlite.
-- Crear db para carrito (persistente).
+- Crear db para ordenes (persistente).
 - Eliminar archivos json locales.
 - Implementar un estado de error en redux. ({ status: true/false, code: "" })
 - Mostrar componente ErrorModal al detectar un error. Al no ser un error crítico se podría cerrar el modal y seguir usando la app.
+- Hacer funcionar el counter en el item detail
+- Hacer un readme detallado. Librerías utilizadas, como clonar repo, como levantar proyecto y en qué consiste.
+- Poner iconos en las categorías, la misma db tiene que tener su respectiva imagen png
+- Hacer funcionar el boton de eliminar item del cart y agregar al lado de confirm un boton para limpiar el carrito
+- Rediseñar Item List, hacer cuadrados con fotos
 ```
