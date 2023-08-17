@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { NavigationContainer } from "@react-navigation/native"
 import { Platform, StatusBar, SafeAreaView, StyleSheet } from "react-native"
@@ -9,7 +9,11 @@ import { getSession } from "../database/sqlite.config"
 import AuthStack from "./AuthStack"
 import MainStack from "./MainStack"
 
+import { lightTheme, darkTheme } from "../global/colors"
+
 const Navigator = () => {
+	const [darkMode, setDarkMode] = useState(false)
+
 	const dispatch = useDispatch()
 	const { email } = useSelector(state => state.userReducer)
 
@@ -30,7 +34,7 @@ const Navigator = () => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<NavigationContainer>
+			<NavigationContainer theme={darkMode ? darkTheme : lightTheme}>
 				{
 					email ? 
 						<MainStack />

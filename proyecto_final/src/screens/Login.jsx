@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
+import { useTheme } from "@react-navigation/native"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 
-import { COLORS } from "../global/colors"
 import { setUser } from "../features/user/user.slice"
 import { insertSession } from "../database/sqlite.config"
 import { useSignInMutation } from "../services/auth.service"
@@ -12,7 +12,9 @@ import InputForm from "../components/InputForm"
 import SubmitButton from "../components/SubmitButton"
 
 const Login = ({ navigation }) => {
+	const { colors } = useTheme()
 	const dispatch = useDispatch()
+	const styles = dynamicStyle(colors)
 
 	const [password, setPassword] = useState("123456")
 	const [errorPassword, setErrorPassword] = useState("")
@@ -94,36 +96,39 @@ const Login = ({ navigation }) => {
 
 export default Login
 
-const styles = StyleSheet.create({
-	main: {
-		width: "100%",
-		height: "100%",
-		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: COLORS.secondary,
-	},
-	container: {
-		gap: 15,
-		width: "90%",
-		borderRadius: 10,
-		paddingVertical: 20,
-		alignItems: "center",
-		flexDirection: "column",
-		justifyContent: "center",
-		borderWidth: 1,
-		borderColor: COLORS.border,
-		backgroundColor: COLORS.primary,
-	},
-	title: {
-		fontSize: 22,
-		color: COLORS.text,
-	},
-	sub: {
-		fontSize: 14,
-		color: COLORS.text,
-	},
-	subLink: {
-		fontSize: 14,
-		color: COLORS.accents,
-	},
-})
+
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		main: {
+			width: "100%",
+			height: "100%",
+			alignItems: "center",
+			justifyContent: "center",
+			backgroundColor: colors.secondary,
+		},
+		container: {
+			gap: 15,
+			width: "90%",
+			borderRadius: 10,
+			paddingVertical: 20,
+			alignItems: "center",
+			flexDirection: "column",
+			justifyContent: "center",
+			borderWidth: 1,
+			borderColor: colors.border,
+			backgroundColor: colors.primary,
+		},
+		title: {
+			fontSize: 22,
+			color: colors.text,
+		},
+		sub: {
+			fontSize: 14,
+			color: colors.text,
+		},
+		subLink: {
+			fontSize: 14,
+			color: colors.accents,
+		},
+	})
+}
