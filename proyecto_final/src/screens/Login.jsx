@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
+import { useTheme } from "@react-navigation/native"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 
 import { setUser } from "../features/user/user.slice"
@@ -9,8 +10,6 @@ import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 
 import InputForm from "../components/InputForm"
 import SubmitButton from "../components/SubmitButton"
-
-import { useTheme } from "@react-navigation/native"
 
 const Login = ({ navigation }) => {
 	const { colors } = useTheme()

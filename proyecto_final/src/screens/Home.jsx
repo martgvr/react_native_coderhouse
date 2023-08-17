@@ -1,11 +1,10 @@
+import { useTheme } from "@react-navigation/native"
 import { StyleSheet, View, FlatList } from "react-native"
 import { useGetCategoriesQuery } from "../services/shop.service"
 
 import Error from "../components/Error"
 import Loader from "../components/Loader"
 import CategoryItem from "../components/CategoryItem"
-
-import { useTheme } from "@react-navigation/native"
 
 const Home = ({ navigation }) => {
 	const styles = dynamicStyle(useTheme().colors)

@@ -1,15 +1,13 @@
 import { useDispatch } from "react-redux"
+import { useTheme } from "@react-navigation/native"
 import { StyleSheet, Text, Pressable } from "react-native"
 import { setCategorySelected } from '../features/shop/shop.slice'
 
 import Card from "./Card"
 
-import { useTheme } from "@react-navigation/native"
-
 const CategoryItem = ({ item, navigation }) => {
-	const { colors } = useTheme()
+	const styles = dynamicStyle(useTheme().colors)
 	const dispatch = useDispatch()
-	const styles = dynamicStyle(colors)
 
 	const selectCategoryHandler = () => {
 		navigation.navigate("ItemListCategory", { category: item })

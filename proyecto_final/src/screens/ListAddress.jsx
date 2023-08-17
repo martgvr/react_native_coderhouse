@@ -1,13 +1,14 @@
-import { COLORS } from "../global/colors"
 import { useSelector } from "react-redux"
+import { useTheme } from "@react-navigation/native"
 import { StyleSheet, Text, View } from "react-native"
 import { useGetUserLocationQuery } from "../services/shop.service"
 
-import AddButton from "../components/AddButton"
 import AddressItem from '../components/AddressItem'
 import SubmitButton from "../components/SubmitButton"
 
 const ListAddress = ({ navigation }) => {
+    const styles = dynamicStyle(useTheme().colors)
+
     const { location, localID } = useSelector((state) => state.userReducer);
     const { data: userLocationQuery, isError, isLoading } = useGetUserLocationQuery(localID)
 
@@ -28,18 +29,20 @@ const ListAddress = ({ navigation }) => {
 
 export default ListAddress;
 
-const styles = StyleSheet.create({
-    container: {
-        height: '100%',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        backgroundColor: COLORS.secondary,
-    },
-    text: {
-        fontSize: 18,
-        color: COLORS.text,
-        paddingVertical: 20,
-    }
-});
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+        container: {
+            height: '100%',
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            backgroundColor: colors.secondary,
+        },
+        text: {
+            fontSize: 18,
+            color: colors.text,
+            paddingVertical: 20,
+        }
+	})
+}

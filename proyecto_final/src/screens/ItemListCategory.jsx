@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from "react"
+import { useTheme } from "@react-navigation/native"
 import { StyleSheet, View, FlatList } from "react-native"
 import { useGetProductsByCategoryQuery } from "../services/shop.service"
 
@@ -7,8 +8,6 @@ import Error from "../components/Error"
 import Loader from "../components/Loader"
 import Search from "../components/Search"
 import ProductItem from "../components/ProductItem"
-
-import { useTheme } from "@react-navigation/native"
 
 const ItemListCategory = ({ navigation }) => {
 	const [keyword, setKeyword] = useState("")

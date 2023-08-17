@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { COLORS } from "../global/colors"
+import { useTheme } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { Image, View, StyleSheet, Text } from "react-native"
 
@@ -11,10 +11,11 @@ import { saveImage } from "../features/user/user.slice"
 import { usePostProfileImageMutation } from "../services/shop.service"
 
 const ImageSelector = ({ navigation }) => {
-	const [image, setImage] = useState(null)
-
 	const dispatch = useDispatch()
+	const styles = dynamicStyle(useTheme().colors)
 	const { localID } = useSelector((state) => state.userReducer)
+
+	const [image, setImage] = useState(null)
 	const [triggerSaveImage, resultSaveImage] = usePostProfileImageMutation()
 
 	const verifyCameraPermissions = async () => {
@@ -82,33 +83,35 @@ const ImageSelector = ({ navigation }) => {
 
 export default ImageSelector
 
-const styles = StyleSheet.create({
-	container: {
-		gap: 0,
-		flex: 1,
-		paddingTop: 40,
-		alignItems: "center",
-		justifyContent: "flex-start",
-		backgroundColor: COLORS.secondary,
-	},
-	image: {
-		width: 200,
-		height: 200,
-		marginBottom: 20,
-		borderRadius: 100,
-	},
-	noPhotoContainer: {
-		width: 200,
-		height: 200,
-		padding: 10,
-		borderWidth: 2,
-		marginBottom: 20,
-		borderRadius: 100,
-		alignItems: "center",
-		justifyContent: "center",
-		borderColor: COLORS.accents,
-	},
-	text: {
-		color: COLORS.text,
-	},
-})
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		container: {
+			gap: 0,
+			flex: 1,
+			paddingTop: 40,
+			alignItems: "center",
+			justifyContent: "flex-start",
+			backgroundColor: colors.secondary,
+		},
+		image: {
+			width: 200,
+			height: 200,
+			marginBottom: 20,
+			borderRadius: 100,
+		},
+		noPhotoContainer: {
+			width: 200,
+			height: 200,
+			padding: 10,
+			borderWidth: 2,
+			marginBottom: 20,
+			borderRadius: 100,
+			alignItems: "center",
+			justifyContent: "center",
+			borderColor: colors.accents,
+		},
+		text: {
+			color: colors.text,
+		},
+	})
+}

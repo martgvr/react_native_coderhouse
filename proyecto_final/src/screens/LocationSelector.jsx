@@ -1,6 +1,6 @@
 import * as Location from "expo-location"
-import { COLORS } from "../global/colors"
 import { useEffect, useState } from "react"
+import { useTheme } from "@react-navigation/native"
 import { StyleSheet, Text, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -12,13 +12,15 @@ import MapPreview from "../components/MapPreview"
 import SubmitButton from "../components/SubmitButton"
 
 const LocationSelector = ({ navigation }) => {
+	
 	const [error, setError] = useState("")
 	const [address, setAddress] = useState("")
 	const [location, setLocation] = useState({ latitude: "", longitude: "" })
-
+	
 	const [triggerPostUserLocation, resultPostUserLocation] = usePostUserLocationMutation()
-
+	
 	const dispatch = useDispatch()
+	const styles = dynamicStyle(useTheme().colors)
 	const { localID } = useSelector((state) => state.userReducer)
 
 	const onConfirmAddress = () => {
@@ -89,38 +91,40 @@ const LocationSelector = ({ navigation }) => {
 
 export default LocationSelector
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "flex-start",
-		backgroundColor: COLORS.secondary,
-	},
-	text: {
-		fontSize: 18,
-		paddingTop: 10,
-		paddingBottom: 20,
-		color: COLORS.text,
-	},
-	title: {
-		fontSize: 14,
-		paddingTop: 20,
-		letterSpacing: 8,
-		color: COLORS.accents,
-		textTransform: "uppercase",
-	},
-	noLocationContainer: {
-		width: 200,
-		height: 200,
-		padding: 10,
-		borderWidth: 2,
-		borderColor: COLORS.accents,
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	address: {
-        fontSize: 16,
-		color: COLORS.text,
-		paddingVertical: 20,
-	},
-})
+const dynamicStyle = (colors) => {
+	return StyleSheet.create({
+		container: {
+			flex: 1,
+			alignItems: "center",
+			justifyContent: "flex-start",
+			backgroundColor: colors.secondary,
+		},
+		text: {
+			fontSize: 18,
+			paddingTop: 10,
+			paddingBottom: 20,
+			color: colors.text,
+		},
+		title: {
+			fontSize: 14,
+			paddingTop: 20,
+			letterSpacing: 8,
+			color: colors.accents,
+			textTransform: "uppercase",
+		},
+		noLocationContainer: {
+			width: 200,
+			height: 200,
+			padding: 10,
+			borderWidth: 2,
+			borderColor: colors.accents,
+			alignItems: "center",
+			justifyContent: "center",
+		},
+		address: {
+			fontSize: 16,
+			color: colors.text,
+			paddingVertical: 20,
+		},
+	})
+}

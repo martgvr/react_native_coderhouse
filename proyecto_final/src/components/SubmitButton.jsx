@@ -1,7 +1,5 @@
-import { COLORS } from "../global/colors"
-import { Pressable, StyleSheet, Text } from "react-native"
-
 import { useTheme } from "@react-navigation/native"
+import { Pressable, StyleSheet, Text } from "react-native"
 
 const SubmitButton = ({ onPress, title, width = '40%' }) => {
 	const styles = dynamicStyle(useTheme().colors)

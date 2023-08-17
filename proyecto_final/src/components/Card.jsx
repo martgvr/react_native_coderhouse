@@ -2,8 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import { useTheme } from "@react-navigation/native"
 
 const Card = ({ children, additionalStyle }) => {
-    const { colors } = useTheme()
-	const styles = dynamicStyle(colors)
+    const styles = dynamicStyle(useTheme().colors)
 
 	return(
         <View style={[styles.cardContainer, additionalStyle]}>
