@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Image, StyleSheet, View, Text } from "react-native"
 
 import { signOut } from "../features/user/user.slice"
-import { deleteSession } from "../database/sqlite.config"
+import { sqliteDelete } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
 
 import SubmitButton from "../components/SubmitButton"
@@ -21,7 +21,12 @@ const Profile = ({ navigation }) => {
 	
 	const logoutHandler = async () => {
 		try {
-			await deleteSession(localID)
+			await sqliteDelete({ 
+				tableName: 'sessions',
+				condition: 'localID = ?',
+				params: [localID]
+			})
+
 			dispatch(signOut())
 		} catch (error) {
 			console.log(error)

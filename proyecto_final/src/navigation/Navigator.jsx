@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { Platform, StatusBar, SafeAreaView, StyleSheet } from "react-native"
 
 import { setUser } from "../features/user/user.slice"
-import { getSession } from "../database/sqlite.config"
+import { sqliteGetAll } from "../database/sqlite.config"
 
 import AuthStack from "./AuthStack"
 import MainStack from "./MainStack"
@@ -20,7 +20,7 @@ const Navigator = () => {
 	useEffect(() => {
 		(async ()=> {
             try {
-                const session = await getSession()
+                const session = await sqliteGetAll({ tableName: 'sessions' })
 
                 if (session?.rows.length) {
                     const user = session.rows._array[0]

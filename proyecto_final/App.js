@@ -17,7 +17,18 @@ export default function App() {
     useEffect(() => {
         (async () => {
             try {
-                await sqliteInit('sessions')
+                await sqliteInit({
+                    tableName: 'sessions',
+                    tableColumns: 'localId TEXT PRIMARY KEY NOT NULL, email TEXT NOT NULL, idToken TEXT NOT NULL'
+                })
+                await sqliteInit({
+                    tableName: 'app',
+                    tableColumns: 'darkMode TEXT NOT NULL'
+                })
+                await sqliteInit({
+                    tableName: 'orders',
+                    tableColumns: 'orderID TEXT PRIMARY KEY NOT NULL, orderTotal TEXT NOT NULL, orderProducts TEXT NOT NULL'
+                })
             } catch (err) {
                 setError({ status: true, code: err })
             }

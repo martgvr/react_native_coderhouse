@@ -1,9 +1,9 @@
 import * as SQLite from 'expo-sqlite'
-import { isValidName } from '../validations/auth';
+import { isValidName } from '../validations/auth'
 
-const db = SQLite.openDatabase('sessions.db')
+const db = SQLite.openDatabase('database.db')
 
-export const sqliteInit = (tableName) => {
+export const sqliteInit = ({ tableName, tableColumns }) => {
     if (!isValidName(tableName)) {
         throw new Error('Nombre de tabla no válido');
     }
@@ -11,7 +11,7 @@ export const sqliteInit = (tableName) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                `CREATE TABLE IF NOT EXISTS ${tableName} (localId TEXT PRIMARY KEY NOT NULL, email TEXT NOT NULL, idToken TEXT NOT NULL)`,
+                `CREATE TABLE IF NOT EXISTS ${tableName} (${tableColumns})`,
                 [],
                 (_, result) => resolve(result),
                 (_, error) => reject(error)
@@ -21,7 +21,43 @@ export const sqliteInit = (tableName) => {
     return promise
 }
 
-export const dropTable = (tableName) => {
+export const sqliteGetAll = ({ tableName }) => {
+    if (!isValidName(tableName)) {
+        throw new Error('Nombre de tabla no válido');
+    }
+
+    const promise = new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                `SELECT * FROM ${tableName}`,
+                [],
+                (_, result) => resolve(result),
+                (_, error) => reject(error)
+            )
+        })
+    })
+    return promise
+}
+
+export const sqliteDelete = ({ tableName, condition, params }) => {
+    if (!isValidName(tableName)) {
+        throw new Error('Nombre de tabla no válido');
+    }
+
+    const promise = new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                `DELETE FROM ${tableName} WHERE ${condition}`,
+                params,
+                (_, result) => resolve(result),
+                (_, error) => reject(error)
+            )
+        })
+    })
+    return promise
+}
+
+export const sqliteDrop = ({ tableName }) => {
     if (!isValidName(tableName)) {
         throw new Error('Nombre de tabla no válido');
     }
@@ -39,40 +75,12 @@ export const dropTable = (tableName) => {
     return promise
 }
 
-export const insertSession = ({ email, localID, idToken }) => {
+export const sqliteInsert = ({ tableName, columns, params }) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'INSERT INTO sessions (email, localID, idToken) VALUES (?, ?, ?);',
-                [email, localID, idToken],
-                (_, result) => resolve(result),
-                (_, error) => reject(error)
-            )
-        })
-    })
-    return promise
-}
-
-export const getSession = () => {
-    const promise = new Promise((resolve, reject) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                'SELECT * FROM sessions',
-                [],
-                (_, result) => resolve(result),
-                (_, error) => reject(error)
-            )
-        })
-    })
-    return promise
-}
-
-export const deleteSession = (localID) => {
-    const promise = new Promise((resolve, reject) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                'DELETE FROM sessions WHERE localID = ?',
-                [localID],
+                `INSERT INTO ${tableName} (${columns}) VALUES (?, ?, ?);`,
+                params,
                 (_, result) => resolve(result),
                 (_, error) => reject(error)
             )
