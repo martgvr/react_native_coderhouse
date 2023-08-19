@@ -4,14 +4,14 @@ import { NavigationContainer } from "@react-navigation/native"
 import { Platform, StatusBar, SafeAreaView, StyleSheet } from "react-native"
 
 import { setUser } from "../features/user/user.slice"
-import { sessionsDB } from "../database/sqlite.config"
 import { lightTheme, darkTheme } from "../global/colors"
+import { appConfigDB, sessionsDB } from "../database/sqlite.config"
 
 import AuthStack from "./AuthStack"
 import MainStack from "./MainStack"
 
 const Navigator = () => {
-	const [darkMode, setDarkMode] = useState(true)
+	const [darkMode, setDarkMode] = useState('')
 
 	const dispatch = useDispatch()
 	const { email } = useSelector(state => state.userReducer)
@@ -25,6 +25,10 @@ const Navigator = () => {
                     const user = session.rows._array[0]
                     dispatch(setUser({...user, localID: user.localId}))
                 }
+
+				const appData = await appConfigDB.getAll()
+				const themeValue = appData.rows._array[0].darkMode
+				setDarkMode(themeValue)
             } catch (error) {
                 console.log('Error getting session:', error.message);
             }
@@ -33,7 +37,7 @@ const Navigator = () => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<NavigationContainer theme={darkMode ? darkTheme : lightTheme}>
+			<NavigationContainer theme={darkMode === 'true' ? darkTheme : lightTheme}>
 				{
 					email ? 
 						<MainStack />

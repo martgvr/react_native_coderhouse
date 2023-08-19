@@ -53,21 +53,16 @@ $ npx expo install expo-sqlite
 # What's next?
 
 ```
-- Hacer función sql para updatear valores
+- Mostrar componente WarningModal al detectar un error. Al no ser un error crítico se podría cerrar el modal y seguir usando la app.
+- Implementar un estado de error en redux. ({ status: true/false, code: "" })
 
 - Crear db para ordenes (persistente).
 - Eliminar archivos json locales.
-
-- Hacer funcionar el switch de modo claro y oscuro. Guardar en sqlite
-- Hacer una función de get de modo claro/oscuro de sqlite en el navigator donde se setea el modo
 
 - Rediseñar Item List, hacer cuadrados con fotos
 - Poner iconos en las categorías, la misma db tiene que tener su respectiva imagen png
 
 - Hacer funcionar el boton de eliminar item del cart y agregar al lado de confirm un boton para limpiar el carrito
-
-- Implementar un estado de error en redux. ({ status: true/false, code: "" })
-- Mostrar componente ErrorModal al detectar un error. Al no ser un error crítico se podría cerrar el modal y seguir usando la app.
 
 - Hacer funcionar el counter en el item detail
 - Hacer un readme detallado. Librerías utilizadas, como clonar repo, como levantar proyecto y en qué consiste.

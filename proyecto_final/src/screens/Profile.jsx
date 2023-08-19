@@ -7,6 +7,7 @@ import { sessionsDB, appConfigDB } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
 
 import SubmitButton from "../components/SubmitButton"
+import { setDarkMode } from "../features/app/app.slice"
 
 const Profile = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -26,16 +27,13 @@ const Profile = ({ navigation }) => {
 			console.log(error)
 		}
 	}
-	
+
 	const themeHandler = async () => {
 		const appData = await appConfigDB.getAll()
 		const oldValue = appData.rows._array[0].darkMode
 		const newValue = (oldValue == 'true') ? 'false' : 'true'
-
+		
 		await appConfigDB.update({ column: 'darkMode', oldValue: oldValue, newValue: newValue })
-
-		const data = await appConfigDB.getAll()
-		console.log(data.rows._array[0].darkMode)
 	}
 	
 	return (

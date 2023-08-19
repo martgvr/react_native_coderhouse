@@ -19,9 +19,8 @@ export default function App() {
             try {
                 await appConfigDB.init('darkMode TEXT NOT NULL')
                 await sessionsDB.init('localId TEXT PRIMARY KEY NOT NULL, email TEXT NOT NULL, idToken TEXT NOT NULL')
-                await ordersDB.init('orderID TEXT PRIMARY KEY NOT NULL, orderTotal TEXT NOT NULL, orderProducts TEXT NOT NULL')
-                
-                await appConfigDB.insert({ columns: 'darkMode', params: ['false'] })
+                await ordersDB.init('orderID TEXT PRIMARY KEY NOT NULL, orderTotal TEXT NOT NULL, orderProducts TEXT NOT NULL')      
+                await appConfigDB.insert({ columns: 'darkMode', params: [''] })
             } catch (err) {
                 setError({ status: true, code: err })
             }
