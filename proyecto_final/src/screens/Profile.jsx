@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Image, StyleSheet, View, Text } from "react-native"
 
 import { signOut } from "../features/user/user.slice"
-import { sessionsDB } from "../database/sqlite.config"
+import { sessionsDB, appConfigDB } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
 
 import SubmitButton from "../components/SubmitButton"
@@ -15,10 +15,17 @@ const Profile = ({ navigation }) => {
 	const { data: image } = useGetProfileImageQuery(localID)
 
 	const cameraImage = image?.image
-	const themeHandler = () => console.log('Theme changing')
 	const launchCamera = async () => navigation.navigate("Image Selector")
 	const launchLocation = async () => navigation.navigate('List Address')
 	
+	const themeHandler = async () => {
+		const oldValue = await appConfigDB.getAll()
+		await appConfigDB.update({ column: 'darkMode', oldValue: oldValue.rows._array[0].darkMode, newValue: 'prueba' })
+
+		const data = await appConfigDB.getAll()
+		console.log(data.rows._array[0].darkMode)
+	}
+
 	const logoutHandler = async () => {
 		try {
 			await sessionsDB.delete({ condition: 'localID = ?', params: [localID] })

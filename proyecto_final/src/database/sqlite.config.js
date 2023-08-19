@@ -84,6 +84,20 @@ class sqliteDB {
         })
         return promise
     }
+
+    update = ({ column, oldValue, newValue }) => {
+        const promise = new Promise((resolve, reject) => {
+            db.transaction(tx => {
+                tx.executeSql(
+                    `UPDATE ${this.tableName} SET ${column} = '${newValue}' WHERE ${column} = '${oldValue}'`,
+                    [],
+                    (_, result) => resolve(result),
+                    (_, error) => reject(error)
+                )
+            })
+        })
+        return promise
+    }
 }
 
 export const ordersDB = new sqliteDB("orders")

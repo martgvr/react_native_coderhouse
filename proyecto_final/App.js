@@ -20,11 +20,7 @@ export default function App() {
                 await appConfigDB.init('darkMode TEXT NOT NULL')
                 await sessionsDB.init('localId TEXT PRIMARY KEY NOT NULL, email TEXT NOT NULL, idToken TEXT NOT NULL')
                 await ordersDB.init('orderID TEXT PRIMARY KEY NOT NULL, orderTotal TEXT NOT NULL, orderProducts TEXT NOT NULL')
-
-                // const data = await sessionsDB.getAll()
-                // console.log(data.rows._array[0])
-
-                // await sqliteInsert({ tableName: 'app', columns: 'darkMode', params: ['true'] })
+                await appConfigDB.insert({ columns: 'darkMode', params: ['false'] })
             } catch (err) {
                 setError({ status: true, code: err })
             }
