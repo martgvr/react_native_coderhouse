@@ -4,7 +4,7 @@ import { useTheme } from "@react-navigation/native"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 
 import { setUser } from "../features/user/user.slice"
-import { sqliteInsert } from "../database/sqlite.config"
+import { sessionsDB } from "../database/sqlite.config"
 import { useSignInMutation } from "../services/auth.service"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 
@@ -32,14 +32,9 @@ const Login = ({ navigation }) => {
 	
 			if (result.isSuccess) {
 				try {
-					await sqliteInsert({
-						tableName: 'sessions',
+					await sessionsDB.insert({
 						columns: 'email, localID, idToken',
-						params: [
-							result.data.email,
-							result.data.localId, 
-							result.data.idToken, 
-						]
+						params: [result.data.email, result.data.localId, result.data.idToken]
 					})
 				} catch (error) {
 					console.log(error)

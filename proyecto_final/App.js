@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from './src/store/store'
 import { fonts } from './src/global/fonts'
 import Navigator from './src/navigation/Navigator'
-import { sqliteInit } from './src/database/sqlite.config'
+import { ordersDB, sessionsDB, appConfigDB } from './src/database/sqlite.config'
 
 import Error from './src/components/Error'
 
@@ -17,18 +17,14 @@ export default function App() {
     useEffect(() => {
         (async () => {
             try {
-                await sqliteInit({
-                    tableName: 'sessions',
-                    tableColumns: 'localId TEXT PRIMARY KEY NOT NULL, email TEXT NOT NULL, idToken TEXT NOT NULL'
-                })
-                await sqliteInit({
-                    tableName: 'app',
-                    tableColumns: 'darkMode TEXT NOT NULL'
-                })
-                await sqliteInit({
-                    tableName: 'orders',
-                    tableColumns: 'orderID TEXT PRIMARY KEY NOT NULL, orderTotal TEXT NOT NULL, orderProducts TEXT NOT NULL'
-                })
+                await appConfigDB.init('darkMode TEXT NOT NULL')
+                await sessionsDB.init('localId TEXT PRIMARY KEY NOT NULL, email TEXT NOT NULL, idToken TEXT NOT NULL')
+                await ordersDB.init('orderID TEXT PRIMARY KEY NOT NULL, orderTotal TEXT NOT NULL, orderProducts TEXT NOT NULL')
+
+                // const data = await sessionsDB.getAll()
+                // console.log(data.rows._array[0])
+
+                // await sqliteInsert({ tableName: 'app', columns: 'darkMode', params: ['true'] })
             } catch (err) {
                 setError({ status: true, code: err })
             }

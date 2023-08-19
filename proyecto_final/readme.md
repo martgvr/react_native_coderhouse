@@ -53,7 +53,8 @@ $ npx expo install expo-sqlite
 # What's next?
 
 ```
-- Universalizar funciones de sqlite.
+- Hacer función sql para updatear valores
+
 - Crear db para ordenes (persistente).
 - Eliminar archivos json locales.
 

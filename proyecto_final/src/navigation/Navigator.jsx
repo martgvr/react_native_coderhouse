@@ -4,15 +4,14 @@ import { NavigationContainer } from "@react-navigation/native"
 import { Platform, StatusBar, SafeAreaView, StyleSheet } from "react-native"
 
 import { setUser } from "../features/user/user.slice"
-import { sqliteGetAll } from "../database/sqlite.config"
+import { sessionsDB } from "../database/sqlite.config"
+import { lightTheme, darkTheme } from "../global/colors"
 
 import AuthStack from "./AuthStack"
 import MainStack from "./MainStack"
 
-import { lightTheme, darkTheme } from "../global/colors"
-
 const Navigator = () => {
-	const [darkMode, setDarkMode] = useState(false)
+	const [darkMode, setDarkMode] = useState(true)
 
 	const dispatch = useDispatch()
 	const { email } = useSelector(state => state.userReducer)
@@ -20,7 +19,7 @@ const Navigator = () => {
 	useEffect(() => {
 		(async ()=> {
             try {
-                const session = await sqliteGetAll({ tableName: 'sessions' })
+                const session = await sessionsDB.getAll()
 
                 if (session?.rows.length) {
                     const user = session.rows._array[0]

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Image, StyleSheet, View, Text } from "react-native"
 
 import { signOut } from "../features/user/user.slice"
-import { sqliteDelete } from "../database/sqlite.config"
+import { sessionsDB } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
 
 import SubmitButton from "../components/SubmitButton"
@@ -21,12 +21,7 @@ const Profile = ({ navigation }) => {
 	
 	const logoutHandler = async () => {
 		try {
-			await sqliteDelete({ 
-				tableName: 'sessions',
-				condition: 'localID = ?',
-				params: [localID]
-			})
-
+			await sessionsDB.delete({ condition: 'localID = ?', params: [localID] })
 			dispatch(signOut())
 		} catch (error) {
 			console.log(error)
@@ -43,9 +38,9 @@ const Profile = ({ navigation }) => {
 			</View>
 
 			<SubmitButton title={'Add profile picture'} onPress={launchCamera} width="80%"/>
-			<SubmitButton title={'Logout'} onPress={logoutHandler} width="80%"/>
 			<SubmitButton title={'My address'} onPress={launchLocation} width="80%" />
 			<SubmitButton title={'Light mode'} onPress={themeHandler} width="80%" />
+			<SubmitButton title={'Logout'} onPress={logoutHandler} width="80%"/>
 		</View>
 	)
 }
