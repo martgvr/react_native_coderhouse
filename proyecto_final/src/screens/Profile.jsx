@@ -18,14 +18,6 @@ const Profile = ({ navigation }) => {
 	const launchCamera = async () => navigation.navigate("Image Selector")
 	const launchLocation = async () => navigation.navigate('List Address')
 	
-	const themeHandler = async () => {
-		const oldValue = await appConfigDB.getAll()
-		await appConfigDB.update({ column: 'darkMode', oldValue: oldValue.rows._array[0].darkMode, newValue: 'prueba' })
-
-		const data = await appConfigDB.getAll()
-		console.log(data.rows._array[0].darkMode)
-	}
-
 	const logoutHandler = async () => {
 		try {
 			await sessionsDB.delete({ condition: 'localID = ?', params: [localID] })
@@ -33,6 +25,17 @@ const Profile = ({ navigation }) => {
 		} catch (error) {
 			console.log(error)
 		}
+	}
+	
+	const themeHandler = async () => {
+		const appData = await appConfigDB.getAll()
+		const oldValue = appData.rows._array[0].darkMode
+		const newValue = (oldValue == 'true') ? 'false' : 'true'
+
+		await appConfigDB.update({ column: 'darkMode', oldValue: oldValue, newValue: newValue })
+
+		const data = await appConfigDB.getAll()
+		console.log(data.rows._array[0].darkMode)
 	}
 	
 	return (
