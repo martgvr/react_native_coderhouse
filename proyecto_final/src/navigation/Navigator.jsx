@@ -23,7 +23,7 @@ const Navigator = () => {
                 const session = await sessionsDB.getAll()
 
                 if (session?.rows.length) {
-                    const user = session.rows1._array[0]
+                    const user = session.rows._array[0]
                     dispatch(setUser({...user, localID: user.localId}))
                 }
 
@@ -34,7 +34,7 @@ const Navigator = () => {
 				dispatch(setWarning({ 
 					warningStatus: true,
 					warningTitle: 'ERROR!',
-					warningDescription: 'Error cargando la sesión',
+					warningDescription: 'No se pudo cargar la sesión.',
 					warningCode: error.message, 
 				}))
             }

@@ -7,7 +7,6 @@ import CartItem from "../components/CartItem"
 
 const Cart = () => {
 	const styles = dynamicStyle(useTheme().colors)
-
     const [triggerPostCart, result] = usePostCartMutation()
     const { items: cartData, total, updatedAt, user } = useSelector(state => state.cartReducer)
 

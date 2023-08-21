@@ -8,6 +8,7 @@ import * as MediaLibrary from "expo-media-library"
 
 import SubmitButton from "../components/SubmitButton"
 import { saveImage } from "../features/user/user.slice"
+import { setWarning } from "../features/app/app.slice"
 import { usePostProfileImageMutation } from "../services/shop.service"
 
 const ImageSelector = ({ navigation }) => {
@@ -39,7 +40,12 @@ const ImageSelector = ({ navigation }) => {
 					setImage(result.assets[0].uri)
 				}
 			} catch (error) {
-				console.log(error)
+				dispatch(setWarning({ 
+					warningCode: error.message, 
+					warningTitle: 'ERROR!',
+					warningStatus: true,
+					warningDescription: 'No se pudo inicializar la cámara del dispositivo.',
+				}))
 			}
 		}
 	}
