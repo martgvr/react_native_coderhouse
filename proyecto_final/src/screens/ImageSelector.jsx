@@ -60,7 +60,12 @@ const ImageSelector = ({ navigation }) => {
 				dispatch(saveImage(response.uri))
 			}
 		} catch (error) {
-			console.log(error)
+			dispatch(setWarning({ 
+				warningCode: error.message, 
+				warningTitle: 'ERROR!',
+				warningStatus: true,
+				warningDescription: 'No se pudieron obtener los permisos de la galería.',
+			}))
 		}
 
 		navigation.goBack()

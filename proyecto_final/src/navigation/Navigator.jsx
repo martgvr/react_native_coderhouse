@@ -32,10 +32,10 @@ const Navigator = () => {
 				dispatch(setDarkMode(themeValue))
             } catch (error) {
 				dispatch(setWarning({ 
-					warningStatus: true,
-					warningTitle: 'ERROR!',
-					warningDescription: 'No se pudo cargar la sesión.',
 					warningCode: error.message, 
+					warningTitle: 'ERROR!',
+					warningStatus: true,
+					warningDescription: 'No se pudo cargar la sesión.',
 				}))
             }
         })()

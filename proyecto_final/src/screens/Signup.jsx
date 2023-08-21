@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { useTheme } from "@react-navigation/native"
 import { setUser } from "../features/user/user.slice"
+import { setWarning } from "../features/app/app.slice"
 import { useSignUpMutation } from "../services/auth.service"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
@@ -56,9 +57,13 @@ const Signup = ({ navigation }) => {
 			if (!isCorrectEmail) setErrorMail('Email incorrecto')
 			if (!isCorrectPassword) setErrorPassword('Password incorrecto')
 			if (!isRepeatedPasswordCorrect) setErrorConfirmPassword('Los passwords no coinciden')
-		} catch (err) {
-			console.log("Catch error")
-			console.log(err.message)
+		} catch (error) {
+			dispatch(setWarning({ 
+				warningCode: error.message, 
+				warningTitle: 'ERROR!',
+				warningStatus: true,
+				warningDescription: 'No se pudo registrar la cuenta.',
+			}))
 		}
 	}
 

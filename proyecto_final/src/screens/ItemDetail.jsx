@@ -63,8 +63,6 @@ const ItemDetail = ({ navigation, route }) => {
 
 export default ItemDetail
 
-
-
 const dynamicStyle = (colors) => {
 	return StyleSheet.create({
 		container: {

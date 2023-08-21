@@ -1,9 +1,10 @@
 import * as Location from "expo-location"
-import { useEffect, useState } from "react"
 import { useTheme } from "@react-navigation/native"
+import { useEffect, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 
+import { setWarning } from "../features/app/app.slice"
 import { MAPS_API_KEY } from "../database/firebase.config"
 import { setUserLocation } from "../features/user/user.slice"
 import { usePostUserLocationMutation } from "../services/shop.service"
@@ -12,8 +13,6 @@ import MapPreview from "../components/MapPreview"
 import SubmitButton from "../components/SubmitButton"
 
 const LocationSelector = ({ navigation }) => {
-	
-	const [error, setError] = useState("")
 	const [address, setAddress] = useState("")
 	const [location, setLocation] = useState({ latitude: "", longitude: "" })
 	
@@ -25,33 +24,43 @@ const LocationSelector = ({ navigation }) => {
 
 	const onConfirmAddress = () => {
 		const locationFormatted = { latitude: location.latitude, longitude: location.longitude, address }
-
+		
 		dispatch(setUserLocation(locationFormatted))
 		triggerPostUserLocation({ location: locationFormatted, localID })
-
 		navigation.goBack()
 	}
 
 	useEffect(() => {
-		;(async () => {
+		(async () => {
 			try {
 				let { status } = await Location.requestForegroundPermissionsAsync()
 
 				if (status !== "granted") {
-					setError("Permission to access location was denied")
+					dispatch(setWarning({ 
+						warningCode: error.message, 
+						warningTitle: 'ERROR!',
+						warningStatus: true,
+						warningDescription: 'No se pudieron obtener los permisos de localización.',
+					}))
+
 					return
 				}
 
 				let location = await Location.getCurrentPositionAsync({})
 				setLocation({ latitude: location.coords.latitude, longitude: location.coords.longitude })
 			} catch (error) {
-				setError(error.message)
+				dispatch(setWarning({ 
+					warningCode: error.message, 
+					warningTitle: 'ERROR!',
+					warningStatus: true,
+					warningDescription: 'No se pudo inicializar la localización.',
+				}))
 			}
 		})()
 	}, [])
 
 	useEffect(() => {
-		;(async () => {
+		(async () => {
 			try {
 				if (location.latitude) {
                     const url_reverse_geocode = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${MAPS_API_KEY}`
@@ -61,7 +70,12 @@ const LocationSelector = ({ navigation }) => {
 					setAddress(data.results[0].formatted_address)
 				}
 			} catch (error) {
-				setError(error.message)
+				dispatch(setWarning({ 
+					warningCode: error.message, 
+					warningTitle: 'ERROR!',
+					warningStatus: true,
+					warningDescription: 'No se pudo obtener la localización del dispositivo.',
+				}))
 			}
 		})()
 	}, [location])
@@ -69,22 +83,14 @@ const LocationSelector = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>My Address</Text>
-
-			{/* Flatlist con las directions */}
-			{location ? (
+			{ location && 
 				<>
 					<Text style={styles.text}>Lat: {location.latitude} / Long: {location.longitude}.</Text>
 					<MapPreview location={location} />
 					<Text style={styles.address}>Formatted address: {address}</Text>
 					<SubmitButton onPress={onConfirmAddress} title="Confirm address" width="80%" />
 				</>
-			) : (
-				<>
-					<View style={styles.noLocationContainer}>
-						<Text>{error}</Text>
-					</View>
-				</>
-			)}
+			}
 		</View>
 	)
 }
@@ -122,9 +128,9 @@ const dynamicStyle = (colors) => {
 			justifyContent: "center",
 		},
 		address: {
+			padding: 20,
 			fontSize: 16,
 			color: colors.text,
-			paddingVertical: 20,
 		},
 	})
 }

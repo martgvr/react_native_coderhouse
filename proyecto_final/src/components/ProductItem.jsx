@@ -4,7 +4,6 @@ import { Image, Pressable, StyleSheet, Text } from "react-native"
 
 const ProductItem = ({ item, navigation }) => {
 	const styles = dynamicStyle(useTheme().colors)
-	
 	const onSelect = () => navigation.navigate("Detail", { productSelected: item.id })
 
 	return (

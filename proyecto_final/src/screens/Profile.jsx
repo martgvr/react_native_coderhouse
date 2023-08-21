@@ -5,9 +5,9 @@ import { Image, StyleSheet, View, Text } from "react-native"
 import { signOut } from "../features/user/user.slice"
 import { sessionsDB, appConfigDB } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
+import { setDarkMode, setWarning } from "../features/app/app.slice"
 
 import SubmitButton from "../components/SubmitButton"
-import { setDarkMode } from "../features/app/app.slice"
 
 const Profile = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -24,7 +24,12 @@ const Profile = ({ navigation }) => {
 			await sessionsDB.delete({ condition: 'localID = ?', params: [localID] })
 			dispatch(signOut())
 		} catch (error) {
-			console.log(error)
+			dispatch(setWarning({ 
+				warningCode: error.message, 
+				warningTitle: 'ERROR!',
+				warningStatus: true,
+				warningDescription: 'No se pudo cerrar sesión.',
+			}))
 		}
 	}
 
@@ -33,8 +38,17 @@ const Profile = ({ navigation }) => {
 		const oldValue = appData.rows._array[0].darkMode
 		const newValue = (oldValue == 'true') ? 'false' : 'true'
 
-		await appConfigDB.update({ column: 'darkMode', oldValue: oldValue, newValue: newValue })
-		dispatch(setDarkMode(newValue))
+		try {
+			await appConfigDB.update({ column: 'darkMode', oldValue: oldValue, newValue: newValue })
+			dispatch(setDarkMode(newValue))
+		} catch (error) {
+			dispatch(setWarning({ 
+				warningCode: error.message, 
+				warningTitle: 'ERROR!',
+				warningStatus: true,
+				warningDescription: 'No se pudo cambiar el modo claro/oscuro.',
+			}))
+		}
 	}
 	
 	return (

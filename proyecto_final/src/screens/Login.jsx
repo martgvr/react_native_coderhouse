@@ -4,6 +4,7 @@ import { useTheme } from "@react-navigation/native"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 
 import { setUser } from "../features/user/user.slice"
+import { setWarning } from "../features/app/app.slice"
 import { sessionsDB } from "../database/sqlite.config"
 import { useSignInMutation } from "../services/auth.service"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
@@ -37,7 +38,12 @@ const Login = ({ navigation }) => {
 						params: [result.data.email, result.data.localId, result.data.idToken]
 					})
 				} catch (error) {
-					console.log(error)
+					dispatch(setWarning({ 
+						warningCode: error.message, 
+						warningTitle: 'ERROR!',
+						warningStatus: true,
+						warningDescription: 'No se pudo guardar la sesión en la base de datos.',
+					}))
 				}
 
 				dispatch(setUser({ 
@@ -69,7 +75,12 @@ const Login = ({ navigation }) => {
 			if (!isCorrectEmail) setErrorMail('Email incorrecto')
 			if (!isCorrectPassword) setErrorPassword('Password incorrecto')
 		} catch (error) {
-			console.log("Error:", err.message)
+			dispatch(setWarning({ 
+				warningCode: error.message, 
+				warningTitle: 'ERROR!',
+				warningStatus: true,
+				warningDescription: 'No se pudo iniciar sesión.',
+			}))
 		}
 	}
 
