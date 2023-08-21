@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { NavigationContainer } from "@react-navigation/native"
 import { Platform, StatusBar, SafeAreaView, StyleSheet } from "react-native"
@@ -9,12 +9,12 @@ import { appConfigDB, sessionsDB } from "../database/sqlite.config"
 
 import AuthStack from "./AuthStack"
 import MainStack from "./MainStack"
+import { setDarkMode } from "../features/app/app.slice"
 
 const Navigator = () => {
-	const [darkMode, setDarkMode] = useState('')
-
 	const dispatch = useDispatch()
 	const { email } = useSelector(state => state.userReducer)
+	const { darkMode } = useSelector(state => state.appReducer)
 
 	useEffect(() => {
 		(async ()=> {
@@ -28,7 +28,7 @@ const Navigator = () => {
 
 				const appData = await appConfigDB.getAll()
 				const themeValue = appData.rows._array[0].darkMode
-				setDarkMode(themeValue)
+				dispatch(setDarkMode(themeValue))
             } catch (error) {
                 console.log('Error getting session:', error.message);
             }

@@ -32,8 +32,9 @@ const Profile = ({ navigation }) => {
 		const appData = await appConfigDB.getAll()
 		const oldValue = appData.rows._array[0].darkMode
 		const newValue = (oldValue == 'true') ? 'false' : 'true'
-		
+
 		await appConfigDB.update({ column: 'darkMode', oldValue: oldValue, newValue: newValue })
+		dispatch(setDarkMode(newValue))
 	}
 	
 	return (
