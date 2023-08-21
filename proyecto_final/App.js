@@ -4,8 +4,9 @@ import { useFonts } from 'expo-font'
 import { Provider } from 'react-redux'
 
 import store from './src/store/store'
-import { fonts } from './src/global/fonts'
 import Navigator from './src/navigation/Navigator'
+
+import { fonts } from './src/global/fonts'
 import { ordersDB, sessionsDB, appConfigDB } from './src/database/sqlite.config'
 
 import Error from './src/components/Error'
@@ -40,5 +41,5 @@ export default function App() {
                     <Navigator />
             }
         </Provider>
-    );
+    )
 }

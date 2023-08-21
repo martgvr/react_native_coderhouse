@@ -6,15 +6,16 @@ import { Platform, StatusBar, SafeAreaView, StyleSheet } from "react-native"
 import { setUser } from "../features/user/user.slice"
 import { lightTheme, darkTheme } from "../global/colors"
 import { appConfigDB, sessionsDB } from "../database/sqlite.config"
+import { setDarkMode, setWarning } from "../features/app/app.slice"
 
 import AuthStack from "./AuthStack"
 import MainStack from "./MainStack"
-import { setDarkMode } from "../features/app/app.slice"
+import WarningModal from "../components/WarningModal"
 
 const Navigator = () => {
 	const dispatch = useDispatch()
 	const { email } = useSelector(state => state.userReducer)
-	const { darkMode } = useSelector(state => state.appReducer)
+	const { darkMode, warningStatus, warningCode, warningTitle, warningDescription } = useSelector(state => state.appReducer)
 
 	useEffect(() => {
 		(async ()=> {
@@ -22,7 +23,7 @@ const Navigator = () => {
                 const session = await sessionsDB.getAll()
 
                 if (session?.rows.length) {
-                    const user = session.rows._array[0]
+                    const user = session.rows1._array[0]
                     dispatch(setUser({...user, localID: user.localId}))
                 }
 
@@ -30,7 +31,12 @@ const Navigator = () => {
 				const themeValue = appData.rows._array[0].darkMode
 				dispatch(setDarkMode(themeValue))
             } catch (error) {
-                console.log('Error getting session:', error.message);
+				dispatch(setWarning({ 
+					warningStatus: true,
+					warningTitle: 'ERROR!',
+					warningDescription: 'Error cargando la sesión',
+					warningCode: error.message, 
+				}))
             }
         })()
 	}, [])
@@ -43,6 +49,14 @@ const Navigator = () => {
 						<MainStack />
 						:
 						<AuthStack />
+				}
+				{
+					warningStatus && 
+						<WarningModal 
+							title={warningTitle} 
+							code={warningCode} 
+							description={warningDescription} 
+						/>
 				}
 			</NavigationContainer>
 		</SafeAreaView>
