@@ -3,10 +3,11 @@ import { useEffect, useState } from "react"
 import { useTheme } from "@react-navigation/native"
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
 
-import Counter from "../components/Counter"
 import { addCartItem } from "../features/cart/cart.slice"
-
 import { useGetProductByIdQuery } from "../services/shop.service"
+
+import Loader from '../components/Global/Loader'
+import Counter from "../components/Shop/Counter"
 
 const ItemDetail = ({ navigation, route }) => {
 	const { colors } = useTheme()
@@ -34,7 +35,10 @@ const ItemDetail = ({ navigation, route }) => {
 	return (
 		<View style={orientation === "landscape" ? styles.containerLandscape : null}>
 			<View style={styles.container}>
-				{product && (
+
+				{!product ?
+					<Loader />
+					:
 					<View style={styles.container1}>
 						<View>
 							<Image source={{ uri: product.images[0] }} style={styles.image} />
@@ -57,7 +61,7 @@ const ItemDetail = ({ navigation, route }) => {
 							</View>
 						</View>
 					</View>
-				)}
+				}
 			</View>
 		</View>
 	)

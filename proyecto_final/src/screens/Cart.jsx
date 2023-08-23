@@ -17,7 +17,7 @@ const Cart = () => {
 			{
 				cartData.length === 0 ?
 					<View style={styles.screenFill}>
-						<Text style={styles.noCartDataTitle}>No se encontraron articulos en el carrito :(</Text>
+						<Text style={styles.noCartDataTitle}>No se encontraron articulos en el carrito</Text>
 						<Text style={styles.noCartDataText}>Visitá nuestra tienda para encontrar tus productos favoritos</Text>
 					</View>
 					:

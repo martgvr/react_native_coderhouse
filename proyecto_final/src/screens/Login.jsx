@@ -9,8 +9,8 @@ import { sessionsDB } from "../database/sqlite.config"
 import { useSignInMutation } from "../services/auth.service"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 
-import InputForm from "../components/InputForm"
-import SubmitButton from "../components/SubmitButton"
+import InputForm from "../components/Global/InputForm"
+import SubmitButton from "../components/Global/SubmitButton"
 
 const Login = ({ navigation }) => {
 	const { colors } = useTheme()

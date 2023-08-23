@@ -10,7 +10,7 @@ import { setDarkMode, setWarning } from "../features/app/app.slice"
 
 import AuthStack from "./AuthStack"
 import MainStack from "./MainStack"
-import WarningModal from "../components/WarningModal"
+import WarningModal from "../components/Global/WarningModal"
 
 const Navigator = () => {
 	const dispatch = useDispatch()

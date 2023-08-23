@@ -3,8 +3,8 @@ import { useTheme } from "@react-navigation/native"
 import { StyleSheet, Text, View } from "react-native"
 import { useGetUserLocationQuery } from "../services/shop.service"
 
-import AddressItem from '../components/AddressItem'
-import SubmitButton from "../components/SubmitButton"
+import AddressItem from '../components/Location/AddressItem'
+import SubmitButton from "../components/Global/SubmitButton"
 
 const ListAddress = ({ navigation }) => {
     const styles = dynamicStyle(useTheme().colors)

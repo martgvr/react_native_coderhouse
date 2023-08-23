@@ -7,7 +7,7 @@ import { sessionsDB, appConfigDB } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
 import { setDarkMode, setWarning } from "../features/app/app.slice"
 
-import SubmitButton from "../components/SubmitButton"
+import SubmitButton from "../components/Global/SubmitButton"
 
 const Profile = ({ navigation }) => {
 	const dispatch = useDispatch()

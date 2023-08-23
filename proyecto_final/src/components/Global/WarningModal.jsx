@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { useTheme } from "@react-navigation/native"
-import { setWarning } from "../features/app/app.slice"
+import { setWarning } from "../../features/app/app.slice"
 import { StyleSheet, Text, View, Modal, TouchableOpacity } from "react-native"
 
 const WarningModal = ({ title, description, code }) => {

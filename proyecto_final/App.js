@@ -9,7 +9,7 @@ import Navigator from './src/navigation/Navigator'
 import { fonts } from './src/global/fonts'
 import { ordersDB, sessionsDB, appConfigDB } from './src/database/sqlite.config'
 
-import Error from './src/components/Error'
+import Error from './src/components/Global/Error'
 
 export default function App() {
     const [fontsLoaded] = useFonts(fonts)

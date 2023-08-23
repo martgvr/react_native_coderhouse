@@ -6,9 +6,9 @@ import { Image, View, StyleSheet, Text } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 import * as MediaLibrary from "expo-media-library"
 
-import SubmitButton from "../components/SubmitButton"
-import { saveImage } from "../features/user/user.slice"
 import { setWarning } from "../features/app/app.slice"
+import { saveImage } from "../features/user/user.slice"
+import SubmitButton from "../components/Global/SubmitButton"
 import { usePostProfileImageMutation } from "../services/shop.service"
 
 const ImageSelector = ({ navigation }) => {

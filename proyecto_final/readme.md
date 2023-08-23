@@ -55,6 +55,7 @@ $ npx expo install expo-sqlite
 ```
 - Crear db para ordenes (persistente).
 - Eliminar archivos json locales.
+- Agrupar componentes por screen
 
 - Poner iconos en las categorías, la misma db tiene que tener su respectiva imagen png
 

@@ -4,10 +4,10 @@ import { useTheme } from "@react-navigation/native"
 import { StyleSheet, View, FlatList } from "react-native"
 import { useGetProductsByCategoryQuery } from "../services/shop.service"
 
-import Error from "../components/Error"
-import Loader from "../components/Loader"
-import Search from "../components/Search"
-import ProductItem from "../components/ProductItem"
+import Search from "../components/Shop/Search"
+import Error from "../components/Global/Error"
+import Loader from "../components/Global/Loader"
+import ProductItem from "../components/Shop/ProductItem"
 
 const ItemListCategory = ({ navigation }) => {
 	const [keyword, setKeyword] = useState("")

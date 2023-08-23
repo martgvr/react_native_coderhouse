@@ -9,8 +9,8 @@ import { MAPS_API_KEY } from "../database/firebase.config"
 import { setUserLocation } from "../features/user/user.slice"
 import { usePostUserLocationMutation } from "../services/shop.service"
 
-import MapPreview from "../components/MapPreview"
-import SubmitButton from "../components/SubmitButton"
+import MapPreview from "../components/Location/MapPreview"
+import SubmitButton from "../components/Global/SubmitButton"
 
 const LocationSelector = ({ navigation }) => {
 	const [address, setAddress] = useState("")

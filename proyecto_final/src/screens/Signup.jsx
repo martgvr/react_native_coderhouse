@@ -7,8 +7,8 @@ import { useSignUpMutation } from "../services/auth.service"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { isAtLeastSixCharacters, isValidEmail } from "../validations/auth"
 
-import InputForm from "../components/InputForm"
-import SubmitButton from "../components/SubmitButton"
+import InputForm from "../components/Global/InputForm"
+import SubmitButton from "../components/Global/SubmitButton"
 
 const Signup = ({ navigation }) => {
 	const { colors } = useTheme()

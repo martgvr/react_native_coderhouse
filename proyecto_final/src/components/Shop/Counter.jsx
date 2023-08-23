@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native"
-import { increment, decrement, incrementByAmount } from "../features/counter/counter.slice"
+import { increment, decrement, incrementByAmount } from "../../features/counter/counter.slice"
 
 import { useTheme } from "@react-navigation/native"
 

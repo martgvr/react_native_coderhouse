@@ -8,7 +8,7 @@ import CartStack from "./CartStack"
 import OrderStack from "./OrderStack"
 import ProfileStack from "./ProfileStack"
 
-import Header from "../components/Header"
+import Header from "../components/Global/Header"
 
 const Tab = createBottomTabNavigator()
 
