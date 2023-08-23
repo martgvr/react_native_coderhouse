@@ -53,9 +53,6 @@ $ npx expo install expo-sqlite
 # What's next?
 
 ```
-- Mostrar componente WarningModal al detectar un error. Al no ser un error crítico se podría cerrar el modal y seguir usando la app.
-- Implementar un estado de error en redux. ({ status: true/false, code: "" })
-
 - Crear db para ordenes (persistente).
 - Eliminar archivos json locales.
 

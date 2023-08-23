@@ -47,14 +47,16 @@ const ItemListCategory = ({ navigation }) => {
 					isError ?
 					<Error title={'Se produjo un error de conexión'} description={'Reinicie la aplicación para intentar nuevamente.'} />
 						:
-						<View style={styles.flatListContainer}>
+						<View>
 							<Search onSearch={onSearch} error={keywordError} goBack={() => navigation.goBack()} />
 							<FlatList
+								numColumns={2}
 								data={products}
 								navigation={navigation}
 								keyExtractor={(product) => product.id}
 								showsVerticalScrollIndicator={false}
 								renderItem={({ item }) => <ProductItem navigation={navigation} item={item} />}
+								contentContainerStyle={styles.flatListContent}
 							/>
 						</View>
 			}
@@ -71,8 +73,8 @@ const dynamicStyle = (colors) => {
 			padding: 20,
 			backgroundColor: colors.secondary,
 		},
-		flatListContainer: {
-			width: '100%'
+		flatListContent: {
+			width: '100%',
 		},
 	})
 }

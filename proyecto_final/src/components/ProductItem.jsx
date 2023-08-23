@@ -1,4 +1,4 @@
-import Card from "./Card"
+import CardItem from "./CardItem"
 import { useTheme } from "@react-navigation/native"
 import { Image, Pressable, StyleSheet, Text } from "react-native"
 
@@ -8,10 +8,10 @@ const ProductItem = ({ item, navigation }) => {
 
 	return (
 		<Pressable onPress={onSelect}>
-			<Card>
+			<CardItem>
 				<Image resizeMode="cover" style={styles.image} source={{ uri: item.thumbnail }} />
 				<Text style={styles.textCategory}>{item.title}</Text>
-			</Card>
+			</CardItem>
 		</Pressable>
 	)
 }
@@ -21,9 +21,8 @@ export default ProductItem
 const dynamicStyle = (colors) => {
 	return StyleSheet.create({
 		image: {
-			width: 35,
-			height: 35,
-			borderRadius: 30,
+			width: '100%',
+			height: 95,
 		},
 		textCategory: {
 			fontSize: 18,
