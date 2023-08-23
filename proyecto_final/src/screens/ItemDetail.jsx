@@ -1,31 +1,33 @@
+import { useDispatch } from 'react-redux'
 import { useEffect, useState } from "react"
 import { useTheme } from "@react-navigation/native"
-import { useSelector, useDispatch } from 'react-redux'
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
 
 import Counter from "../components/Counter"
 import { addCartItem } from "../features/cart/cart.slice"
 
+import { useGetProductByIdQuery } from "../services/shop.service"
+
 const ItemDetail = ({ navigation, route }) => {
 	const { colors } = useTheme()
 	const dispatch = useDispatch()
 	const styles = dynamicStyle(colors)
-	const allProducts = useSelector(state => state.shopReducer.allProducts)
-
-	const [product, setProduct] = useState(null)
-	const [orientation, setOrientation] = useState("portrait")
 
 	const { width, height } = useWindowDimensions()
 	const { productSelected } = route.params
+	
+	const [product, setProduct] = useState(null)
+	const [orientation, setOrientation] = useState("portrait")
+
+	const { data: productFound, isLoading, isError } = useGetProductByIdQuery(productSelected)
 
 	useEffect(() => {
 		setOrientation(width > height ? "landscape" : "portrait")
 	}, [width, height])
 
 	useEffect(() => {
-		const productFound = allProducts.find((product) => product.id == productSelected)
 		setProduct(productFound)
-	}, [productSelected])
+	}, [productFound])
 
 	const onAddToCart = () => dispatch(addCartItem({ ...product, quantity: 1 }))
 

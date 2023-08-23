@@ -24,13 +24,12 @@ const dynamicStyle = (colors) => {
             borderRadius: 6,
             borderWidth: 1,
             borderColor: colors.border,
-            
-            backgroundColor: 'white',
             marginRight: 10,
-            marginBottom: 6,
+            marginBottom: 10,
+            backgroundColor: colors.primary,
             height: 200,
             width: (windowWidth / 2) - 25,
-
+            
             alignItems: 'center',
             flexDirection: 'column', 
             justifyContent: 'flex-start',

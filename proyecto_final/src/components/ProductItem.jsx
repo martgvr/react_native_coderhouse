@@ -25,8 +25,9 @@ const dynamicStyle = (colors) => {
 			height: 95,
 		},
 		textCategory: {
-			fontSize: 18,
+			fontSize: 16,
 			color: colors.text,
+			alignSelf: 'flex-start',
 		},
 	})
 }
