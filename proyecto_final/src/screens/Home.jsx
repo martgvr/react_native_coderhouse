@@ -22,8 +22,8 @@ const Home = ({ navigation }) => {
 						<View style={styles.flatListContainer}>
 							<FlatList
 								data={categories}
-								keyExtractor={(category) => category}
 								showsVerticalScrollIndicator={false}
+								keyExtractor={(category) => category.name}
 								renderItem={({ item }) => <CategoryItem item={item} navigation={navigation} />}
 							/>
 						</View>

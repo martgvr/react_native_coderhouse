@@ -55,9 +55,6 @@ $ npx expo install expo-sqlite
 ```
 - Crear db para ordenes (persistente).
 - Eliminar archivos json locales.
-- Agrupar componentes por screen
-
-- Poner iconos en las categorías, la misma db tiene que tener su respectiva imagen png
 
 - Hacer funcionar el boton de eliminar item del cart y agregar al lado de confirm un boton para limpiar el carrito
 

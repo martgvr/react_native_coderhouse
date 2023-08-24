@@ -1,35 +1,22 @@
 import { useDispatch } from "react-redux"
-import { useTheme } from "@react-navigation/native"
-import { StyleSheet, Text, Pressable } from "react-native"
+import { TouchableOpacity } from "react-native"
 import { setCategorySelected } from '../../features/shop/shop.slice'
 
-import Card from "./Card"
+import CardCategory from "./CardCategory"
 
 const CategoryItem = ({ item, navigation }) => {
-	const styles = dynamicStyle(useTheme().colors)
 	const dispatch = useDispatch()
 
 	const selectCategoryHandler = () => {
-		navigation.navigate("ItemListCategory", { category: item })
-		dispatch(setCategorySelected(item))
+		navigation.navigate("ItemListCategory", { category: item.name })
+		dispatch(setCategorySelected(item.name))
 	}
 
 	return (
-		<Pressable onPress={selectCategoryHandler}>
-			<Card additionalStyle={{ justifyContent: 'center' }}>
-				<Text style={styles.textCategory}>{item}</Text>
-			</Card>
-		</Pressable>
+		<TouchableOpacity onPress={selectCategoryHandler}>
+			<CardCategory icon={item.icon} name={item.name} />
+		</TouchableOpacity>
 	)
 }
 
 export default CategoryItem
-
-const dynamicStyle = (colors) => {
-	return StyleSheet.create({
-		textCategory: {
-			fontSize: 18,
-			color: colors.text,
-		}
-	})
-}

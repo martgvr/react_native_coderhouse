@@ -1,5 +1,5 @@
-import { StyleSheet, View, Dimensions } from 'react-native'
 import { useTheme } from "@react-navigation/native"
+import { StyleSheet, View, Dimensions } from 'react-native'
 
 const windowWidth = Dimensions.get('window').width;
 
