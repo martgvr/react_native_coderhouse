@@ -33,8 +33,8 @@ const dynamicStyle = (colors) => {
 			color: colors.text,
 		},
 		image: {
-			width: 30,
-			height: 30,
+			width: 25,
+			height: 25,
             marginHorizontal: 30,
             tintColor: colors.text,
 		},

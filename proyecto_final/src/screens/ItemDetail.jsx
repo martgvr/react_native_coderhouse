@@ -8,6 +8,7 @@ import { useGetProductByIdQuery } from "../services/shop.service"
 
 import Loader from '../components/Global/Loader'
 import Counter from "../components/Shop/Counter"
+import PictureGallery from '../components/Shop/PictureGallery'
 
 const ItemDetail = ({ navigation, route }) => {
 	const { colors } = useTheme()
@@ -19,6 +20,7 @@ const ItemDetail = ({ navigation, route }) => {
 	
 	const [product, setProduct] = useState(null)
 	const [orientation, setOrientation] = useState("portrait")
+	const [imageToShow, setImageToShow] = useState('')
 
 	const { data: productFound, isLoading, isError } = useGetProductByIdQuery(productSelected)
 
@@ -28,6 +30,7 @@ const ItemDetail = ({ navigation, route }) => {
 
 	useEffect(() => {
 		setProduct(productFound)
+		setImageToShow(productFound?.images[0])
 	}, [productFound])
 
 	const onAddToCart = () => dispatch(addCartItem({ ...product, quantity: 1 }))
@@ -41,7 +44,13 @@ const ItemDetail = ({ navigation, route }) => {
 					:
 					<View style={styles.container1}>
 						<View>
-							<Image source={{ uri: product.images[0] }} style={styles.image} />
+							<Image source={{ uri: imageToShow }} style={styles.image} />
+
+							{
+								product.images &&
+									<PictureGallery setImageToShow={setImageToShow} images={product.images} />
+							}
+
 							<Text style={styles.title}>{product.title}</Text>
 							<Text style={styles.description}>{product.description}</Text>
 							<Text style={styles.price}>$ {product.price}</Text>
