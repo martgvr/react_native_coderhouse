@@ -6,7 +6,7 @@ const PictureGallery = ({ images, setImageToShow }) => {
             {
                 images &&
                     images.map(item =>             
-                        <TouchableOpacity style={styles.imageCard} onPress={() => setImageToShow(item)}>
+                        <TouchableOpacity style={styles.imageCard} onPress={() => setImageToShow(item)} key={item}>
                             <Image source={{ uri: item }} style={styles.image} />
                         </TouchableOpacity>
                     )

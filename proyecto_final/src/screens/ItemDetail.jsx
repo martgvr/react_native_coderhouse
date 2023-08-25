@@ -1,9 +1,10 @@
-import { useDispatch } from 'react-redux'
 import { useEffect, useState } from "react"
 import { useTheme } from "@react-navigation/native"
+import { useDispatch, useSelector } from 'react-redux'
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
 
 import { addCartItem } from "../features/cart/cart.slice"
+import { resetAmount } from "../features/counter/counter.slice"
 import { useGetProductByIdQuery } from "../services/shop.service"
 
 import Loader from '../components/Global/Loader'
@@ -15,6 +16,8 @@ const ItemDetail = ({ navigation, route }) => {
 	const dispatch = useDispatch()
 	const styles = dynamicStyle(colors)
 
+	const count = useSelector(state => state.counterReducer.value)
+
 	const { width, height } = useWindowDimensions()
 	const { productSelected } = route.params
 	
@@ -23,17 +26,24 @@ const ItemDetail = ({ navigation, route }) => {
 	const [imageToShow, setImageToShow] = useState('')
 
 	const { data: productFound, isLoading, isError } = useGetProductByIdQuery(productSelected)
-
+	
 	useEffect(() => {
-		setOrientation(width > height ? "landscape" : "portrait")
-	}, [width, height])
+		dispatch(resetAmount())
+	}, [])
 
 	useEffect(() => {
 		setProduct(productFound)
 		setImageToShow(productFound?.images[0])
 	}, [productFound])
 
-	const onAddToCart = () => dispatch(addCartItem({ ...product, quantity: 1 }))
+	useEffect(() => {
+		setOrientation(width > height ? "landscape" : "portrait")
+	}, [width, height])
+
+	const onAddToCart = () => {
+		dispatch(addCartItem({ ...product, quantity: count }))
+		dispatch(resetAmount())
+	}
 
 	return (
 		<View style={orientation === "landscape" ? styles.containerLandscape : null}>
@@ -64,7 +74,7 @@ const ItemDetail = ({ navigation, route }) => {
 									<Text style={styles.buttonText}>Go back</Text>
 								</TouchableOpacity>
 
-								<TouchableOpacity style={[styles.button, styles.addToCartButton]} onPress={onAddToCart} >
+								<TouchableOpacity style={[styles.button, styles.addToCartButton]} onPress={onAddToCart}>
 									<Text style={styles.buttonText}>Add to cart</Text>
 								</TouchableOpacity>
 							</View>

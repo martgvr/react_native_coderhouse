@@ -53,11 +53,14 @@ $ npx expo install expo-sqlite
 # What's next?
 
 ```
+- Hacer funcionar el counter en el item detail
+- Al entrar al itemdetail hacer un dispatch del amount a 0
+
 - Crear db para ordenes (persistente).
 - Eliminar archivos json locales.
+- Rediseñar estética Cart
 
 - Hacer funcionar el boton de eliminar item del cart y agregar al lado de confirm un boton para limpiar el carrito
 
-- Hacer funcionar el counter en el item detail
 - Hacer un readme detallado. Librerías utilizadas, como clonar repo, como levantar proyecto y en qué consiste.
 ```

@@ -15,8 +15,8 @@ const Counter = () => {
     return (
         <View style={styles.container}>
             <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText} onPress={() => dispatch(decrement())}>-</Text>
+                <TouchableOpacity style={styles.button} onPress={() => dispatch(decrement())}>
+                    <Text style={styles.buttonText}>-</Text>
                 </TouchableOpacity>
 
                 <Text style={styles.span}>{count}</Text>
@@ -34,6 +34,7 @@ const Counter = () => {
                     value={inputToAdd.toString()}
                     placeholder="Cantidad a aumentar"
                 />
+                
                 <TouchableOpacity style={styles.button} onPress={() => dispatch(incrementByAmount(inputToAdd))}>
                     <Text style={styles.buttonText}>Add</Text>
                 </TouchableOpacity>
