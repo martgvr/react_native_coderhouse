@@ -26,7 +26,7 @@ const Order = () => {
 							<Text style={styles.noCartDataText}>Confirmá tu compra en el carrito y generá una nueva orden de compra</Text>
 						</View>
 						:
-						<FlatList data={orderData} keyExtractor={(orderItem) => orderItem.id} renderItem={({ item }) => <OrderItem order={item} />} />
+						<FlatList data={orderData} keyExtractor={(item) => item.total} renderItem={({ item }) => <OrderItem order={item} />} />
 			}
 		</View>
 	)

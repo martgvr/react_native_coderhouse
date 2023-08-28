@@ -53,10 +53,8 @@ $ npx expo install expo-sqlite
 # What's next?
 
 ```
-- Rediseñar estética Cart
-
-- Hacer funcionar el boton de eliminar item del cart
 - Agregar al lado de confirm un boton para limpiar el carrito
+- Hacer funcionar el boton de eliminar item del cart
 
 - Hacer un readme detallado. Librerías utilizadas, como clonar repo, como levantar proyecto y en qué consiste.
 ```

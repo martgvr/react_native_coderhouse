@@ -1,19 +1,22 @@
-import { useSelector } from 'react-redux'
 import { useTheme } from "@react-navigation/native"
+import { useDispatch, useSelector } from 'react-redux'
 import { usePostCartMutation } from "../services/shop.service"
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native"
 
 import CartItem from "../components/Cart/CartItem"
+import { clearCart } from '../features/cart/cart.slice'
 
 const Cart = () => {
+	const dispatch = useDispatch()
 	const styles = dynamicStyle(useTheme().colors)
     const [triggerPostCart, result] = usePostCartMutation()
 
     const { localID } = useSelector(state => state.userReducer)
     const { items: cartData, total, updatedAt } = useSelector(state => state.cartReducer)
 	
+	const clearCartHandler = () => dispatch(clearCart())
     const confirmHandler = () => triggerPostCart({ items: cartData, total, localID, updatedAt })
-	
+
     return (
 		<View style={styles.container}>
 			{
@@ -29,9 +32,15 @@ const Cart = () => {
 						<View style={styles.totalContainer}>
 							<Text style={styles.buttonText}>Total: $ {total}</Text>
 
-							<TouchableOpacity style={styles.button} onPress={confirmHandler}>
-								<Text style={styles.buttonText}>Confirm</Text>
-							</TouchableOpacity>
+							<View style={styles.buttonsContainer}>
+								<TouchableOpacity style={styles.button} onPress={confirmHandler}>
+									<Text style={styles.buttonText}>Confirm</Text>
+								</TouchableOpacity>
+
+								<TouchableOpacity style={styles.button} onPress={clearCartHandler}>
+									<Text style={styles.buttonText}>Clear cart</Text>
+								</TouchableOpacity>
+							</View>
 						</View>
 					</View>
 			}
@@ -51,6 +60,7 @@ const dynamicStyle = (colors) => {
 		},
 		totalContainer: {
 			gap: 10,
+			width: '100%',
 			alignSelf: "center",
 			alignItems: 'center',
 			flexDirection: "column",
@@ -85,6 +95,11 @@ const dynamicStyle = (colors) => {
 		},
 		buttonText: {
 			color: colors.text,
+		},
+		buttonsContainer: {
+			width: '100%',
+			flexDirection: 'row',
+			justifyContent: 'space-between',
 		},
 	})
 }

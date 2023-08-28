@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View, Image } from "react-native"
 
 const OrderItem = ({ order }) => {
 	const { colors } = useTheme()
@@ -9,14 +9,28 @@ const OrderItem = ({ order }) => {
 	return (
 		<View style={styles.card} onPress={() => {}}>
 			<View style={styles.textContainer}>
-				<Text style={styles.text1}>{order.updatedAt}</Text>
-				<Text style={styles.text2}>Total: $ {total}</Text>
-				<Text style={styles.articlesTitle}>Artículos</Text>
-				{
-					order.items.map(item =>
-						<Text key={item.id} style={styles.text3}>{item.title} ({item.quantity})</Text>
-					)
-				}
+				<View>
+					<Text style={styles.title}>Fecha y hora</Text>
+					<Text style={styles.text}>{order.updatedAt}</Text>
+				</View>
+
+				<View>
+					<Text style={styles.title}>Total</Text>
+					<Text style={styles.text}>$ {total}</Text>
+				</View>
+
+				<View style={styles.articlesContainer}>
+					<Text style={styles.title}>Artículos</Text>
+					{
+						order.items.map(item =>
+							<View style={styles.articleRow} key={item.id}>
+								<Image source={{ uri: item.thumbnail }} style={styles.image} />
+								<Text key={item.id} style={styles.text}>{item.title}</Text>
+								<Text style={styles.quantity}>(x{item.quantity})</Text>
+							</View>
+						)
+					}
+				</View>
 			</View>
 		</View>
 	)
@@ -39,30 +53,45 @@ const dynamicStyle = (colors) => {
 			backgroundColor: colors.primary,
 		},
 		textContainer: {
-			gap: 6,
-			width: "70%",
+			gap: 10,
+			width: "100%",
 			alignItems: "flex-start",
 			flexDirection: "column",
 			justifyContent: "flex-start",
 		},
-		text1: {
-			fontSize: 18,
-			color: colors.text,
-		},
-		text2: {
-			color: colors.subtitle,
-			fontSize: 15,
-			fontWeight: "bold",
-		},
-		text3: {
-			fontSize: 14,
-			color: colors.subtitle,
-		},
-		articlesTitle: {
-			fontSize: 18,
-			marginTop: 12,
+		title: {
+			opacity: 0.6,
+			fontSize: 10,
+			marginLeft: -2,
+			marginBottom: 2,
+			letterSpacing: 2,
 			fontWeight: 'bold',
+			color: colors.subtitle,
+			alignSelf: 'flex-start',
+			textTransform: 'uppercase',
+		},
+		text: {
+			fontSize: 16,
 			color: colors.text,
+		},
+		articlesContainer: {
+			gap: 5,
+		},
+		articleRow: {
+			flexDirection: 'row',
+			alignItems: 'center'
+		},
+		image: {
+			height: 30,
+			width: 30,
+			marginRight: 10,
+			borderRadius: 6,
+		},
+		quantity: {
+			opacity: 0.8,
+			fontSize: 14,
+			marginLeft: 10,
+			color: colors.subtitle,
 		},
 	})
 }

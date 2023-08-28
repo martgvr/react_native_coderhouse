@@ -26,11 +26,17 @@ export const cartSlice = createSlice({
             state.total = state.items.reduce((acc, currentItem) => acc += currentItem.price * currentItem.quantity, 0)
             state.updatedAt = new Date().toLocaleString()
         },
-        removeCartItem: (state,action) => {
-            //Logic to remove item
+        removeCartItem: (state, action) => {
+            const itemFound = state.items.find(item => item.id == action.payload.id)
+            const itemPosition = state.items.indexOf(itemFound)
+            state.items.splice(itemPosition, 1)
+        },
+        clearCart: (state, action) => {
+            console.log('OK');
+            state.items = []
         }
     }
 })
 
 export default cartSlice.reducer
-export const { addCartItem, removeCartItem } = cartSlice.actions
+export const { addCartItem, removeCartItem, clearCart } = cartSlice.actions

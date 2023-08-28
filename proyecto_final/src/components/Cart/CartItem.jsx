@@ -1,10 +1,15 @@
 import { useTheme } from "@react-navigation/native"
 import { StyleSheet, Text, View, Image } from "react-native"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
+import { removeCartItem } from "../../features/cart/cart.slice"
+import { useDispatch } from "react-redux"
 
 const CartItem = ({ cartItem }) => {
 	const { colors } = useTheme()
+	const dispatch = useDispatch()
 	const styles = dynamicStyle(colors)
+
+	const deleteItemHandler = (id) => dispatch(removeCartItem({ id }))
 
 	return (
 		<View style={styles.card}>
@@ -35,7 +40,7 @@ const CartItem = ({ cartItem }) => {
 
 			</View>
 
-			<MaterialCommunityIcons name="trash-can-outline" color={colors.accents} size={30} style={styles.deleteIcon}/>
+			<MaterialCommunityIcons name="trash-can-outline" color={colors.accents} size={30} style={styles.deleteIcon} onPress={() => deleteItemHandler(cartItem.id)}/>
 		</View>
 	)
 }
