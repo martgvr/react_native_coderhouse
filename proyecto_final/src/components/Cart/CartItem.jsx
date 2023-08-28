@@ -1,8 +1,9 @@
 import { useTheme } from "@react-navigation/native"
-import { StyleSheet, Text, View, Image } from "react-native"
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
-import { removeCartItem } from "../../features/cart/cart.slice"
 import { useDispatch } from "react-redux"
+import { StyleSheet, Text, View, Image } from "react-native"
+import { removeCartItem } from "../../features/cart/cart.slice"
+
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 const CartItem = ({ cartItem }) => {
 	const { colors } = useTheme()

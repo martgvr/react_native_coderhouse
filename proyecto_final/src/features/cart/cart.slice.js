@@ -32,7 +32,6 @@ export const cartSlice = createSlice({
             state.items.splice(itemPosition, 1)
         },
         clearCart: (state, action) => {
-            console.log('OK');
             state.items = []
         }
     }
