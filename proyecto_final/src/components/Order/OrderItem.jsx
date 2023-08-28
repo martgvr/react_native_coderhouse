@@ -1,10 +1,7 @@
-import { Feather } from "@expo/vector-icons"
 import { useTheme } from "@react-navigation/native"
 import { StyleSheet, Text, View } from "react-native"
 
 const OrderItem = ({ order }) => {
-	console.log(order)
-
 	const { colors } = useTheme()
 	const styles = dynamicStyle(colors)
 	const total = order.items.reduce((acc, currentItem) => (acc += currentItem.price * currentItem.quantity), 0)
@@ -12,10 +9,15 @@ const OrderItem = ({ order }) => {
 	return (
 		<View style={styles.card} onPress={() => {}}>
 			<View style={styles.textContainer}>
-				<Text style={styles.text}>{order.updatedAt}</Text>
+				<Text style={styles.text1}>{order.updatedAt}</Text>
 				<Text style={styles.text2}>Total: $ {total}</Text>
+				<Text style={styles.articlesTitle}>Artículos</Text>
+				{
+					order.items.map(item =>
+						<Text key={item.id} style={styles.text3}>{item.title} ({item.quantity})</Text>
+					)
+				}
 			</View>
-			<Feather name="search" size={30} color={colors.accents} />
 		</View>
 	)
 }
@@ -25,7 +27,6 @@ export default OrderItem
 const dynamicStyle = (colors) => {
 	return StyleSheet.create({
 		card: {
-			height: 90,
 			padding: 10,
 			marginBottom: 10,
 			borderRadius: 10,
@@ -44,7 +45,7 @@ const dynamicStyle = (colors) => {
 			flexDirection: "column",
 			justifyContent: "flex-start",
 		},
-		text: {
+		text1: {
 			fontSize: 18,
 			color: colors.text,
 		},
@@ -52,6 +53,16 @@ const dynamicStyle = (colors) => {
 			color: colors.subtitle,
 			fontSize: 15,
 			fontWeight: "bold",
+		},
+		text3: {
+			fontSize: 14,
+			color: colors.subtitle,
+		},
+		articlesTitle: {
+			fontSize: 18,
+			marginTop: 12,
+			fontWeight: 'bold',
+			color: colors.text,
 		},
 	})
 }
