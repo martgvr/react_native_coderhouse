@@ -3,15 +3,17 @@ import { useTheme } from "@react-navigation/native"
 import { usePostCartMutation } from "../services/shop.service"
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native"
 
-import CartItem from "../components/CartItem"
+import CartItem from "../components/Cart/CartItem"
 
 const Cart = () => {
 	const styles = dynamicStyle(useTheme().colors)
     const [triggerPostCart, result] = usePostCartMutation()
-    const { items: cartData, total, updatedAt, user } = useSelector(state => state.cartReducer)
 
-    const confirmHandler = () => triggerPostCart({ items: cartData, total, user, updatedAt })
-
+    const { localID } = useSelector(state => state.userReducer)
+    const { items: cartData, total, updatedAt } = useSelector(state => state.cartReducer)
+	
+    const confirmHandler = () => triggerPostCart({ items: cartData, total, localID, updatedAt })
+	
     return (
 		<View style={styles.container}>
 			{

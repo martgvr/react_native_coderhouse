@@ -1,14 +1,11 @@
-import Cart from "../../data/cart.json"
 import { createSlice } from "@reduxjs/toolkit"
 
 export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        cartData: Cart,
-        user: "Logged user",
-        updatedAt: "",
+        items: [],
         total: null,
-        items: []
+        updatedAt: "",
     },
     reducers: {
         addCartItem: (state, action) => {

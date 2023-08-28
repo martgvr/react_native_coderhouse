@@ -17,6 +17,7 @@ const ItemListCategory = ({ navigation }) => {
 	const { colors } = useTheme()
 	const styles = dynamicStyle(colors)
 	const categorySelected = useSelector(state => state.shopReducer.categorySelected)
+	
 	const { data: productsSelected, isError, isLoading } = useGetProductsByCategoryQuery(categorySelected)
 
 	useEffect(() => {

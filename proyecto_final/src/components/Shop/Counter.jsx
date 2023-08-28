@@ -35,10 +35,6 @@ const Counter = () => {
                     placeholder="Cantidad a aumentar"
                 />
                 
-                <TouchableOpacity style={styles.button} onPress={() => dispatch(incrementByAmount(inputToAdd))}>
-                    <Text style={styles.buttonText}>Add</Text>
-                </TouchableOpacity>
-
                 <TouchableOpacity style={styles.button} onPress={() => setInputToAdd(0)}>
                     <Text style={styles.buttonText}>Reset</Text>
                 </TouchableOpacity>
@@ -99,7 +95,6 @@ const dynamicStyle = (colors) => {
             borderRadius: 10,
             color: colors.text,
             borderColor: colors.border,
-            backgroundColor: colors.primary,
         },
 	})
 }

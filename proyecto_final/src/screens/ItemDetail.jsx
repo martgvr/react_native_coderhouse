@@ -96,7 +96,7 @@ const dynamicStyle = (colors) => {
 		},
 		container1: {
 			height: '100%',
-			paddingBottom: 60,
+			paddingBottom: 51,
 			justifyContent: 'space-between',
 		},	
 		containerLandscape: {
@@ -128,7 +128,7 @@ const dynamicStyle = (colors) => {
 		buttonsContainer: {
 			width: '100%',
 			padding: 10,
-			marginTop: 10,
+			marginTop: 2,
 			alignSelf: 'center',
 			flexDirection: 'row',
 			justifyContent: 'space-between',
