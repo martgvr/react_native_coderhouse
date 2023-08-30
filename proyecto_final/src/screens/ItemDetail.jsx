@@ -42,9 +42,9 @@ const ItemDetail = ({ navigation, route }) => {
 	}, [width, height])
 
 	const onAddToCart = () => {
+		dispatch(setAlert({ alertStatus: true, alertMessage: 'Producto agregado al carrito', alertType: 'success' }))
 		dispatch(addCartItem({ ...product, quantity: count }))
 		dispatch(resetAmount())
-		dispatch(setAlert({ alertStatus: true, alertMessage: 'Hola' }))
 	}
 
 	return (

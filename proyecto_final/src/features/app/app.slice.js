@@ -8,8 +8,9 @@ export const appSlice = createSlice({
         warningTitle: '',
         warningStatus: false,
         warningDescription: '',
-        alertStatus: true,
+        alertType: '',
         alertMessage: '',
+        alertStatus: false,
     },
     reducers: {
         setDarkMode: (state, action) => {
@@ -23,7 +24,8 @@ export const appSlice = createSlice({
             state.warningDescription = warningDescription
         },
         setAlert: (state, action) => {
-            const { alertStatus, alertMessage } = action.payload
+            const { alertType, alertStatus, alertMessage } = action.payload
+            state.alertType = alertType
             state.alertStatus = alertStatus
             state.alertMessage = alertMessage
         }

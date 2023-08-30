@@ -53,6 +53,5 @@ $ npx expo install expo-sqlite
 # What's next?
 
 ```
-- Hacer un componente para un modal de notificaciones, buscar la forma de que spawnee y se cierre a un tiempo determinado
 - Hacer un readme detallado. Librerías utilizadas, como clonar repo, como levantar proyecto y en qué consiste.
 ```
