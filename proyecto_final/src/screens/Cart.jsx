@@ -1,10 +1,12 @@
 import { useTheme } from "@react-navigation/native"
 import { useDispatch, useSelector } from 'react-redux'
-import { usePostCartMutation } from "../services/shop.service"
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native"
 
-import CartItem from "../components/Cart/CartItem"
+import { setAlert } from "../features/app/app.slice"
 import { clearCart } from '../features/cart/cart.slice'
+import { usePostCartMutation } from "../services/shop.service"
+
+import CartItem from "../components/Cart/CartItem"
 
 const Cart = () => {
 	const dispatch = useDispatch()
@@ -15,7 +17,12 @@ const Cart = () => {
     const { items: cartData, total, updatedAt } = useSelector(state => state.cartReducer)
 	
 	const clearCartHandler = () => dispatch(clearCart())
-    const confirmHandler = () => triggerPostCart({ items: cartData, total, localID, updatedAt })
+
+    const confirmHandler = () => {
+		triggerPostCart({ items: cartData, total, localID, updatedAt })
+		dispatch(setAlert({ alertStatus: true, alertMessage: 'Compra confirmada con éxito', alertType: 'success' }))
+		dispatch(clearCart())
+	}
 
     return (
 		<View style={styles.container}>
@@ -33,12 +40,12 @@ const Cart = () => {
 							<Text style={styles.buttonText}>Total: $ {total}</Text>
 
 							<View style={styles.buttonsContainer}>
-								<TouchableOpacity style={styles.button} onPress={confirmHandler}>
-									<Text style={styles.buttonText}>Confirm</Text>
+								<TouchableOpacity style={[styles.button, styles.goBackButton]} onPress={clearCartHandler}>
+									<Text style={styles.buttonText}>Clear cart</Text>
 								</TouchableOpacity>
 
-								<TouchableOpacity style={styles.button} onPress={clearCartHandler}>
-									<Text style={styles.buttonText}>Clear cart</Text>
+								<TouchableOpacity style={[styles.button, styles.addToCartButton]} onPress={confirmHandler}>
+									<Text style={styles.buttonText}>Confirm</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -54,7 +61,7 @@ const dynamicStyle = (colors) => {
 	return StyleSheet.create({
 		container: {
 			flex: 1,
-			padding: 20,
+			padding: 10,
 			paddingBottom: 65,
 			backgroundColor: colors.secondary,
 		},
@@ -85,16 +92,23 @@ const dynamicStyle = (colors) => {
 			color: colors.subtitle,
 		},
 		button: {
-			padding: 10,
 			width: 150,
-			alignItems: 'center',
-			borderWidth: 1,
+			height: 50,
+			borderWidth: 2,
 			borderRadius: 10,
-			borderColor: colors.border,
+			alignItems: 'center',
+			justifyContent: 'center'
+		},
+		goBackButton: {
+			borderColor: '#cceeff',
+			backgroundColor: colors.primary,
+		},
+		addToCartButton: {
+			borderColor: '#d1edd6',
 			backgroundColor: colors.primary,
 		},
 		buttonText: {
-			color: colors.text,
+			color: colors.text
 		},
 		buttonsContainer: {
 			width: '100%',

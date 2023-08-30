@@ -38,7 +38,7 @@ const dynamicStyle = (colors) => {
 	return StyleSheet.create({
 		container: {
 			flex: 1,
-			padding: 20,
+			padding: 10,
 			backgroundColor: colors.secondary,
 		},
 		screenFill: {
