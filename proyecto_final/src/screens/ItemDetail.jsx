@@ -3,6 +3,7 @@ import { useTheme } from "@react-navigation/native"
 import { useDispatch, useSelector } from 'react-redux'
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from "react-native"
 
+import { setAlert } from "../features/app/app.slice"
 import { addCartItem } from "../features/cart/cart.slice"
 import { resetAmount } from "../features/counter/counter.slice"
 import { useGetProductByIdQuery } from "../services/shop.service"
@@ -43,6 +44,7 @@ const ItemDetail = ({ navigation, route }) => {
 	const onAddToCart = () => {
 		dispatch(addCartItem({ ...product, quantity: count }))
 		dispatch(resetAmount())
+		dispatch(setAlert({ alertStatus: true, alertMessage: 'Hola' }))
 	}
 
 	return (

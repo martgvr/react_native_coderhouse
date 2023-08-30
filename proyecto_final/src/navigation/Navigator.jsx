@@ -10,12 +10,14 @@ import { setDarkMode, setWarning } from "../features/app/app.slice"
 
 import AuthStack from "./AuthStack"
 import MainStack from "./MainStack"
+
+import Alert from "../components/Global/Alert"
 import WarningModal from "../components/Global/WarningModal"
 
 const Navigator = () => {
 	const dispatch = useDispatch()
 	const { email } = useSelector(state => state.userReducer)
-	const { darkMode, warningStatus, warningCode, warningTitle, warningDescription } = useSelector(state => state.appReducer)
+	const { darkMode, warningStatus, warningCode, warningTitle, warningDescription, alertStatus } = useSelector(state => state.appReducer)
 
 	useEffect(() => {
 		(async ()=> {
@@ -57,6 +59,10 @@ const Navigator = () => {
 							code={warningCode} 
 							description={warningDescription} 
 						/>
+				}
+				{
+					alertStatus &&
+						<Alert />
 				}
 			</NavigationContainer>
 		</SafeAreaView>
