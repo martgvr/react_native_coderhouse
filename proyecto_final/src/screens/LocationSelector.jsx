@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 
-import { setWarning } from "../features/app/app.slice"
 import { MAPS_API_KEY } from "../database/firebase.config"
 import { setUserLocation } from "../features/user/user.slice"
+import { setAlert, setWarning } from "../features/app/app.slice"
 import { usePostUserLocationMutation } from "../services/shop.service"
 
 import MapPreview from "../components/Location/MapPreview"
@@ -27,6 +27,7 @@ const LocationSelector = ({ navigation }) => {
 		
 		dispatch(setUserLocation(locationFormatted))
 		triggerPostUserLocation({ location: locationFormatted, localID })
+		dispatch(setAlert({ alertStatus: true, alertMessage: 'Nueva ubicación guardada', alertType: 'success' }))
 		navigation.goBack()
 	}
 
@@ -42,10 +43,10 @@ const LocationSelector = ({ navigation }) => {
 						warningStatus: true,
 						warningDescription: 'No se pudieron obtener los permisos de localización.',
 					}))
-
+					dispatch(setAlert({ alertStatus: true, alertMessage: 'Error al obtener permisos de geolocalización', alertType: 'error' }))
 					return
 				}
-
+				
 				let location = await Location.getCurrentPositionAsync({})
 				setLocation({ latitude: location.coords.latitude, longitude: location.coords.longitude })
 			} catch (error) {
@@ -55,6 +56,7 @@ const LocationSelector = ({ navigation }) => {
 					warningStatus: true,
 					warningDescription: 'No se pudo inicializar la localización.',
 				}))
+				dispatch(setAlert({ alertStatus: true, alertMessage: 'Error al iniciar el servicio de geolocalización', alertType: 'error' }))
 			}
 		})()
 	}, [])
@@ -76,6 +78,7 @@ const LocationSelector = ({ navigation }) => {
 					warningStatus: true,
 					warningDescription: 'No se pudo obtener la localización del dispositivo.',
 				}))
+				dispatch(setAlert({ alertStatus: true, alertMessage: 'Error al obtener la localización', alertType: 'error' }))
 			}
 		})()
 	}, [location])

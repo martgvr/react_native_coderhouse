@@ -6,7 +6,7 @@ import { Image, View, StyleSheet, Text } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 import * as MediaLibrary from "expo-media-library"
 
-import { setWarning } from "../features/app/app.slice"
+import { setAlert, setWarning } from "../features/app/app.slice"
 import { saveImage } from "../features/user/user.slice"
 import { usePostProfileImageMutation } from "../services/shop.service"
 
@@ -47,6 +47,7 @@ const ImageSelector = ({ navigation }) => {
 					warningStatus: true,
 					warningDescription: 'No se pudo inicializar la cámara del dispositivo.',
 				}))
+				dispatch(setAlert({ alertStatus: true, alertMessage: `Ocurrió un error al inicializar la cámara`, alertType: 'error' }))
 			}
 		}
 	}
@@ -67,6 +68,7 @@ const ImageSelector = ({ navigation }) => {
 				warningStatus: true,
 				warningDescription: 'No se pudieron obtener los permisos de la galería.',
 			}))
+			dispatch(setAlert({ alertStatus: true, alertMessage: `Ocurrió un error al inicializar la galería`, alertType: 'error' }))
 		}
 
 		navigation.goBack()

@@ -5,7 +5,7 @@ import { Image, StyleSheet, View, Text } from "react-native"
 import { signOut } from "../features/user/user.slice"
 import { sessionsDB, appConfigDB } from "../database/sqlite.config"
 import { useGetProfileImageQuery } from "../services/shop.service"
-import { setDarkMode, setWarning } from "../features/app/app.slice"
+import { setAlert, setDarkMode, setWarning } from "../features/app/app.slice"
 
 import SubmitButton from "../components/Global/SubmitButton"
 
@@ -41,6 +41,7 @@ const Profile = ({ navigation }) => {
 		try {
 			await appConfigDB.update({ column: 'darkMode', oldValue: oldValue, newValue: newValue })
 			dispatch(setDarkMode(newValue))
+			dispatch(setAlert({ alertStatus: true, alertMessage: `Cambiado a modo ${newValue == 'false' ? 'claro': 'oscuro'}`, alertType: 'success' }))
 		} catch (error) {
 			dispatch(setWarning({ 
 				warningCode: error.message, 

@@ -14,7 +14,7 @@ const Alert = () => {
 	const dispatch = useDispatch()
 	const { alertStatus, alertMessage, alertType } = useSelector((state) => state.appReducer)
 
-	const fadeAnim = useRef(new Animated.Value(1)).current
+	const fadeAnim = useRef(new Animated.Value(0.9)).current
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {

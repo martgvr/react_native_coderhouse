@@ -53,5 +53,6 @@ $ npx expo install expo-sqlite
 # What's next?
 
 ```
+- Agregar alerts a todas la acciones de la aplicación
 - Hacer un readme detallado. Librerías utilizadas, como clonar repo, como levantar proyecto y en qué consiste.
 ```

@@ -1,5 +1,5 @@
-import { useTheme } from "@react-navigation/native"
 import { useDispatch } from "react-redux"
+import { useTheme } from "@react-navigation/native"
 import { StyleSheet, Text, View, Image } from "react-native"
 import { removeCartItem } from "../../features/cart/cart.slice"
 
