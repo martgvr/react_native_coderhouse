@@ -17,11 +17,11 @@ const Login = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const styles = dynamicStyle(colors)
 
-	const [password, setPassword] = useState("123456")
-	const [errorPassword, setErrorPassword] = useState("")
-
-	const [email, setEmail] = useState("jorge@rial.com")
+	const [email, setEmail] = useState("")
 	const [errorMail, setErrorMail] = useState("")
+
+	const [password, setPassword] = useState("")
+	const [errorPassword, setErrorPassword] = useState("")
 
 	const [triggerSignIn, result] = useSignInMutation()
 

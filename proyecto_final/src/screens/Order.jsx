@@ -26,7 +26,7 @@ const Order = () => {
 							<Text style={styles.noCartDataText}>Confirmá tu compra en el carrito y generá una nueva orden de compra</Text>
 						</View>
 						:
-						<FlatList data={orderData} keyExtractor={(item) => item.total} renderItem={({ item }) => <OrderItem order={item} />} />
+						<FlatList data={orderData} keyExtractor={() => Math.random().toString()} renderItem={({ item }) => <OrderItem order={item} />} />
 			}
 		</View>
 	)
@@ -40,6 +40,7 @@ const dynamicStyle = (colors) => {
 			flex: 1,
 			padding: 10,
 			backgroundColor: colors.secondary,
+			paddingBottom: 60,
 		},
 		screenFill: {
 			height: '100%'

@@ -1,58 +1,34 @@
 # Proyecto final React Native
 
-## Instalación de definiciones (tipos)
+## Sobre el proyecto
 
-```
-$ npm i @types/react-native
-```
+![react native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)![redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)![sqlite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 
-## Instalación de fuentes personalizadas
+Esta aplicación ha sido desarrollada para el curso de React Native de Coderhouse utilizando las siguientes tecnologías:
 
-Documentación: `https://docs.expo.dev/versions/latest/sdk/font/`
+- `Expo` para su creación, prueba y distribución.
+- `SQLite` como base de datos local.
+- `Redux Toolkit` para el manejo de estados.
+- `React Navigation` para la construcción de stacks y navegación.
 
-En terminal:
+## Índice
 
-```
-$ npx expo install expo-font
-```
+1) Clonar repositorio
+2) Uso del proyecto
+3) Estructura de proyecto
+4) Creditos
 
-En app:
+## 1. Clonar repositorio
 
-```
-import { useFonts } from 'expo-font';
+## 2. Uso del proyecto
+Comandos para su instalación y ejecución
+Usar tu propia db en firebase.config.js
 
-export default function App() {
-    const [fontsLoaded] = useFonts({
-        'Inter-Black': require('./assets/fonts/Inter-Black.otf'),
-    });
-```
+## 3. Estructura de proyecto
+Carpetas agrupadas, componentes, y screens
+Stacks del navigation
+Stores de redux creados
+Componentes a medida (como Alert / Error Critico / Error modal cerrable)
 
-## Instalación de Navigation
-
-```
-$ npm install @react-navigation/native
-$ npx expo install react-native-screens react-native-safe-area-context
-$ npm install @react-navigation/native-stack
-$ npm install @react-navigation/bottom-tabs
-```
-
-## Redux Toolkit
-
-```
-$ npm install @reduxjs/toolkit
-$ npm install react-redux
-$ npm i -D @redux-devtools/core
-```
-
-## SQLite
-
-```
-$ npx expo install expo-sqlite
-```
-
-# What's next?
-
-```
-- Agregar alerts a todas la acciones de la aplicación
-- Hacer un readme detallado. Librerías utilizadas, como clonar repo, como levantar proyecto y en qué consiste.
-```
+## 4. Creditos
+Creado por ...
