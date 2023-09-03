@@ -1,7 +1,7 @@
 import * as SQLite from 'expo-sqlite'
 import { isValidName } from '../validations/auth'
 
-const db = SQLite.openDatabase('database1.db')
+const db = SQLite.openDatabase('database.db')
 
 class sqliteDB {
     constructor(tableName) {
