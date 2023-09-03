@@ -90,10 +90,41 @@ Productos
 ```
 
 ## 3. Estructura de proyecto
-Carpetas agrupadas, componentes, y screens
-Stacks del navigation
-Stores de redux creados
-Componentes a medida (como Alert / Error Critico / Error modal cerrable)
+
+### Estructura de carpetas
+El proyecto se encuentra estructurado en stacks situados en la carpeta `/src/navigation`
+
+- Navigation
+    - AuthStack
+        - Login
+        - Sign up
+    - MainStack
+        - Shop
+        - Carts
+        - Profile
+        - Orders
+        
+Los componentes utilizados por cada uno de los stacks se encuentran agrupados en la carpeta `/src/components`
+
+### Estructura de Redux
+El proyecto cuenta con una gestión de estados ubicado en `/src/store/store.js`
+
+- Store
+    - app
+        - Estados: modo claro/oscuro, y los estados de warning y alert de la aplicación.
+        - Funciones: `setDarkMode / setWarning / setAlert`
+    - cart
+        - Estados: items agregados al cart, el total monetario y la hora de actualización.
+        - Funciones: `addCartItem / removeCartItem / clearCart`
+    - shop
+        - Estados: id del item seleccionado, categoría seleccionada, etc.
+        - Funciones: `setIdSelected / setCategorySelected`
+    - user
+        - Estados: valores referentes a la sesión del usuario como email, imagen de perfil, etc.
+        - Funciones: `setUser / saveImage / setUserLocation / signOut`
+    - counter
+        - Estados: valores del contador del shop.
+        - Funciones: `increment / incrementByAmount / decrement / resetAmount`
 
 ## 4. Creditos
 Este proyecto ha sido desarrolado por [Martín Guevara](https://github.com/martgvr).
